@@ -82,7 +82,6 @@ page {
   display: flex;
   display: -webkit-box;
   word-break: break-all;
-  line-height: 40rpx;
 }
 
 .vertical {
@@ -94,17 +93,14 @@ page {
 }
 
 .line-1 {
-  height: 40rpx;
   -webkit-line-clamp: 1;
 }
 
 .line-2 {
-  height: 80rpx;
   -webkit-line-clamp: 2;
 }
 
 .line-3 {
-  height: 120rpx;
   -webkit-line-clamp: 3;
 }
 
@@ -113,7 +109,7 @@ page {
 .line-top::before {
   content: " ";
   position: absolute;
-  background-color: #d9d9d9;
+  background-color: #ddd;
 }
 
 .line-bottom::after {
@@ -195,99 +191,6 @@ page {
 
 /* loading style end */
 
-/* footer style start */
-.footer {
-  width: 100%;
-  background-color: #fff;
-  margin-top: 20rpx;
-}
-
-.footer.notop {
-  margin-top: 0;
-}
-
-.footer .tips {
-  text-align: center;
-  color: #ff7aa2;
-  font-size: 32rpx;
-  line-height: 48rpx;
-  padding: 40rpx 0;
-}
-
-.footer .btn-pink {
-  width: 90%;
-  background-color: #ff7aa2;
-  color: #fff;
-  font-size: 36rpx;
-  margin-bottom: 40rpx;
-}
-
-.footer .btn-pink::active {
-  background-color: #fff;
-}
-
-/* footer style end */
-
-/* footer style start */
-.footer .resource {
-  height: 72rpx;
-  line-height: 72rpx;
-  font-size: 28rpx;
-  color: #888;
-  background-color: #eee;
-  text-align: center;
-}
-
-.footer .characters {
-  padding: 10rpx 20rpx;
-}
-
-.footer .citem {
-  padding: 10rpx 0;
-}
-
-.footer .citem .img-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100rpx;
-  width: 100rpx;
-  float: left;
-}
-
-.footer .citem .img-wrap .icon-major {
-  width: 50rpx;
-  height: 64rpx;
-}
-
-.footer .citem .img-wrap .icon-intimate {
-  width: 52rpx;
-  height: 48rpx;
-}
-
-.footer .citem .img-wrap .icon-total {
-  width: 74rpx;
-  height: 42rpx;
-}
-
-.footer .citem .tips-wrap {
-  margin-left: 120rpx;
-}
-
-.footer .citem .tips-wrap .title {
-  color: #323232;
-  font-size: 36rpx;
-  line-height: 52rpx;
-}
-
-.footer .citem .tips-wrap .info {
-  color: #888;
-  font-size: 28rpx;
-  line-height: 48rpx;
-}
-
-/* footer style end */
-
 /* toast style start */
 .ui-toast {
   position: fixed;
@@ -338,3 +241,65 @@ page {
   background-size: 100%;
 }
 /* loading style */
+
+/* article style */
+.article {
+  background-color: #fff;
+}
+
+.article-nav {
+  position: relative;
+}
+
+.article-nav:last-child::after {
+  height: 0 !important;
+}
+
+.article-item {
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 35rpx 24rpx;
+}
+
+.article-info {
+  margin-right: 40rpx;
+  flex: 1;
+}
+
+.article-title {
+  font-size: 32rpx;
+  line-height: 40rpx;
+  height: 80rpx;
+  color: #323232;
+}
+
+.article-desc {
+  font-size: 24rpx;
+  color: #888;
+  margin-top: 46rpx;
+}
+
+.article-resource {
+  float: left;
+}
+
+.article-date {
+  float: right;
+}
+
+.article-thumb {
+  width: 240rpx;
+  height: 150rpx;
+  background-color: #eee;
+}
+
+.article-image {
+  display: block;
+  width: 240rpx;
+  height: 150rpx;
+}
+/* article style */

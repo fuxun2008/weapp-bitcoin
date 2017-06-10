@@ -9,37 +9,37 @@
   "window": {
     "backgroundTextStyle": "black",
     "backgroundColor": "#eee",
-    "navigationBarBackgroundColor": "#ff7aa2",
-    "navigationBarTitleText": "柚宝宝孕育",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "比特币模拟",
+    "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
   },
   "tabBar": {
-    "color": "#585858",
-    "selectedColor": "#ff7aa2",
+    "color": "#888",
+    "selectedColor": "#000",
     "borderStyle": "white",
-    "backgroundColor": "#fbfbfb",
+    "backgroundColor": "#fafafa",
     "position": "bottom",
     "list": [{
       "pagePath": "pages/index/index",
       "text": "资讯",
-      "iconPath": "images/icon-index.png",
-      "selectedIconPath": "images/icon-index-active.png"
+      "iconPath": "images/ic_news_normal.png",
+      "selectedIconPath": "images/ic_news_active.png"
     }, {
       "pagePath": "pages/mining/mining",
       "text": "挖矿",
-      "iconPath": "images/icon-me.png",
-      "selectedIconPath": "images/icon-me-active.png"
+      "iconPath": "images/ic_coin_normal.png",
+      "selectedIconPath": "images/ic_coin_active.png"
     }, {
       "pagePath": "pages/wallet/wallet",
       "text": "钱包",
-      "iconPath": "images/icon-eat.png",
-      "selectedIconPath": "images/icon-eat-active.png"
+      "iconPath": "images/ic_wallet_normal.png",
+      "selectedIconPath": "images/ic_wallet_active.png"
     }, {
       "pagePath": "pages/exchange/exchange",
       "text": "交易所",
-      "iconPath": "images/icon-me.png",
-      "selectedIconPath": "images/icon-me-active.png"
+      "iconPath": "images/ic_exchange_normal.png",
+      "selectedIconPath": "images/ic_exchange_active.png"
     }]
   },
   "networkTimeout": {
