@@ -1,6 +1,40 @@
-<!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
-</view>
+<!--detail.wxml-->
+<!-- 导入模板 -->
+<import src="../common/template.wxml" />
+
+<!--加载动画-->
+<block wx:if="{{showLoading}}">
+  <template is="loadingitem" />
+</block>
+<block wx:else>
+  <view class="wrapper detail-wrapper">
+    <!-- 加载数据成功 -->
+    <block wx:if="{{hasData}}">
+      <view class="detail-title line-2 vertical">{{ article.title }}</view>
+      <view class="detail-info">
+        <text class="detail-resource">{{ article.resource }}</text>
+        <text class="detail-date">{{ article.timestamp }}</text>
+      </view>
+      <view class="detail-detail">
+        <block wx:for="{{ article.info }}" wx:for-index="outIndex" wx:for-item="outItem" wx:key="obj">
+          <block wx:if="{{ outItem.type === 'view' }}">
+            <block wx:for="{{ outItem.child }}" wx:for-index="innerIndex" wx:for-item="innerItem" wx:key="text">
+              <block wx:if="{{ innerItem.type === 'text' && innerItem.text !== '' }}">
+                <view class="parag">
+                  {{ innerItem.text }}
+                </view>
+              </block>
+            </block>
+          </block>
+          <block wx:if="{{ outItem.type === 'img' }}">
+            <image class="img" src="{{ outItem.attr.src }}" mode="aspectFill"></image>
+          </block>
+        </block>
+      </view>
+    </block>
+    <!-- 加载数据失败 -->
+    <block wx:else>
+      <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+    </block>
+  </view>
+</block>

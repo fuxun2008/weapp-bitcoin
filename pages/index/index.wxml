@@ -2,11 +2,13 @@
 <!-- 导入模板 -->
 <import src="../common/template.wxml" />
 
+<!--加载动画-->
 <block wx:if="{{showLoading}}">
   <template is="loadingitem" />
 </block>
 <block wx:else>
   <view class="container">
+    <!-- 加载数据成功 -->
     <block wx:if="{{hasData}}">
       <!-- header导航tab开始 -->
       <view class="header clearfix">
@@ -46,6 +48,7 @@
       </view>
       <!-- 加载更多结束 -->
     </block>
+    <!-- 加载数据失败 -->
     <block wx:else>
       <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
     </block>

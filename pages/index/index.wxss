@@ -27,7 +27,11 @@
 
 .tabitem.active {
   color: #323232;
-  border-bottom: 4rpx solid #000;
+  border-bottom-style: solid;
+  border-bottom-width: 4rpx;
+  border-bottom-color: #000;
+  -webkit-transition: color, border-bottom-color 0.5s linear;
+  transition: color, border-bottom-color 0.5s linear;
 }
 
 /* swpier 轮播图 */

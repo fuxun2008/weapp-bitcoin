@@ -2,6 +2,7 @@
 //获取应用实例
 import _ from '../../utils/util';
 var app = getApp();
+
 Page({
   data: {
     currentTab: 1,
@@ -245,6 +246,9 @@ Page({
     that.setData({
       currentTab: id
     });
+  },
+  reloadData: function() {
+    console.log('reloadData');
   },
   onLoad: function () {
     console.log('onLoad');
