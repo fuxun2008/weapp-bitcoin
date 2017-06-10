@@ -1,6 +1,4 @@
-<!--logs.wxml-->
+<!--exchange.wxml-->
 <view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log" wx:key="*this">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+  <text>交易所</text>
 </view>
