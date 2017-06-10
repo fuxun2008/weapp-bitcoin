@@ -1,12 +1,52 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/detail/detail",
+    "pages/mining/mining",
+    "pages/wallet/wallet",
+    "pages/exchange/exchange"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+  "window": {
+    "backgroundTextStyle": "black",
+    "backgroundColor": "#eee",
+    "navigationBarBackgroundColor": "#ff7aa2",
+    "navigationBarTitleText": "柚宝宝孕育",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#585858",
+    "selectedColor": "#ff7aa2",
+    "borderStyle": "white",
+    "backgroundColor": "#fbfbfb",
+    "position": "bottom",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "资讯",
+      "iconPath": "images/icon-index.png",
+      "selectedIconPath": "images/icon-index-active.png"
+    }, {
+      "pagePath": "pages/mining/mining",
+      "text": "挖矿",
+      "iconPath": "images/icon-me.png",
+      "selectedIconPath": "images/icon-me-active.png"
+    }, {
+      "pagePath": "pages/wallet/wallet",
+      "text": "钱包",
+      "iconPath": "images/icon-eat.png",
+      "selectedIconPath": "images/icon-eat-active.png"
+    }, {
+      "pagePath": "pages/exchange/exchange",
+      "text": "交易所",
+      "iconPath": "images/icon-me.png",
+      "selectedIconPath": "images/icon-me-active.png"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000,
+    "uploadFile": 10000,
+    "connetSocket": 10000
+  },
+  "debug": true
 }
