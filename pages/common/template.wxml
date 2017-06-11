@@ -25,7 +25,7 @@
 <!-- 新闻条目模板 -->
 <template name="articleItem">
   <navigator url="/pages/detail/detail?id={{ id }}" class="news-nav" hover-class="tapback">
-    <view class="news-item line-bottom">
+    <view class="news-item line-bottom line-top">
       <view class="news-title line-2 vertical">
         <text>{{ title }}</text>
       </view>
