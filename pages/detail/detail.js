@@ -5,6 +5,7 @@ import htmlToWxml from '../../components/htmlToWxml';
 Page({
   data: {
     article: {
+      id: 123,
       title: '合乎你天性的生活就是最好的',
       resource: 'Google News',
       timestamp: _.msToDate(1497082010307, 'yyyy-MM-dd'),
@@ -15,6 +16,21 @@ Page({
     showLoading: false
   },
   onLoad: function () {
+  },
+  onShareAppMessage: function () {
+    const self = this;
+    return {
+      title: '付勋教你来读书，' + self.data.article.title,
+      path: '/pages/detail/detail?id=' + self.data.article.id,
+      success: function (res) {
+        // 转发成功
+        console.log(res);
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res.errMsg);
+      }
+    };
   },
   reloadData: function () {
     console.log('reloadData');

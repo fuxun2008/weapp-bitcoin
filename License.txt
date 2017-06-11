@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 大妈币信息科技
+Copyright (c) 2017 十分钟玩转比特币
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

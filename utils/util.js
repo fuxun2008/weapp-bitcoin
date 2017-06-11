@@ -67,19 +67,65 @@ const dateFromNow = ms => {
 };
 
 /**
- * object转成uri参数字符串
- * @param  {object} obj object格式数据 { x: xx, y: yy }
- * @return {string}     uri参数字串 x=xx&y=yy
+ * uri参数字符串转成object
+ * @param  {string}    input       uri参数字串 x=xx&y=yy
+ * @param  {boolean}   flag        是否decode
+ * @return {object}                object格式数据 { x: xx, y: yy }
  */
-const obj2uri = (obj) => {
-  return Object.keys(obj).map(function (k) {
-    return encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]);
-  }).join('&');
+const parse = function (input, flag) {
+  if (input === null || input === '') {
+    return {};
+  }
+  if ((typeof input) !== 'string') {
+    throw new TypeError('invalidate arguments[0]');
+  }
+  const reg = new RegExp('[\?\&][^\?\&]+=[^\?\&]+', 'g');
+  let result = input.match(reg);
+  const query = {};
+  if (result) {
+    for (var i = 0; i < result.length; i++) {
+      var temp = result[i].substring(1);
+      var arr = temp.split('=');
+      var value = arr[1];
+      if (flag === true) {
+        value = decodeURIComponent(value);
+      }
+      query[arr[0]] = value;
+    }
+  }
+  return query;
+};
+
+
+/**
+ * object转成uri参数字符串
+ * @param  {object}    query       object格式数据 { x: xx, y: yy }
+ * @param  {boolean}   flag        是否decode
+ * @return {string}                uri参数字串 x=xx&y=yy
+ */
+const stringify = function (query, flag) {
+  if (query === null || query === undefined) {
+    return '';
+  }
+  if ((typeof query) !== 'object') {
+    throw new TypeError('invalidate arguments[0]');
+  }
+  let search = '';
+  for (var key in query) {
+    if (query.hasOwnProperty(key)) {
+      search += '&' + key + '=' + (query[key] ? encodeURIComponent(query[key]) : '');
+    }
+  }
+  if (flag) {
+    search = search.substring(1);
+  }
+  return search;
 };
 
 module.exports = {
   msToDate,
   nowToDate,
   dateFromNow,
-  obj2uri
+  parse,
+  stringify
 };

@@ -1,10 +1,10 @@
-大妈币小程序
+十分钟玩转比特币
 ========
 
-[Wechat-Lite-App-Damabi](http://gitlab.meiyou.com/h5/damabi.git)
+[Wechat-Lite-App-Damabi](https://www.github.com/fuxun2008/damabi.git)
 
 ## 项目简介
-大妈币小程序主要是一款模拟比特币交易，展示挖矿、收款、交易、动态资讯等功能，在微信里面进行推广使用，增加用户量，扩大影响力。
+十分钟玩转比特币主要是一款模拟比特币交易，展示挖矿、收款、交易、动态资讯等功能，在微信里面进行推广使用，增加用户量，扩大影响力。
 
 ## 注意事项
 git push/merge 到 master 分支可以触发 上线操作，master 分支默认是 protected。请有权限的人 Push/Accept Merge Request 时一定要 *检查代码* Changes/Commits，确认之后接受合并，对操作负责。一般情况下，只允许从 develop 分支合并代码到 master 分支。
