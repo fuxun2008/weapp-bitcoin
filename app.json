@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/list/list",
     "pages/wallet/wallet",
     "pages/mining/mining",
-    "pages/index/index",
     "pages/detail/detail",
     "pages/exchange/exchange"
   ],

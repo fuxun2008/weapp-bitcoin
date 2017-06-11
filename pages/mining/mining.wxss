@@ -6,7 +6,7 @@
 
 .mining {
   display: block;
-  padding-top: 80rpx;
+  padding-top: 70rpx;
   margin-left: 200rpx;
   z-index: 100;
 }

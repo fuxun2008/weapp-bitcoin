@@ -37,7 +37,7 @@
 </template>
 
 <template name="footer">
-  <navigator url="/pages/detail/detail?id={{ id }}" class="footer-nav" hover-class="tapback">
+  <navigator url="/pages/list/list?id={{ id }}" class="footer-nav" hover-class="tapback">
     <view class="footer-wrap line-bottom">
       <text class="footer-txt">更多比特币科普文章</text>
       <image class="footer-arr" src="/images/icon_right_arrow.png"></image>
