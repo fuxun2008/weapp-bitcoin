@@ -22,6 +22,29 @@
   </navigator>
 </template>
 
+<!-- 新闻条目模板 -->
+<template name="articleItem">
+  <navigator url="/pages/detail/detail?id={{ id }}" class="news-nav" hover-class="tapback">
+    <view class="news-item line-bottom">
+      <view class="news-title line-2 vertical">
+        <text>{{ title }}</text>
+      </view>
+      <view class="news-thumb">
+        <image src="{{ img }}" class="news-image" mode="scaleToFill"></image>
+      </view>
+    </view>
+  </navigator>
+</template>
+
+<template name="footer">
+  <navigator url="/pages/detail/detail?id={{ id }}" class="footer-nav" hover-class="tapback">
+    <view class="footer-wrap line-bottom">
+      <text class="footer-txt">更多比特币科普文章</text>
+      <image class="footer-arr" src="/images/icon_right_arrow.png"></image>
+    </view>
+  </navigator>
+</template>
+
 <!-- 无网络模板 -->
 <template name="noNetwork">
   <view class="wrapper-empty" bindtap="reloadData">

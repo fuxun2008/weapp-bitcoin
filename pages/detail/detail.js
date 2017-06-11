@@ -35,4 +35,4 @@ Page({
   reloadData: function () {
     console.log('reloadData');
   }
-})
+});

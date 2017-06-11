@@ -24,7 +24,7 @@ class Authorize {
         done => {
           wx.login({
             success: function (res) {
-              // console.log('wx.login信息：', JSON.stringify(res, null, 2));
+              console.log('wx.login信息：', JSON.stringify(res, null, 2));
               if (res.code) {
                 done(null, res.code);
               } else {
@@ -45,7 +45,7 @@ class Authorize {
         (code, done) => {
           wx.getUserInfo({
             success: function (data) {
-              // console.log('wx.getUserInfo信息：', JSON.stringify(data, null, 2));
+              console.log('wx.getUserInfo信息：', JSON.stringify(data, null, 2));
               const result = {
                 data,
                 code
@@ -69,7 +69,7 @@ class Authorize {
         },
         (result, done) => {
           network.authorize(result.code, result.data.iv, result.data.encryptedData).then(json => {
-            // console.log('authorize信息：', JSON.stringify(json, null, 2));
+            console.log('authorize信息：', JSON.stringify(json, null, 2));
             const data = {
               Authorization: json.data.authentication_token,
               MeetYouUser: json.data.user,

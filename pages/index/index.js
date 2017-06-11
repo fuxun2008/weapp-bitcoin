@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 import _ from '../../utils/util';
-var app = getApp();
+
+const App = getApp();
 
 Page({
   data: {
@@ -66,7 +67,7 @@ Page({
         count: 1211
       }, {
         id: 12,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
+        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
         img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
         resource: '外汇宝',
         timestamp: _.dateFromNow(1497073010801),
@@ -228,18 +229,42 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     var that = this;
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
+    App.initialize(() => {
+      this.setData({
+        errorMsg: '咦？网络不见了，请检查网络连接~',
+        showLoading: false,
+        hasData: false
       });
+      return false;
+    }).then(result => {
+      // console.log(JSON.stringify(result, null, 2));
+      Object.assign(App.globalData.MeetYouUser, result.MeetYouUser);
+      console.log('App.globalData.MeetYouUser: ', JSON.stringify(App.globalData.MeetYouUser, null, 2));
+      // this.MeetYouUser = result.MeetYouUser;
+      const meetYouUser = result.MeetYouUser;
+      const sqs = meetYouUser.skip_quick_setting;
+      const mode = parseInt(meetYouUser.mode);
+      console.log('用户模式：', mode);
+
+      if (result && meetYouUser) {
+        skipQsFlag = sqs;
+      }
+      console.info('是否跳过设置: ', skipQsFlag);
+      if (skipQsFlag) {
+        that.judgeMode(meetYouUser, _endDay);
+      } else {
+        that.setData({
+          skipQsFlag: false,
+          showLoading: false,
+          hasData: true
+        });
+      }
     });
   },
   onShareAppMessage: function() {
     return {
-      title: '自定义转发标题',
-      path: '/page/index/index',
+      title: '付勋' + '邀你来十分钟读懂比特币',
+      path: '/pages/index/index',
       success: function(res) {
         // 转发成功
         console.log(res);
