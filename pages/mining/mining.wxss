@@ -1,8 +1,54 @@
-.log-list {
-  display: flex;
-  flex-direction: column;
-  padding: 40rpx;
+.mining-wrap {
+  min-height: 100vh;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 0, 0, 0.7)), to(#ffdd2f));
+  background-attachment: fixed;
 }
-.log-item {
-  margin: 10rpx;
+
+.mining {
+  display: block;
+  padding-top: 80rpx;
+  margin-left: 200rpx;
+  z-index: 100;
+}
+
+.mining-item {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 50rpx;
+}
+
+.mining-item:last-child {
+  margin-bottom: 0;
+}
+
+.mining-title {
+  font-size: 36rpx;
+  margin-bottom: 16rpx;
+}
+
+.mining-time {
+  font-size: 64rpx;
+}
+
+.mining-coin {
+  font-size: 0;
+  margin: 0 auto;
+  width: 480rpx;
+  height: 323rpx;
+  z-index: 1;
+}
+
+.mining-gold {
+  display: inline-block;
+  width: 480rpx;
+  height: 323rpx;
+  z-index: 1;
+}
+
+.mining-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }
