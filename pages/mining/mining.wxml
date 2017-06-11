@@ -6,7 +6,7 @@
   <view class="mining">
     <view class="mining-item">
       <view class="mining-title">挖矿时长：</view>
-      <view class="mining-time">00:04:39</view>
+      <view class="mining-time">{{ time }}</view>
     </view>
     <view class="mining-item">
       <view class="mining-title">挖出币：</view>
