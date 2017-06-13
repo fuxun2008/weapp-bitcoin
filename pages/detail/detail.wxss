@@ -1,6 +1,8 @@
-.detail-wrapper {
+page {
   background-color: #fff;
-  min-height: 100vh;
+}
+
+.detail-wrapper {
   padding: 40rpx 30rpx 20rpx;
 }
 

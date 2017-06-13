@@ -7,30 +7,27 @@ Page({
   data: {
     id: 0,
     title: '',
-    resource: '',
-    timestamp: '',
+    resource: '比特币资讯',
+    timestamp: _.nowToDate(),
     cover: '',
     views: 0,
     info: '',
     errorMsg: '暂时没有数据哦~',
-    hasData: true,
-    showLoading: false
+    hasData: false,
+    showLoading: true
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // console.log('baby options: ', JSON.stringify(options, null, 2));
     const that = this;
     let id = parseInt(options.id);
-    wx.setNavigationBarTitle({
-      title: ''
-    });
     that.fetchData(id);
   },
   onShareAppMessage: function () {
     const self = this;
     return {
-      title: '付勋教你来读书，' + self.data.article.title,
-      path: '/pages/detail/detail?id=' + self.data.article.id,
+      title: '付勋教你来读书，' + self.data.title,
+      path: '/pages/detail/detail?id=' + self.data.id,
       success: function (res) {
         // 转发成功
         console.log(res);
@@ -51,13 +48,13 @@ Page({
           data.created_at = new Date().getTime();
         }
         data.content = data.content.replace(/(\r\n\t)|(\r\n)|(\n)/g, '');
-        console.log('article content: ', data.content);
+        console.log('detailContent: ', data.content);
         that.setData({
           id: data.id,
           title: data.title,
           cover: data.cover,
           info: htmlToWxml.html2json(data.content),
-          resource: data.source,
+          resource: data.source || '比特币资讯',
           views: data.views,
           timestamp: _.msToDate(data.created_at, 'yyyy-MM-dd'),
           hasData: true,

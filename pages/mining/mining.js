@@ -11,6 +11,7 @@ let flag = true;
 Page({
   data: {
     time: '00:00:00',
+    coin: 0,
     article: {
       id: 10,
       title: '比特币触底反弹，澳交所接受使用比特币支付收购款',
@@ -23,20 +24,25 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // this.start();
+    console.log('onLoad');
   },
   onReady: function() {
     // 页面渲染完成
+    console.log('onReady');
   },
   onShow: function () {
     // 监听页面显示
+    console.log('onShow');
     this.start();
   },
   onHide: function() {
     // 监听页面隐藏
+    console.log('onHide');
     this.stop();
   },
   onUnload: function() {
     // 监听页面卸载
+    console.log('onUnload');
     this.reset();
   },
   onShareAppMessage: function () {
@@ -54,7 +60,7 @@ Page({
     };
   },
   reset: function() {
-    window.clearInterval(int);
+    clearInterval(int);
     millisecond = hour = minute = second = 0;
     this.setData({
       time: '00:00:00'
@@ -68,11 +74,13 @@ Page({
     }
   },
   timer: function() {
+    const self = this;
     millisecond = millisecond + 50;
     if (millisecond >= 1000) {
       millisecond = 0;
       second = second + 1;
     }
+
     if (second >= 60) {
       second = 0;
       minute = minute + 1;
@@ -82,6 +90,11 @@ Page({
       minute = 0;
       hour = hour + 1;
     }
+
+    if (hour >= 24) {
+      hour = 0;
+    }
+
     this.setData({
       time: [hour, minute, second].map(this.formatNumber).join(':')
     });
@@ -91,7 +104,7 @@ Page({
     return n[1] ? n : '0' + n;
   },
   stop: function() {
-    flag = false;
-    window.clearInterval(int);
+    clearInterval(int);
+    flag = true;
   }
 });

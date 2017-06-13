@@ -10,7 +10,7 @@
     </view>
     <view class="mining-item">
       <view class="mining-title">挖出币：</view>
-      <view class="mining-time"><text class="mining-money">5.439</text>xbtc</view>
+      <view class="mining-time"><text class="mining-money">{{coin}}</text>xbtc</view>
     </view>
     <view class="mining-item">
       <view class="mining-title">市值：</view>

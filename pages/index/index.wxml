@@ -12,7 +12,7 @@
     <block wx:if="{{hasData}}">
       <!-- header导航tab开始 -->
       <view class="header clearfix">
-        <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ currentTab === index ? 'active' : '' }}" bindtap="bindViewTap" data-id="{{ index }}">{{ item.name }}</view>
+        <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ (currentTab === index + 1) ? 'active' : '' }}" bindtap="bindViewTap" data-id="{{ index + 1 }}">{{ item.name }}</view>
       </view>
       <!-- header导航tab结束 -->
       <!-- 轮播图开始 -->
