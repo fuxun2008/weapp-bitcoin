@@ -47,8 +47,8 @@ Page({
         if (data.created_at <= 0) {
           data.created_at = new Date().getTime();
         }
+        data.created_at = _.msToDate(data.created_at, 'yyyy-MM-dd');
         data.content = data.content.replace(/(\r\n\t)|(\r\n)|(\n)/g, '');
-        console.log('detailContent: ', data.content);
         that.setData({
           id: data.id,
           title: data.title,
@@ -56,7 +56,7 @@ Page({
           info: htmlToWxml.html2json(data.content),
           resource: data.source || '比特币资讯',
           views: data.views,
-          timestamp: _.msToDate(data.created_at, 'yyyy-MM-dd'),
+          timestamp: data.created_at,
           hasData: true,
           showLoading: false
         });

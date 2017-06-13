@@ -26,7 +26,7 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad');
-    var that = this;
+    const that = this;
     that.fetchData();
     App.initialize(() => {
       this.setData({
@@ -36,28 +36,13 @@ Page({
       });
       return false;
     }).then(result => {
-      // console.log(JSON.stringify(result, null, 2));
+      console.log(JSON.stringify(result, null, 2));
       Object.assign(App.globalData.MeetYouUser, result.MeetYouUser);
       console.log('App.globalData.MeetYouUser: ', JSON.stringify(App.globalData.MeetYouUser, null, 2));
       // this.MeetYouUser = result.MeetYouUser;
       const meetYouUser = result.MeetYouUser;
       const sqs = meetYouUser.skip_quick_setting;
       const mode = parseInt(meetYouUser.mode);
-      console.log('用户模式：', mode);
-
-      if (result && meetYouUser) {
-        skipQsFlag = sqs;
-      }
-      console.info('是否跳过设置: ', skipQsFlag);
-      if (skipQsFlag) {
-        that.judgeMode(meetYouUser, _endDay);
-      } else {
-        that.setData({
-          skipQsFlag: false,
-          showLoading: false,
-          hasData: true
-        });
-      }
     });
   },
   onShareAppMessage: function() {
@@ -80,17 +65,15 @@ Page({
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
         const data = json.data;
+        data.article_list.forEach((item, index) => {
+          if (item.created_at <= 0) {
+            item.created_at = new Date().getTime();
+          }
+          item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
+        });
         that.setData({
-          currentTab: 1,
           tabs: data.category_list,
           imgUrls: data.article_top_list,
-          swiper: {
-            indicatorDots: false,
-            autoplay: true,
-            circular: true,
-            interval: 3000,
-            duration: 500
-          },
           articles: data.article_list,
           hasData: true,
           hasMore: data.article_list.length === MAXSIZE ? true : false,
@@ -98,16 +81,8 @@ Page({
         });
       } else {
         that.setData({
-          currentTab: 1,
           tabs: [],
           imgUrls: [],
-          swiper: {
-            indicatorDots: false,
-            autoplay: true,
-            circular: true,
-            interval: 3000,
-            duration: 500
-          },
           articles: [],
           hasMore: false,
           hasData: false,
@@ -133,5 +108,7 @@ Page({
   },
   reloadData: function() {
     console.log('reloadData');
+    const that = this;
+    that.fetchData();
   }
 });
