@@ -94,7 +94,10 @@ const fetchDetail = id => {
   return new Promise((resolve, reject) => {
     const url = API_METHODS['detail'];
     Http.instance.get({
-      url: url
+      url: url,
+      data: {
+        id: id
+      }
     }).then(data => {
       resolve(data);
     }, err => {

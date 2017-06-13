@@ -5,15 +5,13 @@ import htmlToWxml from '../../components/htmlToWxml';
 
 Page({
   data: {
-    article: {
-      id: 0,
-      title: '',
-      resource: '',
-      timestamp: '',
-      cover: '',
-      views: 0,
-      info: ''
-    },
+    id: 0,
+    title: '',
+    resource: '',
+    timestamp: '',
+    cover: '',
+    views: 0,
+    info: '',
     errorMsg: '暂时没有数据哦~',
     hasData: true,
     showLoading: false
@@ -49,27 +47,22 @@ Page({
       console.log('detailPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
         const data = json.data;
-        if (data && data.length) {
-          that.setData({
-            id: data.id,
-            title: data.title,
-            cover: data.cover,
-            info: htmlToWxml.html2json(data.content),
-            resource: data.source,
-            views: data.views,
-            timestamp: _.msToDate(data.created_at, 'yyyy-MM-dd'),
-            hasData: true,
-            showLoading: false
-          });
-        } else {
-          that.setData({
-            id: id,
-            errorMsg: '暂时没有数据哦~',
-            hasData: false,
-            showLoading: false
-          });
-          console.warn('暂时没有数据哦~');
+        if (data.created_at <= 0) {
+          data.created_at = new Date().getTime();
         }
+        data.content = data.content.replace(/(\r\n\t)|(\r\n)|(\n)/g, '');
+        console.log('article content: ', data.content);
+        that.setData({
+          id: data.id,
+          title: data.title,
+          cover: data.cover,
+          info: htmlToWxml.html2json(data.content),
+          resource: data.source,
+          views: data.views,
+          timestamp: _.msToDate(data.created_at, 'yyyy-MM-dd'),
+          hasData: true,
+          showLoading: false
+        });
       } else {
         that.setData({
           id: id,

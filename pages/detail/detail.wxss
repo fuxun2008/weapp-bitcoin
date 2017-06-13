@@ -26,7 +26,6 @@
 }
 
 .detail-detail .parag {
-  text-indent: 2em;
   padding-bottom: 20rpx;
   line-height: 1.6;
   letter-spacing:3rpx;

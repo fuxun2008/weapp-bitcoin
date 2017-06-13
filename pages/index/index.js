@@ -4,7 +4,7 @@ import _ from '../../utils/util';
 import API from '../../services/api';
 
 const App = getApp();
-const MAXSIZE = 20;
+const MAXSIZE = 10;
 
 Page({
   data: {
@@ -28,11 +28,6 @@ Page({
     console.log('onLoad');
     var that = this;
     that.fetchData();
-
-
-
-
-
     // App.initialize(() => {
     //   this.setData({
     //     errorMsg: '咦？网络不见了，请检查网络连接~',
@@ -105,8 +100,8 @@ Page({
         that.setData({
           currentTab: '1',
           tabs: [],
+          imgUrls: [],
           swiper: {
-            imgUrls: [],
             indicatorDots: false,
             autoplay: true,
             circular: true,
