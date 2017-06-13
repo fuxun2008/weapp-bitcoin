@@ -9,7 +9,6 @@ import _ from './utils/util';
 import Config from './config';
 const Promise = require('./components/promise').Promise;
 
-
 App({
   onLaunch: function () {
     console.log('App Launch');

@@ -12,18 +12,18 @@
     <block wx:if="{{hasData}}">
       <!-- header导航tab开始 -->
       <view class="header clearfix">
-        <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ currentTab === item.id ? 'active' : '' }}" bindtap="bindViewTap" data-id="{{ item.id }}">{{ item.name }}</view>
+        <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ currentTab === index ? 'active' : '' }}" bindtap="bindViewTap" data-id="{{ index }}">{{ item.name }}</view>
       </view>
       <!-- header导航tab结束 -->
       <!-- 轮播图开始 -->
-      <swiper class="swiper" wx:if="{{ swiper.imgUrls && swiper.imgUrls.length }}" indicator-dots="{{ swiper.indicatorDots }}" autoplay="{{ swiper.autoplay }}" interval="{{ swiper.interval }}" duration="{{ swiper.duration }}" circular="{{ swiper.circular }}">
-        <swiper-item wx:for="{{ swiper.imgUrls }}" wx:key="id">
-          <navigator url="/pages/detail/detail?id={{ id }}" class="swiper-nav">
+      <swiper class="swiper" wx:if="{{ imgUrls && imgUrls.length }}" indicator-dots="{{ swiper.indicatorDots }}" autoplay="{{ swiper.autoplay }}" interval="{{ swiper.interval }}" duration="{{ swiper.duration }}" circular="{{ swiper.circular }}">
+        <swiper-item wx:for="{{ imgUrls }}" wx:key="id">
+          <navigator url="/pages/detail/detail?id={{ item.id }}" class="swiper-nav">
             <view class="swiper-content">
-              <image src="{{ item.url }}" class="swiper-item" mode="aspectFill" />
+              <image src="{{ item.cover }}" class="swiper-item" mode="aspectFill" />
               <view class="swiper-desc">
-                <text class="swiper-text line-1 vertical">{{ item.desc }}</text>
-                <text class="swiper-id">[{{ index + 1 }}/{{ swiper.imgUrls.length }}]</text>
+                <text class="swiper-text line-1 vertical">{{ item.title }}</text>
+                <text class="swiper-id">[{{ index + 1 }}/{{ imgUrls.length }}]</text>
               </view>
             </view>
           </navigator>

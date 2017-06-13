@@ -8,15 +8,15 @@
         </view>
         <view class="article-desc clearfix">
           <view class="article-resource">
-            来源：<text>{{ resource }}</text>
+            来源：<text>{{ source }}</text>
           </view>
           <view class="article-date">
-            <text>{{ timestamp }}</text>
+            <text>{{ created_at }}</text>
           </view>
         </view>
       </view>
       <view class="article-thumb">
-        <image src="{{ img }}" class="article-image" mode="scaleToFill"></image>
+        <image src="{{ cover }}" class="article-image" mode="scaleToFill"></image>
       </view>
     </view>
   </navigator>

@@ -96,7 +96,6 @@ const parse = function (input, flag) {
   return query;
 };
 
-
 /**
  * object转成uri参数字符串
  * @param  {object}    query       object格式数据 { x: xx, y: yy }

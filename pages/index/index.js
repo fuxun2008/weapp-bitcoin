@@ -1,226 +1,24 @@
 //index.js
 //获取应用实例
 import _ from '../../utils/util';
+import API from '../../services/api';
 
 const App = getApp();
+const MAXSIZE = 20;
 
 Page({
   data: {
-    currentTab: 1,
-    tabs: [
-      {
-        id: 1,
-        name: '科普入门'
-      },
-      {
-        id: 2,
-        name: '最新新闻'
-      },
-      {
-        id: 3,
-        name: '进阶'
-      },
-      {
-        id: 4,
-        name: '操作比特'
-      }
-    ],
+    currentTab: 0,
+    tabs: [],
+    imgUrls: [],
     swiper: {
-      imgUrls: [{
-          id: 1,
-          url: 'http://m.anhuinews.com/upload/2017/06/09/20176912333117.jpg',
-          desc: '合肥不夜书店的24小时：书里的诗意和远方'
-        }, {
-          id: 2,
-          url: 'http://m.anhuinews.com/upload/2017/06/10/20176106404326.jpg',
-          desc: '塌陷区建成漂浮电站'
-        }, {
-          id: 3,
-          url: 'http://m.anhuinews.com/upload/2017/06/08/2017681213020.jpg',
-          desc: '中安在线池州频道开通上线(组图)'
-        }, {
-          id: 4,
-          url: 'http://m.anhuinews.com/upload/2017/06/09/2017695504933.png',
-          desc: '合安高铁开始架梁 建成后合肥到安庆40分钟'
-        }
-      ],
       indicatorDots: false,
       autoplay: true,
       circular: true,
       interval: 3000,
       duration: 500
     },
-    articles: [
-      {
-        id: 10,
-        title: '比特币触底反弹，澳交所接受使用比特币支付收购款',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: 'GoogleNews',
-        timestamp: _.dateFromNow(1497082010307),
-        count: 1234
-      }, {
-        id: 11,
-        title: '十分钟看懂比特币的过去、现在和未来',
-        img: 'http://m.anhuinews.com/upload/2017/06/10/2017610673781.jpg',
-        resource: '搜狐新闻',
-        timestamp: _.dateFromNow(1497082020307),
-        count: 1211
-      }, {
-        id: 12,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 13,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 14,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 15,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 16,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 17,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 18,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 19,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 20,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 21,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 22,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 23,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 24,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 25,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 26,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 27,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 28,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 29,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 30,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 31,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 32,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }, {
-        id: 33,
-        title: '比特币场内平台升级反洗钱系统场外监管政策空白有待填补',
-        img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-        resource: '外汇宝',
-        timestamp: _.dateFromNow(1497073010801),
-        count: 111
-      }
-    ],
+    articles: [],
     errorMsg: '暂时没有数据哦~',
     hasData: true,
     hasMore: false,
@@ -229,6 +27,12 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     var that = this;
+    that.fetchData();
+
+
+
+
+
     // App.initialize(() => {
     //   this.setData({
     //     errorMsg: '咦？网络不见了，请检查网络连接~',
@@ -274,6 +78,55 @@ Page({
         console.log(res.errMsg);
       }
     };
+  },
+  fetchData: function() {
+    const that = this;
+    API.fetchIndex().then(json => {
+      console.log('indexPage: ', JSON.stringify(json, null, 2));
+      if (json && json.code === 0) {
+        const data = json.data;
+        that.setData({
+          currentTab: '1',
+          tabs: data.category_list,
+          imgUrls: data.article_top_list,
+          swiper: {
+            indicatorDots: false,
+            autoplay: true,
+            circular: true,
+            interval: 3000,
+            duration: 500
+          },
+          articles: data.article_list,
+          hasData: true,
+          hasMore: data.article_list.length === MAXSIZE ? true : false,
+          showLoading: false
+        });
+      } else {
+        that.setData({
+          currentTab: '1',
+          tabs: [],
+          swiper: {
+            imgUrls: [],
+            indicatorDots: false,
+            autoplay: true,
+            circular: true,
+            interval: 3000,
+            duration: 500
+          },
+          articles: [],
+          hasMore: false,
+          hasData: false,
+          showLoading: false
+        });
+      }
+    }, error => {
+      that.setData({
+        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        hasData: false,
+        showLoading: false
+      });
+      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+    });
   },
   //事件处理函数
   bindViewTap: function(e) {

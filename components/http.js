@@ -1,18 +1,11 @@
 import Config from '../config';
 import _ from '../utils/util';
-const PARAMS = ['v'];
 const Promise = require('./promise').Promise;
 
 const request = options => new Promise((resolve, reject) => {
   if (options.loading) {
     wx.showNavigationBarLoading();
   }
-  let params = _.parse(options.url);
-  PARAMS.forEach(k => {
-    params[k] = Config[k];
-  });
-  const p = _.stringify(params, true);
-  let url = options.url.split('?')[0] + '?' + p;
   let header = {
     'content-type': 'application/json'
   };
@@ -24,7 +17,7 @@ const request = options => new Promise((resolve, reject) => {
   }
 
   wx.request({
-    url: url,
+    url: options.url,
     method: options.method,
     data: options.data || {},
     header: header || {},
