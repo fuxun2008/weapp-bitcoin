@@ -36,7 +36,7 @@ Page({
       });
       return false;
     }).then(result => {
-      console.log(JSON.stringify(result, null, 2));
+      console.log('APP Data: ', JSON.stringify(result, null, 2));
       Object.assign(App.globalData.MeetYouUser, result.MeetYouUser);
       console.log('App.globalData.MeetYouUser: ', JSON.stringify(App.globalData.MeetYouUser, null, 2));
       // this.MeetYouUser = result.MeetYouUser;

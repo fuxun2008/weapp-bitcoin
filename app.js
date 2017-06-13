@@ -47,7 +47,7 @@ App({
       }).then(result => {
         this.Authorize = Authorize.instance;
         Http.setAuthorization(result.Authorization);
-        // console.log('登录信息：', JSON.stringify(result, null, 2));
+        console.log('登录信息：', JSON.stringify(result, null, 2));
         resolve(result);
       });
     });

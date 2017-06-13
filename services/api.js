@@ -5,8 +5,8 @@ const Promise = require('../components/promise').Promise;
 const WX_URL = `https://api.design-sprint.cn`;
 
 const API_METHODS = {
-  'user': `${WX_URL}/users/wx/connect`,
-  'userSetting': `${WX_URL}/users/wx/mode`,
+  'user': `${WX_URL}/wx/connect`,
+  'userSetting': `${WX_URL}/wx/mode`,
   'index': `${WX_URL}/article/list`,
   'detail': `${WX_URL}/article/detail`
 };
