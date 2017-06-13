@@ -15,6 +15,7 @@
         <text class="detail-resource">{{ resource }}</text>
         <text class="detail-date">{{ timestamp }}</text>
       </view>
+      <block wx:if="{{info && info.length}}">
       <view class="detail-detail">
         <block wx:for="{{ info }}" wx:for-index="outIndex" wx:for-item="outItem" wx:key="obj">
           <block wx:if="{{ outItem.type === 'view' }}">
@@ -31,6 +32,10 @@
           </block>
         </block>
       </view>
+      </block>
+      <block wx:else>
+        <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+      </block>
     </block>
     <!-- 加载数据失败 -->
     <block wx:else>
