@@ -1,0 +1,61 @@
+<!--wallet.wxml-->
+<!-- 导入模板 -->
+<import src="../common/template.wxml" />
+
+<view class="container wallet-wrap">
+  <view class="wallet line-bottom">
+    <view class="wallet-item">
+      <view class="wallet-title">
+        <text>比特币：</text>
+      </view>
+      <view class="wallet-value">
+        <text class="wallet-bi">24</text><text class="wallet-unit">BTC</text>
+      </view>
+    </view>
+    <view class="wallet-item">
+      <view class="wallet-title">
+        <text>今天市值：</text>
+      </view>
+      <view class="wallet-value">
+        <text class="wallet-bi">480124</text><text class="wallet-unit">CNY</text>
+      </view>
+    </view>
+    <view class="wallet-btns">
+      <view class="wallet-btn wallet-transfer">转账</view>
+      <view class="wallet-btn wallet-gather">收款</view>
+    </view>
+    <view class="wallet-package">
+      <view class="wallet-wimg">
+        <image class="wallet-img" src="/images/icon_qr.png" mode="aspectFill"></image>
+      </view>
+      <view class="wallet-info">
+        <view class="wallet-addr">钱包地址：</view>
+        <view class="wallet-key">0edce4bb393cc7a49510dade77c83449510d</view>
+      </view>
+    </view>
+  </view>
+  <view class="wallet-history">
+    <view class="wallet-tit">
+      <text>最近交易记录</text>
+    </view>
+    <view class="wallet-list">
+      <view class="wallet-line">
+        <view class="wallet-cimg">
+          <image class="wallet-avatar" mode="aspectFill"></image>
+        </view>
+        <view class="wallet-middle">
+          <view class="wallet-top">Ron</view>
+          <view class="wallet-bottom line-1 vertical">0edce4bb393cc7a49510dade77c83449510d</view>
+        </view>
+        <view class="wallet-right">
+          <view class="wallet-top">+100BTC</view>
+          <view class="wallet-bottom">2017-6-11</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="common-footer">
+    <template is="articleItem" data="{{ ...article }}" />
+    <template is="footer" />
+  </view>
+</view>

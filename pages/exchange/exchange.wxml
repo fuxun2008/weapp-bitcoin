@@ -1,0 +1,78 @@
+<!--exchange.wxml-->
+<!-- 导入模板 -->
+<import src="../common/template.wxml" />
+<view class="container exchange-wrap">
+  <view class="exchange-new line-bottom">
+    <view class="exchange-title">
+      <text>BTC最新市价：</text>
+    </view>
+    <view class="exchange-pwrap">
+      <view class="exchange-price">
+        ￥<text>19302</text>
+      </view>
+      <view class="exchange-btn">+12.4%</view>
+    </view>
+  </view>
+  <view class="exchange-weekly line-bottom">
+    <view class="weekly-title">
+      <text>最近一周走势</text>
+    </view>
+    <view class="exchange-list">
+      <view class="exchange-item">
+        <text class="item-week">周日</text>
+        <text class="item-date">2017-06-11</text>
+        <text class="item-money">￥21223</text>
+        <text class="item-rate item-btn cred">+12.4%</text>
+      </view>
+      <view class="exchange-item">
+        <text class="item-week">周六</text>
+        <text class="item-date">2017-06-10</text>
+        <text class="item-money">￥19223</text>
+        <text class="item-rate item-btn cgreen">-12.4%</text>
+      </view>
+      <view class="exchange-item">
+        <text class="item-week">周五</text>
+        <text class="item-date">2017-06-09</text>
+        <text class="item-money">￥21563</text>
+        <text class="item-rate item-btn cred">+9.4%</text>
+      </view>
+    </view>
+  </view>
+  <view class="exchange-capital line-bottom">
+    <view class="weekly-title">
+      <text>拥有资产</text>
+    </view>
+    <view class="exchange-money">
+      <view class="exchange-bit">比特币：<text>21</text>BTC</view>
+      <view class="exchange-value">市值约为：<text>¥212331</text></view>
+    </view>
+  </view>
+  <view class="common-footer">
+    <template is="articleItem" data="{{ ...article }}" />
+    <template is="footer" />
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+page {
+  background-color: #fff;
+}
+
+.detail-wrapper {
+  padding: 40rpx 30rpx 20rpx;
+}
+
+.detail-title {
+  margin-bottom: 40rpx;
+  color: #000;
+  font-size: 48rpx;
+  letter-spacing: 0;
+}
+
+.detail-info {
+  color: #888;
+  font-size: 30rpx;
+  margin-bottom: 40rpx;
+}
+
+.detail-resource {
+  margin-right: 20rpx;
+}
+
+.detail-detail {
+  font-size: 0;
+}
+
+.detail-detail .parag {
+  padding-bottom: 20rpx;
+  line-height: 1.6;
+  letter-spacing:3rpx;
+  font-size: 32rpx;
+  color: #111;
+}
+
+.detail-detail .img {
+  width: 100%;
+  padding: 0 0 30rpx;
+}

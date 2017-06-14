@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/list/list",
+    "pages/wallet/wallet",
+    "pages/mining/mining",
+    "pages/detail/detail",
+    "pages/exchange/exchange"
+  ],
+  "window": {
+    "backgroundTextStyle": "black",
+    "backgroundColor": "#eee",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "十分钟玩转比特币",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#000",
+    "borderStyle": "white",
+    "backgroundColor": "#fafafa",
+    "position": "bottom",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "资讯",
+      "iconPath": "images/ic_news_normal.png",
+      "selectedIconPath": "images/ic_news_active.png"
+    }, {
+      "pagePath": "pages/mining/mining",
+      "text": "挖矿",
+      "iconPath": "images/ic_coin_normal.png",
+      "selectedIconPath": "images/ic_coin_active.png"
+    }, {
+      "pagePath": "pages/wallet/wallet",
+      "text": "钱包",
+      "iconPath": "images/ic_wallet_normal.png",
+      "selectedIconPath": "images/ic_wallet_active.png"
+    }, {
+      "pagePath": "pages/exchange/exchange",
+      "text": "交易所",
+      "iconPath": "images/ic_exchange_normal.png",
+      "selectedIconPath": "images/ic_exchange_active.png"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000,
+    "uploadFile": 10000,
+    "connetSocket": 10000
+  },
+  "debug": true
+}

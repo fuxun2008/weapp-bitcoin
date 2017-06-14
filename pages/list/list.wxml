@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<!-- 导入模板 -->
+<import src="../common/template.wxml" />
+
+<!--加载动画-->
+<block wx:if="{{showLoading}}">
+  <template is="loadingitem" />
+</block>
+<block wx:else>
+  <view class="container">
+    <!-- 加载数据成功 -->
+    <block wx:if="{{hasData}}">
+      <!-- 文章列表开始 -->
+      <view class="article">
+        <block wx:for="{{ articles }}" wx:key="id">
+          <template is="newsItem" data="{{ ...item }}" />
+        </block>
+      </view>
+      <!-- 文章列表结束 -->
+      <!-- 加载更多开始 -->
+      <view class="load-more-wrap">
+        <block wx:if="{{ hasMore }}">
+          <text class="weui-loading"/><text class="loading-text">正在加载更多</text>
+        </block>
+        <block wx:else>
+          没有更多了哟~
+        </block>
+      </view>
+      <!-- 加载更多结束 -->
+    </block>
+    <!-- 加载数据失败 -->
+    <block wx:else>
+      <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+    </block>
+  </view>
+</block>
+
+
+
+
+

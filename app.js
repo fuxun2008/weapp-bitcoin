@@ -1,30 +1,59 @@
 //app.js
+import aldstat from './utils/ald-stat.js'; // 阿拉丁统计SDK
+
+import API from './services/api';
+import Http from './components/http';
+import Storage from './components/storage';
+import Authorize from './controlers/authorize';
+import _ from './utils/util';
+import Config from './config';
+const Promise = require('./components/promise').Promise;
+
 App({
   onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-  },
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
+    console.log('App Launch');
+    let version = wx.getStorageSync('version');
+    if (!version) {
+      version = Config.v;
+      wx.setStorageSync('version', version);
+    } else if (version !== Config.v) {
+      // 清除缓存
+      wx.clearStorageSync();
+      version = Config.v;
+      wx.setStorageSync('version', version);
     }
+    this.version = version;
+    this.Http = Http.instance;
+    Http.instance.onUnAuthorize(this.onUnAuthorize);
   },
-  globalData:{
-    userInfo:null
+  onUnAuthorize: function () {
+    wx.hideToast();
+    wx.showToast({
+      title: '401授权失效！',
+      icon: 'loading',
+      duration: 2000
+    });
+  },
+  initialize: function (callback) {
+    let that = this;
+    return new Promise((resolve, reject) => {
+      Authorize.adapter('network', API);
+      Authorize.adapter('storage', Storage.instance);
+
+      this.Authorize = Authorize.instance;
+
+      Authorize.initialize(() => {
+        callback && callback();
+      }).then(result => {
+        this.Authorize = Authorize.instance;
+        Http.setAuthorization(result.Authorization);
+        console.log('登录信息：', JSON.stringify(result, null, 2));
+        resolve(result);
+      });
+    });
+  },
+  globalData: {
+    DeviceInfo: {},
+    MeetYouUser: {}
   }
 })

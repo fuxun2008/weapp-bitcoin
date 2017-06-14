@@ -1,0 +1,115 @@
+page {
+  background-color: #fff;
+}
+
+.exchange-wrap {
+  padding: 0 30rpx;
+}
+
+.exchange-new {
+  position: relative;
+  padding: 60rpx 30rpx;
+}
+
+.exchange-title {
+  font-size: 28rpx;
+  color: #000;
+  margin-bottom: 10rpx;
+}
+
+.exchange-pwrap {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+.exchange-price {
+  font-size: 60rpx;
+  color: #ff3000;
+  margin-right: 32rpx;
+}
+
+.exchange-btn {
+  font-size: 26rpx;
+  color: #ff3100;
+  background-color: #fff2ef;
+  border: 2rpx solid #ff3100;
+  border-radius: 6rpx;
+  padding: 10rpx 16rpx;
+}
+
+.exchange-weekly,
+.exchange-capital {
+  position: relative;
+  padding: 30rpx;
+}
+
+.weekly-title {
+  font-size: 36rpx;
+  color: #000;
+  margin-bottom: 20rpx;
+}
+
+.exchange-item {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #888;
+  margin-bottom: 10rpx;
+}
+
+.exchange-item:last-child {
+  margin-bottom: 0;
+}
+
+.item-week {
+  width: 90rpx;
+}
+
+.item-date {
+  width: 220rpx;
+}
+
+.item-money {
+  flex: 1;
+}
+
+.item-rate {
+  margin-left: 10rpx;
+}
+
+.item-btn {
+  font-size: 20rpx;
+  border-radius: 6rpx;
+  padding: 4rpx 16rpx;
+  min-width: 72.8126rpx;
+  text-align: center;
+}
+
+.cgreen {
+  color: #04d724;
+  background: #ddefcb;
+  border: 2rpx solid #04d724;
+}
+
+.cred {
+  color: #ff3100;
+  background: #fff2ef;
+  border: 2rpx solid #ff3100;
+}
+
+.exchange-money {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.exchange-bit {
+  margin-bottom: 10rpx;
+}
+
+.exchange-money text {
+  display: inline-block;
+  margin-left: 10rpx;
+}
