@@ -73,6 +73,7 @@
   display: block;
   width: 55rpx;
   height: 55rpx;
+  background-color: #eee;
 }
 
 .wallet-info {
@@ -116,7 +117,7 @@
   width: 82rpx;
   height: 82rpx;
   border-radius: 100%;
-  background-color: #f1f1f1;
+  background-color: #eee;
 }
 
 .wallet-middle {

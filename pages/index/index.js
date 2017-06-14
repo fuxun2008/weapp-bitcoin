@@ -8,7 +8,7 @@ const MAXSIZE = 10;
 
 Page({
   data: {
-    currentTab: 1,
+    currentTab: 0,
     tabs: [],
     imgUrls: [],
     swiper: {
@@ -47,6 +47,9 @@ Page({
   },
   fetchData: function(page, cid) {
     const that = this;
+    that.setData({
+      showLoading: true
+    });
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
@@ -58,6 +61,7 @@ Page({
           item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
         });
         that.setData({
+          currentTab: data.cid,
           tabs: data.category_list,
           imgUrls: data.article_top_list,
           articles: data.article_list,
@@ -87,21 +91,22 @@ Page({
   //事件处理函数
   bindViewTap: function(e) {
     const that = this;
-    const id = parseInt(e.currentTarget.dataset.id, 10);
-    that.setData({
-      currentTab: id
-    });
+    const cid = parseInt(e.currentTarget.dataset.cid, 10);
+    that.fetchData(1, cid);
   },
   onReachBottom: function () {
     const that = this;
+    let page = that.data.page;
     const hasMore = that.data.hasMore;
+    const cid = that.data.currentTab;
     if (hasMore) {
-      that.fetchData(that.data.page++, 0);
+      that.fetchData(page++, cid);
     }
   },
   reloadData: function() {
     console.log('reloadData');
     const that = this;
-    that.fetchData();
+    const cid = that.data.currentTab;
+    that.fetchData(1, cid);
   }
 });

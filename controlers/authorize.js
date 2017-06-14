@@ -107,7 +107,7 @@ class Authorize {
     this.initializing = true;
     return new Promise((resolve, reject) => {
       this.login().then(result => {
-        console.log('登录成功数据: ', JSON.stringify(result, null, 2));
+        // console.log('登录成功数据: ', JSON.stringify(result, null, 2));
         this.initializing = false;
         this.Authorization = result.Authorization;
         this.BitUser = result.BitUser;

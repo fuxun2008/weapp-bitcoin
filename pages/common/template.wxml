@@ -30,16 +30,17 @@
         <text>{{ title }}</text>
       </view>
       <view class="news-thumb">
-        <image src="{{ img }}" class="news-image" mode="scaleToFill"></image>
+        <image src="{{ cover }}" class="news-image" mode="scaleToFill"></image>
       </view>
     </view>
   </navigator>
 </template>
 
+<!-- 更多文章模板 -->
 <template name="footer">
-  <navigator url="/pages/list/list?id={{ id }}" class="footer-nav" hover-class="tapback">
+  <navigator url="/pages/list/list?cid={{ cid }}&name={{ name }}" class="footer-nav" hover-class="tapback">
     <view class="footer-wrap line-bottom">
-      <text class="footer-txt">更多比特币科普文章</text>
+      <text class="footer-txt">更多比特币{{ name }}科普文章</text>
       <image class="footer-arr" src="/images/icon_right_arrow.png"></image>
     </view>
   </navigator>

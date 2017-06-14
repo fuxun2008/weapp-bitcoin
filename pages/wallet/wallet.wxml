@@ -54,8 +54,8 @@
       </view>
     </view>
   </view>
-  <view class="common-footer">
-    <template is="articleItem" data="{{ ...article }}" />
-    <template is="footer" />
+  <view wx:if="{{articles && articles.length}}" class="common-footer">
+    <template is="articleItem" data="{{ ...articles[0] }}" />
+    <template is="footer" data="{{ cid: 3, name: '钱包' }}" />
   </view>
 </view>

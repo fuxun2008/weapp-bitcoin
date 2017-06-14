@@ -301,6 +301,7 @@ page {
   display: block;
   width: 240rpx;
   height: 150rpx;
+  background-color: #eee;
 }
 /* article style */
 
@@ -337,6 +338,7 @@ page {
   width: 240rpx;
   height: 150rpx;
   display: block;
+  background-color: #eee;
 }
 /* news style */
 
