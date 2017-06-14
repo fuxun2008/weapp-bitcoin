@@ -71,8 +71,8 @@ class Authorize {
           network.authorize(result.code, result.data.iv, result.data.encryptedData).then(json => {
             console.log('authorize信息：', JSON.stringify(json, null, 2));
             const data = {
-              Authorization: json.data.authentication_token,
-              MeetYouUser: json.data.user,
+              Authorization: json.data.access_token,
+              BitUser: json.data.weixin,
               WechatUser: result.data.userInfo
             };
             if (json.code == 0) {
@@ -110,7 +110,7 @@ class Authorize {
         console.log('登录成功数据: ', JSON.stringify(result, null, 2));
         this.initializing = false;
         this.Authorization = result.Authorization;
-        this.MeetYouUser = result.MeetYouUser;
+        this.BitUser = result.BitUser;
         this.WechatUser = result.WechatUser;
         this.saveStorage().then(result => {
           resolve(this);
@@ -124,7 +124,7 @@ class Authorize {
           console.log('本地存储数据: ', JSON.stringify(result, null, 2));
           this.initializing = false;
           this.Authorization = result.Authorization;
-          this.MeetYouUser = result.MeetYouUser;
+          this.BitUser = result.BitUser;
           resolve(this);
         }, error => {
           this.initializing = false;
@@ -155,14 +155,14 @@ class Authorize {
             }, null);
           });
         },
-        MeetYouUser: done => {
-          storage.read('MeetYouUser').then(user => {
-            console.info('读取MeetYouUser成功！');
+        BitUser: done => {
+          storage.read('BitUser').then(user => {
+            console.info('读取BitUser成功！');
             done(null, user);
           }, error => {
             done({
               err: error,
-              msg: '读取MeetYouUser失败！'
+              msg: '读取BitUser失败！'
             }, null);
           });
         }
@@ -170,7 +170,7 @@ class Authorize {
         if (error) {
           reject(error);
         } else {
-          console.info('读取Authorization，MeetYouUser成功！');
+          console.info('读取Authorization，BitUser成功！');
           resolve(result);
         }
       });
@@ -206,14 +206,14 @@ class Authorize {
             }, null);
           });
         },
-        MeetYouUser: done => {
-          storage.write('MeetYouUser', this.MeetYouUser).then(user => {
-            console.info('存储MeetYouUser成功！');
+        BitUser: done => {
+          storage.write('BitUser', this.BitUser).then(user => {
+            console.info('存储BitUser成功！');
             done(null, user);
           }, error => {
             done({
               err: error,
-              msg: '存储MeetYouUser失败！'
+              msg: '存储BitUser失败！'
             }, null);
           });
         }
@@ -221,7 +221,7 @@ class Authorize {
         if (error) {
           reject(error);
         } else {
-          console.info('存储Authorization，WechatUser，MeetYouUser成功！');
+          console.info('存储Authorization，WechatUser，BitUser成功！');
           resolve(result);
         }
       });

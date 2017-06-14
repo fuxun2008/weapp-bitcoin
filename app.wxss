@@ -22,7 +22,7 @@
 
 page {
   display: block;
-  font-family: "STHeiti", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  font-family: "PingFangSC-Regular", "STHeiti", "Microsoft YaHei", Helvetica, Arial, sans-serif;
   color: #323232;
   background-color: #eee;
   -webkit-font-smoothing: antialiased;

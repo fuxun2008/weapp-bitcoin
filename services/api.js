@@ -77,11 +77,15 @@ const putUserInfo = (data) => {
   });
 };
 
-const fetchIndex = () => {
+const fetchIndex = (page = 1, cid) => {
   return new Promise((resolve, reject) => {
     const url = API_METHODS['index'];
     Http.instance.get({
-      url: url
+      url: url,
+      data: {
+        page: page,
+        cid: cid
+      }
     }).then(data => {
       resolve(data);
     }, err => {

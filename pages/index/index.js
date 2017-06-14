@@ -19,6 +19,7 @@ Page({
       duration: 500
     },
     articles: [],
+    page: 1,
     errorMsg: '暂时没有数据哦~',
     hasData: false,
     hasMore: true,
@@ -27,7 +28,7 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     const that = this;
-    that.fetchData();
+    that.fetchData(1, 0);
     App.initialize(() => {
       this.setData({
         errorMsg: '咦？网络不见了，请检查网络连接~',
@@ -59,9 +60,9 @@ Page({
       }
     };
   },
-  fetchData: function() {
+  fetchData: function(page, cid) {
     const that = this;
-    API.fetchIndex().then(json => {
+    API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
         const data = json.data;
@@ -105,6 +106,13 @@ Page({
     that.setData({
       currentTab: id
     });
+  },
+  onReachBottom: function () {
+    const that = this;
+    const hasMore = that.data.hasMore;
+    if (hasMore) {
+      that.fetchData(that.data.page++, 0);
+    }
   },
   reloadData: function() {
     console.log('reloadData');

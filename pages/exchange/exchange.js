@@ -3,7 +3,14 @@ import _ from '../../utils/util.js';
 
 Page({
   data: {
-    logs: []
+    article: {
+      id: 10,
+      title: '比特币触底反弹，澳交所接受使用比特币支付收购款',
+      img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
+      resource: 'GoogleNews',
+      timestamp: _.dateFromNow(1497082010307),
+      count: 1234
+    }
   },
   onLoad: function () {
   },

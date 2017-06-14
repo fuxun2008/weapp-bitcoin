@@ -26,7 +26,7 @@ Page({
   onShareAppMessage: function () {
     const self = this;
     return {
-      title: '付勋教你来读书，' + self.data.title,
+      title: '付勋分享给你一篇能秒懂比特币的文章',
       path: '/pages/detail/detail?id=' + self.data.id,
       success: function (res) {
         // 转发成功
