@@ -1,6 +1,8 @@
 //exchange.js
 import _ from '../../utils/util.js';
 
+const App = getApp();
+
 Page({
   data: {
     article: {
@@ -14,9 +16,10 @@ Page({
   },
   onLoad: function () {
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: '付勋' + '邀你测试自己的比特币投资天赋',
+      title: name + '邀你测试自己的比特币投资天赋',
       path: '/pages/exchange/exchange',
       success: function (res) {
         // 转发成功

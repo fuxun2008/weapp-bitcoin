@@ -100,7 +100,7 @@ class Authorize {
     });
   }
 
-  initialize(callback) {
+  initialize() {
     if (this.initializing) {
       return;
     }
@@ -128,7 +128,6 @@ class Authorize {
           resolve(this);
         }, error => {
           this.initializing = false;
-          callback && callback();
           console.error(error.msg, JSON.stringify(error, null, 2));
         });
         this.initializing = false;
@@ -232,8 +231,8 @@ class Authorize {
     return Authorize.instance.adapter(name, engine);
   }
 
-  static initialize(callback) {
-    return Authorize.instance.initialize(callback);
+  static initialize() {
+    return Authorize.instance.initialize();
   }
 
   static loadStorage() {

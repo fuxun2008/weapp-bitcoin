@@ -1,6 +1,8 @@
 //mining.js
 import _ from '../../utils/util.js';
 
+const App = getApp();
+
 let hour = 0;
 let minute = 0;
 let second = 0; //时 分 秒
@@ -45,9 +47,10 @@ Page({
     console.log('onUnload');
     this.reset();
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: '付勋' + '教你如何挖出价值不菲的比特币！',
+      title: name + '教你如何挖出价值不菲的比特币！',
       path: '/pages/mining/mining',
       success: function (res) {
         // 转发成功

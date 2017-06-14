@@ -1,6 +1,8 @@
 //wallet.js
 import _ from '../../utils/util.js';
 
+const App = getApp();
+
 Page({
   data: {
     article: {
@@ -14,9 +16,10 @@ Page({
   },
   onLoad: function () {
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: '付勋' + '喊你来捡钱包啦！支付宝钱包、微信钱包都不如比特币钱包~',
+      title: name + '喊你来捡钱包啦！支付宝钱包、微信钱包都不如比特币钱包~',
       path: '/pages/exchange/exchange',
       success: function (res) {
         // 转发成功
