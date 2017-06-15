@@ -285,6 +285,7 @@ page {
 
 .article-resource {
   float: left;
+  width: 280rpx;
 }
 
 .article-date {
