@@ -121,10 +121,29 @@ const stringify = function (query, flag) {
   return search;
 };
 
+/**
+ * 显示加载样式
+ */
+const showLoading = function () {
+  wx.showLoading({
+    title: '玩命加载中...',
+    mask: true
+  });
+};
+
+/**
+ * 隐藏加载样式
+ */
+const hideLoading = function() {
+  wx.hideLoading();
+};
+
 module.exports = {
   msToDate,
   nowToDate,
   dateFromNow,
   parse,
-  stringify
+  stringify,
+  showLoading,
+  hideLoading
 };

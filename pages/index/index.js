@@ -21,16 +21,13 @@ Page({
     articles: [],
     page: 1,
     errorMsg: '暂时没有数据哦~',
-    hasData: false,
-    hasMore: true,
-    showLoading: true
+    hasData: true,
+    hasMore: true
   },
   onLoad: function () {
     console.log('onLoad');
     const that = this;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, 0);
   },
   onShareAppMessage: function (options) {
@@ -52,6 +49,7 @@ Page({
     const that = this;
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
+      _.hideLoading();
       if (json && json.code === 0) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
@@ -67,21 +65,19 @@ Page({
           articles: that.data.articles.concat(data.article_list),
           page: page,
           hasData: true,
-          hasMore: data.article_list.length === MAXSIZE ? true : false,
-          showLoading: false
+          hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
           hasMore: false,
-          hasData: false,
-          showLoading: false
+          hasData: false
         });
       }
     }, error => {
+      wx.hideLoading();
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
-        showLoading: false
+        hasData: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
@@ -90,14 +86,14 @@ Page({
   bindViewTap: function(e) {
     const that = this;
     const cid = parseInt(e.currentTarget.dataset.cid, 10);
+    _.showLoading();
     that.setData({
       currentTab: cid,
       imgUrls: [],
       articles: [],
       page: 1,
       hasMore: false,
-      hasData: true,
-      showLoading: true
+      hasData: true
     });
     that.fetchData(1, cid);
   },
@@ -115,9 +111,7 @@ Page({
     console.log('reloadData');
     const that = this;
     const cid = that.data.currentTab;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, cid);
   }
 });
