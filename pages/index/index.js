@@ -74,7 +74,7 @@ Page({
         });
       }
     }, error => {
-      wx.hideLoading();
+      _.hideLoading();
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
         hasData: false
