@@ -6,7 +6,7 @@
   <!-- 加载数据成功 -->
   <!-- header导航tab开始 -->
   <view class="header clearfix">
-    <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ (currentTab === item.id) ? 'active' : '' }}" bindtap="bindViewTap" data-cid="{{ item.id }}">{{ item.name }}</view>
+    <view wx:for="{{ tabs }}" wx:key="id" class="tabitem line-1 vertical {{ (currentTab === item.id) ? 'active' : '' }}" bindtap="bindViewTap" data-cid="{{ item.id }}">{{ item.name }}</view>
   </view>
   <!--加载动画-->
   <!-- header导航tab结束 -->
@@ -20,7 +20,6 @@
               <image src="{{ item.cover }}" class="swiper-item" mode="aspectFill" />
               <view class="swiper-desc">
                 <text class="swiper-text line-1 vertical">{{ item.title }}</text>
-                <text class="swiper-id">[{{ index + 1 }}/{{ imgUrls.length }}]</text>
               </view>
             </view>
           </navigator>

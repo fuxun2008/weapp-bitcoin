@@ -70,9 +70,4 @@
 
 .swiper-text {
   float: left;
-  width: 600rpx;
-}
-
-.swiper-id {
-  float: right;
 }
