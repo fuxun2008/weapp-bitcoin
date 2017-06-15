@@ -2,21 +2,21 @@
 <!-- 导入模板 -->
 <import src="../common/template.wxml" />
 
-<!--加载动画-->
-<block wx:if="{{showLoading}}">
-  <template is="loadingitem" />
-</block>
-<block wx:else>
-  <view class="container">
-    <!-- 加载数据成功 -->
+<view class="container">
+  <!-- 加载数据成功 -->
+  <!-- header导航tab开始 -->
+  <view class="header clearfix">
+    <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ (currentTab === item.id) ? 'active' : '' }}" bindtap="bindViewTap" data-cid="{{ item.id }}">{{ item.name }}</view>
+  </view>
+  <!--加载动画-->
+  <block wx:if="{{showLoading}}">
+    <template is="loadingitem" />
+  </block>
+  <block wx:else>
+    <!-- header导航tab结束 -->
     <block wx:if="{{hasData}}">
-      <!-- header导航tab开始 -->
-      <view class="header clearfix">
-        <view wx:for="{{ tabs }}" wx:key="id" class="tabitem {{ (currentTab === item.id) ? 'active' : '' }}" bindtap="bindViewTap" data-cid="{{ item.id }}">{{ item.name }}</view>
-      </view>
-      <!-- header导航tab结束 -->
       <view class="content">
-      <!-- 轮播图开始 -->
+        <!-- 轮播图开始 -->
         <swiper class="swiper" wx:if="{{ imgUrls && imgUrls.length }}" indicator-dots="{{ swiper.indicatorDots }}" autoplay="{{ swiper.autoplay }}" interval="{{ swiper.interval }}" duration="{{ swiper.duration }}" circular="{{ swiper.circular }}">
           <swiper-item wx:for="{{ imgUrls }}" wx:key="id">
             <navigator url="/pages/detail/detail?id={{ item.id }}" class="swiper-nav">
@@ -59,5 +59,5 @@
     <block wx:else>
       <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
     </block>
-  </view>
-</block>
+  </block>
+</view>

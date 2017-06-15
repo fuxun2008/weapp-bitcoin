@@ -3,7 +3,6 @@ import _ from '../../utils/util.js';
 import API from '../../services/api';
 
 const App = getApp();
-const MAXSIZE = 10;
 
 let hour = 0;
 let minute = 0;
@@ -16,15 +15,19 @@ Page({
   data: {
     time: '00:00:00',
     coin: 0,
-    currentTab: 0,
-    articles: []
+    cid: 2,
+    articles: [],
+    showLoading: true
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // this.start();
     console.log('onLoad');
     const that = this;
-    that.fetchData(1, 2);
+    that.setData({
+      showLoading: true
+    });
+    that.fetchData(1, that.data.cid);
   },
   onReady: function() {
     // 页面渲染完成
@@ -110,9 +113,6 @@ Page({
   },
   fetchData: function (page, cid) {
     const that = this;
-    that.setData({
-      showLoading: true
-    });
     API.fetchIndex(page, cid).then(json => {
       console.log('miningPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
@@ -124,24 +124,18 @@ Page({
           item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
         });
         that.setData({
-          currentTab: data.cid,
+          cid: data.cid,
           articles: data.article_list,
-          hasData: true,
-          hasMore: data.article_list.length === MAXSIZE ? true : false,
           showLoading: false
         });
       } else {
         that.setData({
-          articles: [],
-          hasMore: false,
-          hasData: false,
           showLoading: false
         });
       }
     }, error => {
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
         showLoading: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
