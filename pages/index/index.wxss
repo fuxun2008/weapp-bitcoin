@@ -34,9 +34,12 @@
   transition: color, border-bottom-color 0.5s linear;
 }
 
+.content {
+  margin-top: 70rpx;
+}
+
 /* swpier 轮播图 */
 .swiper {
-  margin-top: 70rpx;
   height: 400rpx;
 }
 

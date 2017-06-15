@@ -25,6 +25,7 @@ App({
     this.version = version;
     this.Http = Http.instance;
     Http.instance.onUnAuthorize(this.onUnAuthorize);
+    this.initialize();
   },
   onUnAuthorize: function () {
     wx.hideToast();
@@ -34,26 +35,23 @@ App({
       duration: 2000
     });
   },
-  initialize: function (callback) {
+  initialize: function () {
     let that = this;
-    return new Promise((resolve, reject) => {
-      Authorize.adapter('network', API);
-      Authorize.adapter('storage', Storage.instance);
+    Authorize.adapter('network', API);
+    Authorize.adapter('storage', Storage.instance);
 
+    this.Authorize = Authorize.instance;
+
+    Authorize.initialize().then(result => {
       this.Authorize = Authorize.instance;
-
-      Authorize.initialize(() => {
-        callback && callback();
-      }).then(result => {
-        this.Authorize = Authorize.instance;
-        Http.setAuthorization(result.Authorization);
-        console.log('登录信息：', JSON.stringify(result, null, 2));
-        resolve(result);
-      });
+      Http.setAuthorization(result.Authorization);
+      this.globalData.WechatUser = Object.assign({}, result.WechatUser);
+      this.globalData.BitUser = Object.assign({}, result.BitUser);
     });
   },
   globalData: {
-    DeviceInfo: {},
-    MeetYouUser: {}
+    defaultName: '中本聪',
+    WechatUser: {},
+    BitUser: {}
   }
 })

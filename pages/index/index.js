@@ -8,7 +8,7 @@ const MAXSIZE = 10;
 
 Page({
   data: {
-    currentTab: 1,
+    currentTab: 0,
     tabs: [],
     imgUrls: [],
     swiper: {
@@ -28,27 +28,15 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     const that = this;
-    that.fetchData(1, 0);
-    App.initialize(() => {
-      this.setData({
-        errorMsg: '咦？网络不见了，请检查网络连接~',
-        showLoading: false,
-        hasData: false
-      });
-      return false;
-    }).then(result => {
-      console.log('APP Data: ', JSON.stringify(result, null, 2));
-      Object.assign(App.globalData.MeetYouUser, result.MeetYouUser);
-      console.log('App.globalData.MeetYouUser: ', JSON.stringify(App.globalData.MeetYouUser, null, 2));
-      // this.MeetYouUser = result.MeetYouUser;
-      const meetYouUser = result.MeetYouUser;
-      const sqs = meetYouUser.skip_quick_setting;
-      const mode = parseInt(meetYouUser.mode);
+    that.setData({
+      showLoading: true
     });
+    that.fetchData(1, 0);
   },
-  onShareAppMessage: function() {
+  onShareAppMessage: function (options) {
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: '付勋' + '邀你来十分钟读懂比特币',
+      title: name + '邀你来十分钟读懂比特币',
       path: '/pages/index/index',
       success: function(res) {
         // 转发成功
@@ -73,18 +61,17 @@ Page({
           item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
         });
         that.setData({
+          currentTab: data.cid,
           tabs: data.category_list,
-          imgUrls: data.article_top_list,
-          articles: data.article_list,
+          imgUrls: that.data.imgUrls.concat(data.article_top_list),
+          articles: that.data.articles.concat(data.article_list),
+          page: page,
           hasData: true,
           hasMore: data.article_list.length === MAXSIZE ? true : false,
           showLoading: false
         });
       } else {
         that.setData({
-          tabs: [],
-          imgUrls: [],
-          articles: [],
           hasMore: false,
           hasData: false,
           showLoading: false
@@ -102,21 +89,35 @@ Page({
   //事件处理函数
   bindViewTap: function(e) {
     const that = this;
-    const id = parseInt(e.currentTarget.dataset.id, 10);
+    const cid = parseInt(e.currentTarget.dataset.cid, 10);
     that.setData({
-      currentTab: id
+      currentTab: cid,
+      imgUrls: [],
+      articles: [],
+      page: 1,
+      hasMore: false,
+      hasData: true,
+      showLoading: true
     });
+    that.fetchData(1, cid);
   },
   onReachBottom: function () {
     const that = this;
+    const page = parseInt(that.data.page, 10);
+    const nextPage = page + 1;
     const hasMore = that.data.hasMore;
+    const cid = that.data.currentTab;
     if (hasMore) {
-      that.fetchData(that.data.page++, 0);
+      that.fetchData(nextPage, cid);
     }
   },
   reloadData: function() {
     console.log('reloadData');
     const that = this;
-    that.fetchData();
+    const cid = that.data.currentTab;
+    that.setData({
+      showLoading: true
+    });
+    that.fetchData(1, cid);
   }
 });

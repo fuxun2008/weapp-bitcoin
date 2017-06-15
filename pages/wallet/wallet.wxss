@@ -10,22 +10,20 @@
 }
 
 .wallet-item {
-  margin-bottom: 40rpx;
+  margin-bottom: 36rpx;
   color: #000;
-  font-weight: 700;
 }
 
 .wallet-item + .wallet-item {
-  margin-bottom: 66rpx;
+  margin-bottom: 54rpx;
 }
 
 .wallet-title {
-  font-size: 36rpx;
-  margin-bottom: 16rpx;
+  font-size: 28rpx;
 }
 
 .wallet-value {
-  font-size: 64rpx;
+  font-size: 60rpx;
 }
 
 .wallet-bi {
@@ -75,6 +73,7 @@
   display: block;
   width: 55rpx;
   height: 55rpx;
+  background-color: #eee;
 }
 
 .wallet-info {
@@ -118,7 +117,7 @@
   width: 82rpx;
   height: 82rpx;
   border-radius: 100%;
-  background-color: #f1f1f1;
+  background-color: #eee;
 }
 
 .wallet-middle {

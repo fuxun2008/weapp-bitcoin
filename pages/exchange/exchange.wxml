@@ -47,32 +47,8 @@
       <view class="exchange-value">市值约为：<text>¥212331</text></view>
     </view>
   </view>
-  <view class="common-footer">
-    <template is="articleItem" data="{{ ...article }}" />
-    <template is="footer" />
+  <view wx:if="{{articles && articles.length}}" class="common-footer">
+    <template is="articleItem" data="{{ ...articles[0] }}" />
+    <template is="footer" data="{{ cid: 4, name: '交易所' }}" />
   </view>
 </view>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

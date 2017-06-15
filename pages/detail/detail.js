@@ -3,6 +3,8 @@ import _ from '../../utils/util';
 import API from '../../services/api';
 import htmlToWxml from '../../components/htmlToWxml';
 
+const App = getApp();
+
 Page({
   data: {
     id: 0,
@@ -23,10 +25,11 @@ Page({
     let id = parseInt(options.id);
     that.fetchData(id);
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
     const self = this;
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: '付勋分享给你一篇能秒懂比特币的文章',
+      title: name + '分享给你一篇能秒懂比特币的文章',
       path: '/pages/detail/detail?id=' + self.data.id,
       success: function (res) {
         // 转发成功
