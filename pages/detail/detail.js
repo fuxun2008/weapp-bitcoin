@@ -15,14 +15,14 @@ Page({
     views: 0,
     info: '',
     errorMsg: '暂时没有数据哦~',
-    hasData: false,
-    showLoading: true
+    hasData: false
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // console.log('baby options: ', JSON.stringify(options, null, 2));
     const that = this;
     let id = parseInt(options.id);
+    _.showLoading();
     that.fetchData(id);
   },
   onShareAppMessage: function (options) {
@@ -45,6 +45,7 @@ Page({
     const that = this;
     API.fetchDetail(id).then(json => {
       console.log('detailPage: ', JSON.stringify(json, null, 2));
+      _.hideLoading();
       if (json && json.code === 0) {
         const data = json.data;
         if (data.created_at <= 0) {
@@ -60,24 +61,22 @@ Page({
           resource: data.source || '比特币资讯',
           views: data.views,
           timestamp: data.created_at,
-          hasData: true,
-          showLoading: false
+          hasData: true
         });
       } else {
         that.setData({
           id: id,
           errorMsg: '暂时没有数据哦~',
-          hasData: false,
-          showLoading: false
+          hasData: false
         });
         console.warn('暂时没有数据哦~');
       }
     }, error => {
+      _.hideLoading();
       that.setData({
         id: id,
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
-        showLoading: false
+        hasData: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
@@ -85,10 +84,7 @@ Page({
   reloadData: function () {
     const that = this;
     const id = that.data.id;
-    that.setData({
-      hasData: false,
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(id);
   }
 });
