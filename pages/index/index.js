@@ -21,8 +21,8 @@ Page({
     articles: [],
     page: 1,
     errorMsg: '',
-    hasData: true,
-    hasMore: true
+    hasData: false,
+    hasMore: false
   },
   onLoad: function () {
     console.log('onLoad');
@@ -95,7 +95,7 @@ Page({
       articles: [],
       page: 1,
       hasMore: false,
-      hasData: true
+      hasData: false
     });
     that.fetchData(1, cid);
   },

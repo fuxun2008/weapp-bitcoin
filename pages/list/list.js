@@ -10,8 +10,8 @@ Page({
     articles: [],
     page: 1,
     errorMsg: '',
-    hasData: true,
-    hasMore: true
+    hasData: false,
+    hasMore: false
   },
   onLoad: function (options) {
     console.log('options: ', JSON.stringify(options, null, 2));
