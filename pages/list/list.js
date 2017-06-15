@@ -9,7 +9,7 @@ Page({
     currentTab: 0,
     articles: [],
     page: 1,
-    errorMsg: '暂时没有数据哦~',
+    errorMsg: '',
     hasData: true,
     hasMore: true
   },
@@ -40,12 +40,14 @@ Page({
           currentTab: data.cid,
           articles: that.data.articles.concat(data.article_list),
           page: page,
+          errorMsg: '',
           hasData: true,
           hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
           hasMore: false,
+          errorMsg: '暂时没有数据哦~',
           hasData: false
         });
       }

@@ -50,7 +50,7 @@
 <template name="noNetwork">
   <view class="wrapper-empty">
     <view class="page-empty" bindtap="reloadData">
-      <text class="empty-tips">{{errorMsg || "暂时没有数据哦~"}}</text>
+      <text class="empty-tips">{{ errorMsg }}</text>
     </view>
   </view>
 </template>

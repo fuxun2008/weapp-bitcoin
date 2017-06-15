@@ -9,17 +9,17 @@ Page({
   data: {
     id: 0,
     title: '',
-    resource: '比特币资讯',
-    timestamp: _.nowToDate(),
+    resource: '',
+    timestamp: '',
     cover: '',
     views: 0,
     info: '',
-    errorMsg: '暂时没有数据哦~',
-    hasData: false
+    errorMsg: '',
+    hasData: true
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    // console.log('baby options: ', JSON.stringify(options, null, 2));
+    console.log('detailOptions: ', JSON.stringify(options, null, 2));
     const that = this;
     let id = parseInt(options.id);
     _.showLoading();
@@ -61,6 +61,7 @@ Page({
           resource: data.source || '比特币资讯',
           views: data.views,
           timestamp: data.created_at,
+          errorMsg: '',
           hasData: true
         });
       } else {

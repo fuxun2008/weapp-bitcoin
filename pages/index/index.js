@@ -20,7 +20,7 @@ Page({
     },
     articles: [],
     page: 1,
-    errorMsg: '暂时没有数据哦~',
+    errorMsg: '',
     hasData: true,
     hasMore: true
   },
@@ -65,10 +65,12 @@ Page({
           articles: that.data.articles.concat(data.article_list),
           page: page,
           hasData: true,
+          errorMsg: '',
           hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
+          errorMsg: '暂时没有数据哦~',
           hasMore: false,
           hasData: false
         });
