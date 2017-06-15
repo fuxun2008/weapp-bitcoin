@@ -23,7 +23,7 @@
           </block>
         </block>
         <block wx:if="{{ outItem.type === 'img' }}">
-          <image class="img" src="{{ outItem.attr.src }}" mode="aspectFill"></image>
+          <image class="img" src="{{ outItem.attr.src }}" mode="widthFix"></image>
         </block>
       </block>
     </view>
