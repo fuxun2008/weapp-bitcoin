@@ -28,6 +28,9 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     const that = this;
+    that.setData({
+      showLoading: true
+    });
     that.fetchData(1, 0);
   },
   onShareAppMessage: function (options) {
@@ -47,9 +50,6 @@ Page({
   },
   fetchData: function(page, cid) {
     const that = this;
-    that.setData({
-      showLoading: true
-    });
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
@@ -63,17 +63,15 @@ Page({
         that.setData({
           currentTab: data.cid,
           tabs: data.category_list,
-          imgUrls: data.article_top_list,
-          articles: data.article_list,
+          imgUrls: that.data.imgUrls.concat(data.article_top_list),
+          articles: that.data.articles.concat(data.article_list),
+          page: page,
           hasData: true,
           hasMore: data.article_list.length === MAXSIZE ? true : false,
           showLoading: false
         });
       } else {
         that.setData({
-          tabs: [],
-          imgUrls: [],
-          articles: [],
           hasMore: false,
           hasData: false,
           showLoading: false
@@ -92,21 +90,34 @@ Page({
   bindViewTap: function(e) {
     const that = this;
     const cid = parseInt(e.currentTarget.dataset.cid, 10);
+    that.setData({
+      currentTab: cid,
+      imgUrls: [],
+      articles: [],
+      page: 1,
+      hasMore: false,
+      hasData: true,
+      showLoading: true
+    });
     that.fetchData(1, cid);
   },
   onReachBottom: function () {
     const that = this;
-    let page = that.data.page;
+    const page = parseInt(that.data.page, 10);
+    const nextPage = page + 1;
     const hasMore = that.data.hasMore;
     const cid = that.data.currentTab;
     if (hasMore) {
-      that.fetchData(page++, cid);
+      that.fetchData(nextPage, cid);
     }
   },
   reloadData: function() {
     console.log('reloadData');
     const that = this;
     const cid = that.data.currentTab;
+    that.setData({
+      showLoading: true
+    });
     that.fetchData(1, cid);
   }
 });
