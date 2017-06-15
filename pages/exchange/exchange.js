@@ -3,21 +3,18 @@ import _ from '../../utils/util.js';
 import API from '../../services/api';
 
 const App = getApp();
-const MAXSIZE = 10;
 
 Page({
   data: {
-    article: {
-      id: 10,
-      title: '比特币触底反弹，澳交所接受使用比特币支付收购款',
-      img: 'http://m.anhuinews.com/upload/2017/06/06/201766631967.jpg',
-      resource: 'GoogleNews',
-      timestamp: _.dateFromNow(1497082010307),
-      count: 1234
-    }
+    cid: 4,
+    articles: [],
+    showLoading: true
   },
   onLoad: function () {
     const that = this;
+    that.setData({
+      showLoading: true
+    });
     that.fetchData(1, 4);
   },
   onShareAppMessage: function (options) {
@@ -37,9 +34,6 @@ Page({
   },
   fetchData: function (page, cid) {
     const that = this;
-    that.setData({
-      showLoading: true
-    });
     API.fetchIndex(page, cid).then(json => {
       console.log('exchangePage: ', JSON.stringify(json, null, 2));
       if (json && json.code === 0) {
@@ -51,28 +45,18 @@ Page({
           item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
         });
         that.setData({
-          currentTab: data.cid,
-          tabs: data.category_list,
-          imgUrls: data.article_top_list,
+          cid: data.cid,
           articles: data.article_list,
-          hasData: true,
-          hasMore: data.article_list.length === MAXSIZE ? true : false,
           showLoading: false
         });
       } else {
         that.setData({
-          tabs: [],
-          imgUrls: [],
-          articles: [],
-          hasMore: false,
-          hasData: false,
           showLoading: false
         });
       }
     }, error => {
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
         showLoading: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
