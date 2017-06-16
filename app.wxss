@@ -261,7 +261,7 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 35rpx 24rpx;
 }
 
@@ -280,7 +280,7 @@ page {
 .article-desc {
   font-size: 24rpx;
   color: #888;
-  margin-top: 46rpx;
+  margin-top: 36rpx;
 }
 
 .article-resource {
@@ -308,7 +308,7 @@ page {
 
 /* news style */
 .news-nav {
-  background: rgba(255, 255, 255, 0.95);
+  background: #eee;
 }
 
 .news-item {

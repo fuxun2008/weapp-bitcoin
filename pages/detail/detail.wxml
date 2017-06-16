@@ -2,44 +2,38 @@
 <!-- 导入模板 -->
 <import src="../common/template.wxml" />
 
-<!--加载动画-->
-<block wx:if="{{showLoading}}">
-  <template is="loadingitem" />
-</block>
-<block wx:else>
-  <view class="wrapper detail-wrapper">
-    <!-- 加载数据成功 -->
-    <block wx:if="{{hasData}}">
-      <view class="detail-title line-2 vertical">{{ title }}</view>
-      <view class="detail-info">
-        <text class="detail-resource">{{ resource }}</text>
-        <text class="detail-date">{{ timestamp }}</text>
-      </view>
-      <block wx:if="{{info && info.length}}">
-      <view class="detail-detail">
-        <block wx:for="{{ info }}" wx:for-index="outIndex" wx:for-item="outItem" wx:key="obj">
-          <block wx:if="{{ outItem.type === 'view' }}">
-            <block wx:for="{{ outItem.child }}" wx:for-index="innerIndex" wx:for-item="innerItem" wx:key="text">
-              <block wx:if="{{ innerItem.type === 'text' && innerItem.text !== '' }}">
-                <view class="parag">
-                  {{ innerItem.text }}
-                </view>
-              </block>
+<view class="wrapper detail-wrapper">
+  <!-- 加载数据成功 -->
+  <block wx:if="{{hasData}}">
+    <view class="detail-title line-2 vertical">{{ title }}</view>
+    <view class="detail-info">
+      <text class="detail-resource">{{ resource }}</text>
+      <text class="detail-date">{{ timestamp }}</text>
+    </view>
+    <block wx:if="{{info && info.length}}">
+    <view class="detail-detail">
+      <block wx:for="{{ info }}" wx:for-index="outIndex" wx:for-item="outItem" wx:key="obj">
+        <block wx:if="{{ outItem.type === 'view' }}">
+          <block wx:for="{{ outItem.child }}" wx:for-index="innerIndex" wx:for-item="innerItem" wx:key="text">
+            <block wx:if="{{ innerItem.type === 'text' && innerItem.text !== '' }}">
+              <view class="parag">
+                {{ innerItem.text }}
+              </view>
             </block>
           </block>
-          <block wx:if="{{ outItem.type === 'img' }}">
-            <image class="img" src="{{ outItem.attr.src }}" mode="aspectFill"></image>
-          </block>
         </block>
-      </view>
+        <block wx:if="{{ outItem.type === 'img' }}">
+          <image class="img" src="{{ outItem.attr.src }}" mode="widthFix"></image>
+        </block>
       </block>
-      <block wx:else>
-        <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
-      </block>
+    </view>
     </block>
-    <!-- 加载数据失败 -->
     <block wx:else>
       <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
     </block>
-  </view>
-</block>
+  </block>
+  <!-- 加载数据失败 -->
+  <block wx:else>
+    <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+  </block>
+</view>

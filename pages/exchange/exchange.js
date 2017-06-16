@@ -7,14 +7,11 @@ const App = getApp();
 Page({
   data: {
     cid: 4,
-    articles: [],
-    showLoading: true
+    articles: []
   },
   onLoad: function () {
     const that = this;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, 4);
   },
   onShareAppMessage: function (options) {
@@ -36,6 +33,7 @@ Page({
     const that = this;
     API.fetchIndex(page, cid).then(json => {
       console.log('exchangePage: ', JSON.stringify(json, null, 2));
+      _.hideLoading();
       if (json && json.code === 0) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
@@ -46,18 +44,13 @@ Page({
         });
         that.setData({
           cid: data.cid,
-          articles: data.article_list,
-          showLoading: false
-        });
-      } else {
-        that.setData({
-          showLoading: false
+          articles: data.article_list
         });
       }
     }, error => {
+      _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        showLoading: false
+        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~'
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });

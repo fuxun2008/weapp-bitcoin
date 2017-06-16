@@ -20,17 +20,14 @@ Page({
     },
     articles: [],
     page: 1,
-    errorMsg: '暂时没有数据哦~',
+    errorMsg: '',
     hasData: false,
-    hasMore: true,
-    showLoading: true
+    hasMore: false
   },
   onLoad: function () {
     console.log('onLoad');
     const that = this;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, 0);
   },
   onShareAppMessage: function (options) {
@@ -52,7 +49,8 @@ Page({
     const that = this;
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
-      if (json && json.code === 0) {
+      _.hideLoading();
+      if (json && json.code === 0 && json.data && (json.data.article_top_list.length || json.data.article_list.length)) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
           if (item.created_at <= 0) {
@@ -63,25 +61,27 @@ Page({
         that.setData({
           currentTab: data.cid,
           tabs: data.category_list,
-          imgUrls: that.data.imgUrls.concat(data.article_top_list),
-          articles: that.data.articles.concat(data.article_list),
+          imgUrls: page === 1 ? data.article_top_list : that.data.imgUrls.concat(data.article_top_list),
+          articles: page === 1 ? data.article_list :  that.data.articles.concat(data.article_list),
           page: page,
           hasData: true,
-          hasMore: data.article_list.length === MAXSIZE ? true : false,
-          showLoading: false
+          errorMsg: '',
+          hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
+          currentTab: cid,
+          errorMsg: '暂时没有数据哦~',
+          page: page,
           hasMore: false,
-          hasData: false,
-          showLoading: false
+          hasData: false
         });
       }
     }, error => {
+      _.hideLoading();
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
-        showLoading: false
+        hasData: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
@@ -90,15 +90,15 @@ Page({
   bindViewTap: function(e) {
     const that = this;
     const cid = parseInt(e.currentTarget.dataset.cid, 10);
-    that.setData({
-      currentTab: cid,
-      imgUrls: [],
-      articles: [],
-      page: 1,
-      hasMore: false,
-      hasData: true,
-      showLoading: true
-    });
+    _.showLoading();
+    // that.setData({
+    //   currentTab: cid,
+    //   imgUrls: [],
+    //   articles: [],
+    //   page: 1,
+    //   hasMore: false,
+    //   hasData: true
+    // });
     that.fetchData(1, cid);
   },
   onReachBottom: function () {
@@ -115,9 +115,7 @@ Page({
     console.log('reloadData');
     const that = this;
     const cid = that.data.currentTab;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, cid);
   }
 });

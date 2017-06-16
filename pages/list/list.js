@@ -9,10 +9,9 @@ Page({
     currentTab: 0,
     articles: [],
     page: 1,
-    errorMsg: '暂时没有数据哦~',
-    hasData: true,
-    hasMore: true,
-    showLoading: true
+    errorMsg: '',
+    hasData: false,
+    hasMore: false
   },
   onLoad: function (options) {
     console.log('options: ', JSON.stringify(options, null, 2));
@@ -21,12 +20,14 @@ Page({
     wx.setNavigationBarTitle({
       title: options.name + '资讯' || '资讯新闻'
     });
+    _.showLoading();
     that.fetchData(1, cid);
   },
   fetchData: function (page, cid) {
     const that = this;
     API.fetchIndex(page, cid).then(json => {
       console.log('miningPage: ', JSON.stringify(json, null, 2));
+      _.hideLoading();
       if (json && json.code === 0) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
@@ -39,22 +40,22 @@ Page({
           currentTab: data.cid,
           articles: that.data.articles.concat(data.article_list),
           page: page,
+          errorMsg: '',
           hasData: true,
-          hasMore: data.article_list.length === MAXSIZE ? true : false,
-          showLoading: false
+          hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
           hasMore: false,
-          hasData: false,
-          showLoading: false
+          errorMsg: '暂时没有数据哦~',
+          hasData: false
         });
       }
     }, error => {
+      _.hideLoading();
       that.setData({
         errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
-        hasData: false,
-        showLoading: false
+        hasData: false
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
@@ -73,9 +74,7 @@ Page({
     console.log('reloadData');
     const that = this;
     const cid = that.data.currentTab;
-    that.setData({
-      showLoading: true
-    });
+    _.showLoading();
     that.fetchData(1, cid);
   }
 })
