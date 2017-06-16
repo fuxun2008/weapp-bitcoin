@@ -2,7 +2,7 @@ import Http from '../components/http';
 import _ from '../utils/util';
 const Promise = require('../components/promise').Promise;
 
-const WX_URL = `https://api.design-sprint.cn`;
+const WX_URL = `https://api.damabtc.com`;
 
 const API_METHODS = {
   'user': `${WX_URL}/wx/connect`,
