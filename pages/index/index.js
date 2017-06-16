@@ -50,7 +50,7 @@ Page({
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       _.hideLoading();
-      if (json && json.code === 0) {
+      if (json && json.code === 0 && json.data && (json.data.article_top_list.length || json.data.article_list.length)) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
           if (item.created_at <= 0) {
@@ -61,8 +61,8 @@ Page({
         that.setData({
           currentTab: data.cid,
           tabs: data.category_list,
-          imgUrls: that.data.imgUrls.concat(data.article_top_list),
-          articles: that.data.articles.concat(data.article_list),
+          imgUrls: page === 1 ? data.article_top_list : that.data.imgUrls.concat(data.article_top_list),
+          articles: page === 1 ? data.article_list :  that.data.articles.concat(data.article_list),
           page: page,
           hasData: true,
           errorMsg: '',
@@ -70,7 +70,9 @@ Page({
         });
       } else {
         that.setData({
+          currentTab: cid,
           errorMsg: '暂时没有数据哦~',
+          page: page,
           hasMore: false,
           hasData: false
         });
@@ -89,14 +91,14 @@ Page({
     const that = this;
     const cid = parseInt(e.currentTarget.dataset.cid, 10);
     _.showLoading();
-    that.setData({
-      currentTab: cid,
-      imgUrls: [],
-      articles: [],
-      page: 1,
-      hasMore: false,
-      hasData: false
-    });
+    // that.setData({
+    //   currentTab: cid,
+    //   imgUrls: [],
+    //   articles: [],
+    //   page: 1,
+    //   hasMore: false,
+    //   hasData: true
+    // });
     that.fetchData(1, cid);
   },
   onReachBottom: function () {
