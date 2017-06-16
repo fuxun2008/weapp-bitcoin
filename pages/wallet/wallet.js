@@ -17,7 +17,7 @@ Page({
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: name + '喊你来捡钱包啦！支付宝钱包、微信钱包都不如比特币钱包~',
+      title: name + '喊你来捡钱包啦！',
       path: '/pages/exchange/exchange',
       success: function (res) {
         // 转发成功

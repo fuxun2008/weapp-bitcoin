@@ -16,7 +16,7 @@
         </view>
       </view>
       <view class="article-thumb">
-        <image src="{{ cover }}" class="article-image" mode="scaleToFill"></image>
+        <image src="{{ cover }}" class="article-image" mode="aspectFill"></image>
       </view>
     </view>
   </navigator>
@@ -30,7 +30,7 @@
         <text>{{ title }}</text>
       </view>
       <view class="news-thumb">
-        <image src="{{ cover }}" class="news-image" mode="scaleToFill"></image>
+        <image src="{{ cover }}" class="news-image" mode="aspectFill"></image>
       </view>
     </view>
   </navigator>
@@ -38,7 +38,7 @@
 
 <!-- 更多文章模板 -->
 <template name="footer">
-  <navigator url="/pages/list/list?cid={{ cid }}&name={{ name }}" class="footer-nav" hover-class="tapback">
+  <navigator url="/pages/list/list?cid={{ cid }}&name={{ name }}" class="footer-nav hidden" hover-class="tapback">
     <view class="footer-wrap line-bottom">
       <text class="footer-txt">更多比特币{{ name }}科普文章</text>
       <image class="footer-arr" src="/images/icon_right_arrow.png"></image>
