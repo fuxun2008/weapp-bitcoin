@@ -1,6 +1,5 @@
-.wallet-wrap {
+page {
   background-color: #fff;
-  min-height: 100vh;
 }
 
 .wallet {

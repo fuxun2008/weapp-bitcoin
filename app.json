@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/list/list",
-    "pages/wallet/wallet",
     "pages/mining/mining",
+    "pages/wallet/wallet",
     "pages/detail/detail",
-    "pages/exchange/exchange"
+    "pages/exchange/exchange",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "black",
