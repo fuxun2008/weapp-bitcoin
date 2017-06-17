@@ -3,26 +3,28 @@
 <import src="../common/template.wxml" />
 
 <view class="container wallet-wrap">
-  <view class="wallet line-bottom">
+  <view class="todo">
+    <view class="todo-wrap todo-wrap__wallet">
+      <image class="todo-img todo-img__wallet" src="/images/icon_wallet.png"></image>
+    </view>
+    <view class="todo-txt">钱包功能开发中</view>
+  </view>
+  <view hidden="true" class="wallet line-bottom">
     <view class="wallet-item">
       <view class="wallet-title">
-        <text>比特币：</text>
+        <text>xbtc：</text>
       </view>
       <view class="wallet-value">
-        <text class="wallet-bi">24</text><text class="wallet-unit">BTC</text>
+        <text class="wallet-bi">150.2553</text><text class="wallet-unit hidden">BTC</text>
       </view>
     </view>
-    <view class="wallet-item">
+    <view class="wallet-item hidden">
       <view class="wallet-title">
         <text>今天市值：</text>
       </view>
       <view class="wallet-value">
         <text class="wallet-bi">480124</text><text class="wallet-unit">CNY</text>
       </view>
-    </view>
-    <view class="wallet-btns">
-      <view class="wallet-btn wallet-transfer">转账</view>
-      <view class="wallet-btn wallet-gather">收款</view>
     </view>
     <view class="wallet-package">
       <view class="wallet-wimg">
@@ -33,8 +35,12 @@
         <view class="wallet-key">0edce4bb393cc7a49510dade77c83449510d</view>
       </view>
     </view>
+    <view class="wallet-btns">
+      <view class="wallet-btn wallet-transfer">转账</view>
+      <view class="wallet-btn wallet-gather">收款</view>
+    </view>
   </view>
-  <view class="wallet-history">
+  <view hidden="true" class="wallet-history">
     <view class="wallet-tit">
       <text>最近交易记录</text>
     </view>

@@ -379,3 +379,46 @@ page {
   width: 100%;
 }
 /* common style */
+
+/* todo */
+.todo {
+  width: 488rpx;
+  height: 518rpx;
+  background: #edf7ff;
+  box-shadow: 0 60rpx 40rpx 0 #f5fbff;
+  border-radius: 48rpx;
+  margin: 140rpx auto;
+}
+
+.todo-wrap {
+  width: 194rpx;
+  height: 194rpx;
+  font-size: 0;
+  padding-top: 142rpx;
+  margin: 0 auto 64rpx;
+}
+
+.todo-img {
+  width: 194rpx;
+  height: 194rpx;
+}
+
+.todo-wrap__wallet,
+.todo-img__wallet {
+  width: 206rpx;
+  height: 156rpx;
+}
+
+.todo-wrap__exchange,
+.todo-img__exchange {
+  width: 152rpx;
+  height: 152rpx;
+}
+
+.todo-txt {
+  font-size: 32rpx;
+  color: #64b5ff;
+  letter-spacing: 0;
+  text-align: center;
+}
+/* todo */

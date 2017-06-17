@@ -1,12 +1,11 @@
-.wallet-wrap {
+page {
   background-color: #fff;
-  min-height: 100vh;
 }
 
 .wallet {
   position: relative;
   margin: 0 26rpx;
-  padding: 40rpx 30rpx;
+  padding: 54rpx 30rpx 67rpx;
 }
 
 .wallet-item {
@@ -20,6 +19,7 @@
 
 .wallet-title {
   font-size: 28rpx;
+  margin-bottom: 10rpx;
 }
 
 .wallet-value {
@@ -34,17 +34,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 80rpx;
 }
 
 .wallet-btn {
-  color: #1aad19;
+  color: #000;
   font-size: 32rpx;
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
   border-radius: 6rpx;
-  border: 2rpx solid #1aad19;
+  border: 2rpx solid #000;
 }
 
 .wallet-btn + .wallet-btn {
@@ -52,27 +53,27 @@
 }
 
 .wallet-btn:active {
-  color: #106a0f;
-  border-color: #106a0f;
+  color: #1a1a1a;
+  border-color: #1a1a1a;
   background-color: #e6e6e6;
 }
 
 .wallet-package {
   display: flex;
-  margin-top: 70rpx;
+  margin-top: 65rpx;
 }
 
 .wallet-wimg {
-  width: 56rpx;
-  height: 56rpx;
+  width: 60rpx;
+  height: 60rpx;
   font-size: 0;
-  margin-right: 24rpx;
+  margin-right: 20rpx;
 }
 
 .wallet-img {
   display: block;
-  width: 55rpx;
-  height: 55rpx;
+  width: 60rpx;
+  height: 60rpx;
   background-color: #eee;
 }
 
@@ -83,8 +84,11 @@
 }
 
 .wallet-addr {
-  font-size: 26rpx;
-  margin-bottom: 10rpx;
+  line-height: 30rpx;
+}
+
+.wallet-key {
+  line-height: 30rpx;
 }
 
 .wallet-history {

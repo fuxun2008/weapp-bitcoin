@@ -4,17 +4,17 @@ import API from '../../services/api';
 
 const App = getApp();
 
-let hour = 0;
-let minute = 0;
-let second = 0; //时 分 秒
-let millisecond = 0; //毫秒
-let int;
-let flag = true;
+// let hour = 0;
+// let minute = 0;
+// let second = 0; //时 分 秒
+// let millisecond = 0; //毫秒
+// let int;
+// let flag = true;
 
 Page({
   data: {
-    time: '00:00:00',
-    coin: 0,
+    // time: '00:00:00',
+    // coin: 0,
     cid: 2,
     articles: []
   },
@@ -23,7 +23,7 @@ Page({
     // this.start();
     console.log('onLoad');
     const that = this;
-    _.showLoading();
+    // _.showLoading();
     that.fetchData(1, that.data.cid);
   },
   onReady: function() {
@@ -33,17 +33,17 @@ Page({
   onShow: function () {
     // 监听页面显示
     console.log('onShow');
-    this.start();
+    // this.start();
   },
   onHide: function() {
     // 监听页面隐藏
     console.log('onHide');
-    this.stop();
+    // this.stop();
   },
   onUnload: function() {
     // 监听页面卸载
     console.log('onUnload');
-    this.reset();
+    // this.reset();
   },
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
@@ -60,54 +60,54 @@ Page({
       }
     };
   },
-  reset: function() {
-    clearInterval(int);
-    millisecond = hour = minute = second = 0;
-    this.setData({
-      time: '00:00:00'
-    });
-  },
-  start: function() {
-    const self = this;
-    if (flag) {
-      flag = false;
-      int = setInterval(self.timer, 50);
-    }
-  },
-  timer: function() {
-    const self = this;
-    millisecond = millisecond + 50;
-    if (millisecond >= 1000) {
-      millisecond = 0;
-      second = second + 1;
-    }
+  // reset: function() {
+  //   clearInterval(int);
+  //   millisecond = hour = minute = second = 0;
+  //   this.setData({
+  //     time: '00:00:00'
+  //   });
+  // },
+  // start: function() {
+  //   const self = this;
+  //   if (flag) {
+  //     flag = false;
+  //     int = setInterval(self.timer, 50);
+  //   }
+  // },
+  // timer: function() {
+  //   const self = this;
+  //   millisecond = millisecond + 50;
+  //   if (millisecond >= 1000) {
+  //     millisecond = 0;
+  //     second = second + 1;
+  //   }
 
-    if (second >= 60) {
-      second = 0;
-      minute = minute + 1;
-    }
+  //   if (second >= 60) {
+  //     second = 0;
+  //     minute = minute + 1;
+  //   }
 
-    if (minute >= 60) {
-      minute = 0;
-      hour = hour + 1;
-    }
+  //   if (minute >= 60) {
+  //     minute = 0;
+  //     hour = hour + 1;
+  //   }
 
-    if (hour >= 24) {
-      hour = 0;
-    }
+  //   if (hour >= 24) {
+  //     hour = 0;
+  //   }
 
-    this.setData({
-      time: [hour, minute, second].map(this.formatNumber).join(':')
-    });
-  },
-  formatNumber: function(n) {
-    n = n.toString();
-    return n[1] ? n : '0' + n;
-  },
-  stop: function() {
-    clearInterval(int);
-    flag = true;
-  },
+  //   this.setData({
+  //     time: [hour, minute, second].map(this.formatNumber).join(':')
+  //   });
+  // },
+  // formatNumber: function(n) {
+  //   n = n.toString();
+  //   return n[1] ? n : '0' + n;
+  // },
+  // stop: function() {
+  //   clearInterval(int);
+  //   flag = true;
+  // },
   fetchData: function (page, cid) {
     const that = this;
     API.fetchIndex(page, cid).then(json => {

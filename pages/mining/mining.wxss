@@ -1,8 +1,12 @@
+page {
+  background-color: #fff;
+}
+/*
 .mining-wrap {
   min-height: 100vh;
   background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 0, 0, 0.7)), to(#ffdd2f));
   background-attachment: fixed;
-}
+}*/
 
 .mining {
   display: block;
