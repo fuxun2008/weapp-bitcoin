@@ -52,7 +52,7 @@ Page({
           data.created_at = new Date().getTime();
         }
         data.created_at = _.msToDate(data.created_at, 'yyyy-MM-dd');
-        data.content = data.content.replace(/(\r\n\t)|(\r\n)|(\n)/g, '').replace(/&nbsp;/g, '  ');
+        data.content = data.content.replace(/(\r\n\t)|(\r\n)|(\n)/g, '').replace(/\t/g, '').replace(/&nbsp;/g, '  ').replace(/<br \/>/g, '').replace(/<p><\/p>/g, '');
         that.setData({
           id: data.id,
           title: data.title,

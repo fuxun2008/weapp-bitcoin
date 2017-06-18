@@ -11,7 +11,7 @@
     "backgroundTextStyle": "black",
     "backgroundColor": "#eee",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "十分钟玩转比特币",
+    "navigationBarTitleText": "比特币大富翁",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
   },
@@ -49,5 +49,5 @@
     "uploadFile": 10000,
     "connetSocket": 10000
   },
-  "debug": true
+  "debug": false
 }

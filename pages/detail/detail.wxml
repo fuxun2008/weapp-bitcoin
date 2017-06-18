@@ -16,9 +16,7 @@
         <block wx:if="{{ outItem.type === 'view' }}">
           <block wx:for="{{ outItem.child }}" wx:for-index="innerIndex" wx:for-item="innerItem" wx:key="text">
             <block wx:if="{{ innerItem.type === 'text' && innerItem.text !== '' }}">
-              <view class="parag">
-                {{ innerItem.text }}
-              </view>
+              <view class="parag">{{ innerItem.text }}</view>
             </block>
           </block>
         </block>

@@ -23,7 +23,7 @@ Page({
     // this.start();
     console.log('onLoad');
     const that = this;
-    // _.showLoading();
+    _.showLoading();
     that.fetchData(1, that.data.cid);
   },
   onReady: function() {

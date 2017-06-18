@@ -28,9 +28,9 @@ page {
 }
 
 .detail-detail .parag {
-  padding-bottom: 20rpx;
+  padding-bottom: 30rpx;
   line-height: 1.6;
-  letter-spacing:3rpx;
+  letter-spacing: 4rpx;
   font-size: 32rpx;
   color: #111;
 }
