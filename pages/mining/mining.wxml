@@ -1,34 +1,27 @@
 <!--mining.wxml-->
-<!-- 导入模板 -->
-<import src="../common/template.wxml" />
 
 <!--加载动画-->
-<view class="container mining-wrap">
-  <view class="todo">
-    <view class="todo-wrap">
-      <image class="todo-img" src="/images/icon_mining.png"></image>
-    </view>
-    <view class="todo-txt">挖矿功能开发中</view>
+<view class="container">
+  <view class="mining_wrap">
+    挖出XBTC：<text class="mining_txt">{{ gold }}</text>
   </view>
-  <view hidden="true" class="mining">
-    <view class="mining-item">
-      <view class="mining-title">挖矿时长：</view>
-      <view class="mining-time">{{ time }}</view>
-    </view>
-    <view class="mining-item">
-      <view class="mining-title">挖出币：</view>
-      <view class="mining-time"><text class="mining-money">{{coin}}</text>xbtc</view>
-    </view>
-    <view class="mining-item">
-      <view class="mining-title">市值：</view>
-      <view class="mining-time">￥102322.21</view>
-    </view>
+  <view class="mining-item">
+    <view class="mining-title">挖矿时长：{{ time }}</view>
   </view>
-  <view hidden="true" class="mining-coin">
-    <image class="mining-gold" src="/images/gold_coin.png"></image>
+  <view class="mining-btns">
+    <view class="mining-btn mining-start" bindtap="goto" data-status="{{ status }}">{{ status == 'start' ? '开始' : '停止' }}</view>
   </view>
-  <view wx:if="{{articles && articles.length}}" class="common-footer">
-    <template is="articleItem" data="{{ ...articles[0] }}" />
-    <template is="footer" data="{{ cid: cid, name: '挖矿' }}" />
+  <view hidden="true" class="timer_main {{isRuning ? 'timer--runing': ''}}">
+    <view class="timer_time-wrap">
+      <view class="timer_progress_mask"></view>
+      <view class="timer_progress timer_left">
+        <view class="timer_circle timer_circle--left" style="transform: rotate({{ leftDeg }}deg);"></view>
+      </view>
+      <view class="timer_progress timer_right">
+        <view class="timer_circle timer_circle--right" style="transform: rotate({{ rightDeg }}deg);"></view>
+      </view>
+    </view>
+    <text wx:if="{{ !completed }}" class="timer_time">{{ remainTimeText }}</text>
+    <text wx:if="{{ isRunning }}" animation="{{ nameAnimation }}" class="timer_taskName">{{ taskName }}中</text>
   </view>
 </view>
