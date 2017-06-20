@@ -8,7 +8,10 @@ const API_METHODS = {
   'user': `${WX_URL}/wx/connect`,
   'userSetting': `${WX_URL}/wx/mode`,
   'index': `${WX_URL}/article/list`,
-  'detail': `${WX_URL}/article/detail`
+  'detail': `${WX_URL}/article/detail`,
+  'mineGet': `${WX_URL}/mine/get`,
+  'mineGo': `${WX_URL}/mine/go`,
+  'mineStop': `${WX_URL}/mine/stop`
 };
 
 const authorize = (code, iv, info) => {
@@ -110,9 +113,54 @@ const fetchDetail = id => {
   });
 };
 
+const handleMineGet = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineGet'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMineGo = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineGet'];
+    Http.instance.post({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMineStop = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineGet'];
+    Http.instance.post({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
   fetchIndex,
   fetchDetail,
+  handleMineGet,
+  handleMineGo,
+  handleMineStop,
   authorize,
   putUserInfo
 };

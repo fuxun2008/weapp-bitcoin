@@ -103,7 +103,7 @@ class Http {
       options.header = {};
     }
     if (Authorization) {
-      options.header['Authorization'] = `XDS ${Authorization}`;
+      options.header['Authorization'] = `${Authorization}`;
     } else if (VirtualAuthorization) {
       options.header['Authorization-Virtual'] = `VDS ${VirtualAuthorization}`;
     }
