@@ -14,9 +14,24 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    // this.start();
     console.log('onLoad');
     const that = this;
+    const srt = Storage.readSync('stopwatchRunningTime');
+    const sbt = Storage.readSync('stopwatchBeginingTimestamp');
+    if (Number(sbt) && Number(srt)) {
+      const runningTime = Number(srt) + new Date().getTime() - Number(sbt);
+      Storage.writeSync('stopwatchRunningTime', runningTime);
+      that.startWatch();
+    }
+
+    if (srt) {
+      that.setData({
+        time: that.returnFormattedToMilliseconds(Number(srt))
+      });
+    }
+    else {
+      Storage.writeSync('stopwatchRunningTime', 0);
+    }
   },
   onReady: function() {
     // 页面渲染完成
@@ -98,18 +113,13 @@ Page({
       status: 'start'
     });
   },
-  formatNumber: function(n) {
-    n = n.toString();
-    return n[1] ? n : '0' + n;
-  },
   returnFormattedToMilliseconds: function (time) {
-    const that = this;
     const milliseconds = Math.floor((time % 1000) / 100);
     const seconds = Math.floor((time / 1000) % 60);
     const minutes = Math.floor((time / (1000 * 60)) % 60);
     const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
 
-    return that.formatNumber(hours) + ":" + that.formatNumber(minutes) + ":" + that.formatNumber(seconds) + "." + milliseconds;
+    return _.formatTime(hours) + ":" + _.formatTime(minutes) + ":" + _.formatTime(seconds) + "." + milliseconds;
   },
   goto: function (e) {
     const that = this;

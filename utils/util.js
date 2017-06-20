@@ -138,10 +138,9 @@ const hideLoading = function() {
   wx.hideLoading();
 };
 
-const formatTime = function (time, format) {
-  let temp = '0000000000' + time
-  let len = format.length
-  return temp.substr(-len)
+const formatTime = function (n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
 }
 
 module.exports = {
