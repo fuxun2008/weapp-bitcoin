@@ -5,33 +5,23 @@ import Storage from '../../components/storage';
 
 let stopwatchInterval;
 stopwatchInterval = 0;
+const WEIGHT = 4;
 
 Page({
   data: {
+    num: 10, // 1小时挖出的币数
     gold: '0.0000',
     time: '00:00:00',
-    status: 'start' // start:开始，stop:停止
+    status: 'start', // start:开始，stop:停止
+    errorMsg: '',
+    hasData: false
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad');
     const that = this;
-    const srt = Storage.readSync('stopwatchRunningTime');
-    const sbt = Storage.readSync('stopwatchBeginingTimestamp');
-    if (Number(sbt) && Number(srt)) {
-      const runningTime = Number(srt) + new Date().getTime() - Number(sbt);
-      Storage.writeSync('stopwatchRunningTime', runningTime);
-      that.startWatch();
-    }
-
-    if (srt) {
-      that.setData({
-        time: that.returnFormattedToMilliseconds(Number(srt))
-      });
-    }
-    else {
-      Storage.writeSync('stopwatchRunningTime', 0);
-    }
+    _.showLoading();
+    that.fetchData();
   },
   onReady: function() {
     // 页面渲染完成
@@ -56,8 +46,60 @@ Page({
       }
     };
   },
+  reloadData: function() {
+    const that = this;
+    _.showLoading();
+    that.fetchData();
+  },
+  fetchData: function() {
+    const that = this;
+    API.handleMineGet().then(json => {
+      console.log('miningInfo: ', JSON.stringify(json, null, 2));
+      _.hideLoading();
+      if (json && json.code === 0) {
+        that.setData({
+          hasData: true
+        });
+        that.initWatch();
+      } else {
+        that.setData({
+          errorMsg: '暂时没有数据哦~',
+          hasData: false
+        });
+      }
+    }, error => {
+      _.hideLoading();
+      that.setData({
+        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        hasData: false
+      });
+      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+    });
+  },
+  initWatch: function() {
+    const that = this;
+    const num = that.data.num;
+    const srt = Storage.readSync('stopwatchRunningTime');
+    const sbt = Storage.readSync('stopwatchBeginingTimestamp');
+    if (Number(sbt) && Number(srt)) {
+      const runningTime = Number(srt) + new Date().getTime() - Number(sbt);
+      Storage.writeSync('stopwatchRunningTime', runningTime);
+      that.startWatch();
+    }
+
+    if (srt) {
+      that.setData({
+        gold: (num / 3600 / 1000 * Number(srt)).toFixed(WEIGHT),
+        time: that.returnFormattedToMilliseconds(Number(srt))
+      });
+    }
+    else {
+      Storage.writeSync('stopwatchRunningTime', 0);
+    }
+  },
   startWatch: function () {
     const that = this;
+    const num = that.data.num;
     clearInterval(stopwatchInterval);
 
     const startTimestamp = new Date().getTime();
@@ -75,8 +117,8 @@ Page({
 
     stopwatchInterval = setInterval(function () {
       const stopwatchTime = (new Date().getTime() - startTimestamp + runningTime);
-
       that.setData({
+        gold: (num / 3600 / 1000 * stopwatchTime).toFixed(WEIGHT),
         time: that.returnFormattedToMilliseconds(stopwatchTime)
       });
     }, 100);
@@ -109,6 +151,7 @@ Page({
     Storage.writeSync('stopwatchBeginingTimestamp', 0);
     Storage.writeSync('stopwatchRunningTime', 0);
     that.setData({
+      gold: '0.0000',
       time: that.returnFormattedToMilliseconds(0),
       status: 'start'
     });
@@ -127,9 +170,47 @@ Page({
     const status = ds.status;
     console.log('status: ', status);
     if (status === 'start') {
-      that.startWatch();
+      API.handleMineGo().then(json => {
+        console.log('mineGo: ', JSON.stringify(json, null, 2));
+        if (json && json.code === 0) {
+          that.startWatch();
+        } else {
+          wx.showToast({
+            title: '接口异常，请重试~',
+            icon: 'loading',
+            duration: 3000
+          });
+        }
+      }, error => {
+        _.hideLoading();
+        wx.showToast({
+          title: '接口异常，请重试~',
+          icon: 'loading',
+          duration: 3000
+        });
+        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      });
     } else {
-      that.pauseWatch();
+      API.handleMineStop().then(json => {
+        console.log('mineStop: ', JSON.stringify(json, null, 2));
+        if (json && json.code === 0) {
+          that.pauseWatch();
+        } else {
+          wx.showToast({
+            title: '接口异常，请重试~',
+            icon: 'loading',
+            duration: 3000
+          });
+        }
+      }, error => {
+        _.hideLoading();
+        wx.showToast({
+          title: '接口异常，请重试~',
+          icon: 'loading',
+          duration: 3000
+        });
+        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      });
     }
   }
 });

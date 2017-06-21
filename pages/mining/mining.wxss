@@ -9,6 +9,12 @@ page {
   color: #000;
 }
 
+.mining_txt {
+  display: inline-block;
+  width: 300rpx;
+  text-align: left;
+}
+
 .mining-item {
   text-align: center;
   margin-top: 60rpx;

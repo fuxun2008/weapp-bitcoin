@@ -129,7 +129,7 @@ const handleMineGet = () => {
 
 const handleMineGo = () => {
   return new Promise((resolve, reject) => {
-    const url = API_METHODS['mineGet'];
+    const url = API_METHODS['mineGo'];
     Http.instance.post({
       url: url,
       data: {}
@@ -143,7 +143,7 @@ const handleMineGo = () => {
 
 const handleMineStop = () => {
   return new Promise((resolve, reject) => {
-    const url = API_METHODS['mineGet'];
+    const url = API_METHODS['mineStop'];
     Http.instance.post({
       url: url,
       data: {}

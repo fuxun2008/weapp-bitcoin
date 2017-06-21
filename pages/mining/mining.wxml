@@ -1,27 +1,33 @@
 <!--mining.wxml-->
+<!-- 导入模板 -->
+<import src="../common/template.wxml" />
 
 <!--加载动画-->
-<view class="container">
-  <view class="mining_wrap">
-    挖出XBTC：<text class="mining_txt">{{ gold }}</text>
-  </view>
-  <view class="mining-item">
-    <view class="mining-title">挖矿时长：{{ time }}</view>
-  </view>
-  <view class="mining-btns">
-    <view class="mining-btn mining-start {{ status === 'start' ? 'cred' : 'cgred' }}" bindtap="goto" data-status="{{ status }}">{{ status === 'start' ? '开始' : '停止' }}</view>
-  </view>
-  <view hidden="true" class="timer_main {{isRuning ? 'timer--runing': ''}}">
-    <view class="timer_time-wrap">
-      <view class="timer_progress_mask"></view>
-      <view class="timer_progress timer_left">
-        <view class="timer_circle timer_circle--left" style="transform: rotate({{ leftDeg }}deg);"></view>
-      </view>
-      <view class="timer_progress timer_right">
-        <view class="timer_circle timer_circle--right" style="transform: rotate({{ rightDeg }}deg);"></view>
-      </view>
+<block wx:if="{{hasData}}">
+  <view class="container">
+    <view class="mining_wrap">挖出XBTC：<text class="mining_txt">{{ gold }}</text></view>
+    <view class="mining-item">
+      <view class="mining-title">挖矿时长：<text class="mining_txt">{{ time }}</text></view>
     </view>
-    <text wx:if="{{ !completed }}" class="timer_time">{{ remainTimeText }}</text>
-    <text wx:if="{{ isRunning }}" animation="{{ nameAnimation }}" class="timer_taskName">{{ taskName }}中</text>
+    <view class="mining-btns">
+      <view class="mining-btn mining-start {{ status === 'start' ? 'cred' : 'cgred' }}" bindtap="goto" data-status="{{ status }}">{{ status === 'start' ? '开始' : '停止' }}</view>
+    </view>
+    <view hidden="true" class="timer_main {{isRuning ? 'timer--runing': ''}}">
+      <view class="timer_time-wrap">
+        <view class="timer_progress_mask"></view>
+        <view class="timer_progress timer_left">
+          <view class="timer_circle timer_circle--left" style="transform: rotate({{ leftDeg }}deg);"></view>
+        </view>
+        <view class="timer_progress timer_right">
+          <view class="timer_circle timer_circle--right" style="transform: rotate({{ rightDeg }}deg);"></view>
+        </view>
+      </view>
+      <text wx:if="{{ !completed }}" class="timer_time">{{ remainTimeText }}</text>
+      <text wx:if="{{ isRunning }}" animation="{{ nameAnimation }}" class="timer_taskName">{{ taskName }}中</text>
+    </view>
   </view>
-</view>
+</block>
+<!-- 加载数据失败 -->
+<block wx:else>
+  <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+</block>
