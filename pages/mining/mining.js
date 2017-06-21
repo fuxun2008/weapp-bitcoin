@@ -9,10 +9,10 @@ const WEIGHT = 4;
 
 Page({
   data: {
-    num: 10, // 1小时挖出的币数
+    num: 0, // 1小时挖出的币数
     gold: '0.0000',
     time: '00:00:00',
-    status: 'start', // start:开始，stop:停止
+    status: true, // start:开始，stop:停止
     errorMsg: '',
     hasData: false
   },
@@ -60,7 +60,7 @@ Page({
         that.setData({
           hasData: true
         });
-        that.initWatch();
+        that.initWatch(json.data);
       } else {
         that.setData({
           errorMsg: '暂时没有数据哦~',
@@ -76,33 +76,38 @@ Page({
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
   },
-  initWatch: function() {
+  initWatch: function(data) {
     const that = this;
-    const num = that.data.num;
+    const speed = data.speed;
     const srt = Storage.readSync('stopwatchRunningTime');
     const sbt = Storage.readSync('stopwatchBeginingTimestamp');
-    if (Number(sbt) && Number(srt)) {
-      const runningTime = Number(srt) + new Date().getTime() - Number(sbt);
+    if (!data.is_stop) { // Number(sbt) && Number(srt)
+      const runningTime = Number(srt) + data.timestamp - Number(sbt); // data.timestamp = new Date().getTime()
       Storage.writeSync('stopwatchRunningTime', runningTime);
-      that.startWatch();
+      that.startWatch(speed, data.timestamp);
     }
 
     if (srt) {
       that.setData({
-        gold: (num / 3600 / 1000 * Number(srt)).toFixed(WEIGHT),
+        speed: speed,
+        gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT), // data.xbtc
         time: that.returnFormattedToMilliseconds(Number(srt))
       });
     }
     else {
+      that.setData({
+        speed: speed,
+        gold: data.xbtc
+      });
       Storage.writeSync('stopwatchRunningTime', 0);
     }
   },
-  startWatch: function () {
+  startWatch: function (sped, startTimestamp) {
     const that = this;
-    const num = that.data.num;
+    const speed = sped || that.data.speed;
     clearInterval(stopwatchInterval);
 
-    const startTimestamp = new Date().getTime();
+    // const startTimestamp = new Date().getTime();
     let runningTime = 0;
     const str = Storage.readSync('stopwatchRunningTime');
 
@@ -118,29 +123,29 @@ Page({
     stopwatchInterval = setInterval(function () {
       const stopwatchTime = (new Date().getTime() - startTimestamp + runningTime);
       that.setData({
-        gold: (num / 3600 / 1000 * stopwatchTime).toFixed(WEIGHT),
+        gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
         time: that.returnFormattedToMilliseconds(stopwatchTime)
       });
     }, 100);
 
     that.setData({
-      status: 'stop'
+      status: false
     });
   },
-  pauseWatch: function () {
+  pauseWatch: function (startTimestamp) {
     const that = this;
     clearInterval(stopwatchInterval);
     const bt = Storage.readSync('stopwatchBeginingTimestamp');
     const srt = Storage.readSync('stopwatchRunningTime');
     console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
     if (Number(bt)) {
-      const runningTime = Number(srt) + new Date().getTime() - Number(bt);
+      const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
 
       Storage.writeSync('stopwatchBeginingTimestamp', 0);
       Storage.writeSync('stopwatchRunningTime', runningTime);
 
       that.setData({
-        status: 'start'
+        status: true
       });
     }
   },
@@ -153,7 +158,7 @@ Page({
     that.setData({
       gold: '0.0000',
       time: that.returnFormattedToMilliseconds(0),
-      status: 'start'
+      status: true
     });
   },
   returnFormattedToMilliseconds: function (time) {
@@ -168,12 +173,13 @@ Page({
     const that = this;
     const ds = e.currentTarget.dataset;
     const status = ds.status;
+    const speed = that.data.speed;
     console.log('status: ', status);
-    if (status === 'start') {
+    if (status) {
       API.handleMineGo().then(json => {
         console.log('mineGo: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.startWatch();
+          that.startWatch(speed, json.data.timestamp);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',
@@ -194,7 +200,7 @@ Page({
       API.handleMineStop().then(json => {
         console.log('mineStop: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.pauseWatch();
+          that.pauseWatch(json.data.timestamp);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',

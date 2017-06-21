@@ -10,7 +10,7 @@
       <view class="mining-title">挖矿时长：<text class="mining_txt">{{ time }}</text></view>
     </view>
     <view class="mining-btns">
-      <view class="mining-btn mining-start {{ status === 'start' ? 'cred' : 'cgred' }}" bindtap="goto" data-status="{{ status }}">{{ status === 'start' ? '开始' : '停止' }}</view>
+      <view class="mining-btn mining-start {{ status ? 'cred' : 'cgred' }}" bindtap="goto" data-status="{{ status }}">{{ status ? '开始' : '停止' }}</view>
     </view>
     <view hidden="true" class="timer_main {{isRuning ? 'timer--runing': ''}}">
       <view class="timer_time-wrap">
