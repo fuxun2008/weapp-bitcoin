@@ -33,12 +33,6 @@ page {
   text-align: center;
   border-radius: 6rpx;
 }
-/*
-.mining-btn:active {
-  color: #1a1a1a;
-  border-color: #1a1a1a;
-  background-color: #e6e6e6;
-}*/
 
 .mining-start {
   margin: 0 auto;
@@ -188,12 +182,12 @@ page {
   color: #fff;
   background-color: #f02e2e;
   border: 2rpx solid #f02e2e;
-  transition: all 0.4s linear;
+  transition: all 0.2s linear;
 }
 
 .cgred {
   color: #f02e2e;
   background-color: #fff;
   border: 2rpx solid #f02e2e;
-  transition: all 0.4s linear;
+  transition: all 0.2s linear;
 }
