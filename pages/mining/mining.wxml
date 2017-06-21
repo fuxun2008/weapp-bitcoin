@@ -12,19 +12,6 @@
     <view class="mining-btns">
       <view class="mining-btn mining-start {{ status ? 'cred' : 'cgred' }}" bindtap="goto" data-status="{{ status }}">{{ status ? '开始' : '停止' }}</view>
     </view>
-    <view hidden="true" class="timer_main {{isRuning ? 'timer--runing': ''}}">
-      <view class="timer_time-wrap">
-        <view class="timer_progress_mask"></view>
-        <view class="timer_progress timer_left">
-          <view class="timer_circle timer_circle--left" style="transform: rotate({{ leftDeg }}deg);"></view>
-        </view>
-        <view class="timer_progress timer_right">
-          <view class="timer_circle timer_circle--right" style="transform: rotate({{ rightDeg }}deg);"></view>
-        </view>
-      </view>
-      <text wx:if="{{ !completed }}" class="timer_time">{{ remainTimeText }}</text>
-      <text wx:if="{{ isRunning }}" animation="{{ nameAnimation }}" class="timer_taskName">{{ taskName }}中</text>
-    </view>
   </view>
 </block>
 <!-- 加载数据失败 -->
