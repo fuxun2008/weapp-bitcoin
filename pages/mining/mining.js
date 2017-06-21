@@ -7,6 +7,12 @@ let stopwatchInterval;
 stopwatchInterval = 0;
 const WEIGHT = 4;
 
+const ctx = wx.createCanvasContext('canvasArcCir');
+let step = 1;
+let startAngle = 1.5 * Math.PI;
+let endAngle = 0;
+const n = 600;
+
 Page({
   data: {
     num: 0, // 1小时挖出的币数
@@ -23,13 +29,11 @@ Page({
     _.showLoading();
     that.fetchData();
   },
-  onReady: function() {
+  onReady: function () {
     // 页面渲染完成
     console.log('onReady');
-
   },
   onShow: function () {
-
   },
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
@@ -46,12 +50,12 @@ Page({
       }
     };
   },
-  reloadData: function() {
+  reloadData: function () {
     const that = this;
     _.showLoading();
     that.fetchData();
   },
-  fetchData: function() {
+  fetchData: function () {
     const that = this;
     API.handleMineGet().then(json => {
       console.log('miningInfo: ', JSON.stringify(json, null, 2));
@@ -60,6 +64,7 @@ Page({
         that.setData({
           hasData: true
         });
+        that.initDraw();
         that.initWatch(json.data);
       } else {
         that.setData({
@@ -76,7 +81,7 @@ Page({
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
   },
-  initWatch: function(data) {
+  initWatch: function (data) {
     const that = this;
     const speed = data.speed;
     const srt = Storage.readSync('stopwatchRunningTime');
@@ -105,6 +110,7 @@ Page({
   startWatch: function (sped, startTimestamp) {
     const that = this;
     const speed = sped || that.data.speed;
+
     clearInterval(stopwatchInterval);
 
     // const startTimestamp = new Date().getTime();
@@ -120,17 +126,18 @@ Page({
       Storage.writeSync('stopwatchRunningTime', 1);
     }
 
+    that.setData({
+      status: false
+    });
+
     stopwatchInterval = setInterval(function () {
       const stopwatchTime = (new Date().getTime() - startTimestamp + runningTime);
+      that.animation();
       that.setData({
         gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
         time: that.returnFormattedToMilliseconds(stopwatchTime)
       });
     }, 100);
-
-    that.setData({
-      status: false
-    });
   },
   pauseWatch: function (startTimestamp) {
     const that = this;
@@ -218,5 +225,38 @@ Page({
         console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
       });
     }
+  },
+  animation: function () {
+    const that = this;
+    if (step <= n) {
+      endAngle = step * 2 * Math.PI / n + 1.5 * Math.PI;
+      that.drawArc(startAngle, endAngle);
+      step++;
+    } else {
+      step = 1;
+    }
+  },
+  initDraw: function() {
+    var cxt_arc = wx.createCanvasContext('canvasCircle');
+    cxt_arc.setLineWidth(6);
+    cxt_arc.setStrokeStyle('#eaeaea');
+    cxt_arc.setLineCap('round');
+    cxt_arc.beginPath();
+    cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
+    cxt_arc.stroke();
+    cxt_arc.draw();
+  },
+  drawArc: function (s, e) {
+    ctx.setFillStyle('white');
+    ctx.clearRect(0, 0, 200, 200);
+    ctx.draw();
+    var x = 100, y = 100, radius = 96;
+    ctx.setLineWidth(5);
+    ctx.setStrokeStyle('#d81e06');
+    ctx.setLineCap('round');
+    ctx.beginPath();
+    ctx.arc(x, y, radius, s, e, false);
+    ctx.stroke();
+    ctx.draw();
   }
 });

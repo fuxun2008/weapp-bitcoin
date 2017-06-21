@@ -51,3 +51,15 @@ page {
   border: 2rpx solid #f02e2e;
   transition: all 0.2s linear;
 }
+
+.circle-box {
+  text-align: center;
+  margin-top: 10vw;
+}
+
+.circle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
