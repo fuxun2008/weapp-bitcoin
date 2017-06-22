@@ -11,7 +11,7 @@ const ctx = wx.createCanvasContext('canvasArcCir');
 let step = 1;
 let startAngle = 1.5 * Math.PI;
 let endAngle = 0;
-const n = 600;
+const n = 600; // 一分钟
 
 Page({
   data: {
@@ -238,8 +238,8 @@ Page({
   },
   initDraw: function() {
     var cxt_arc = wx.createCanvasContext('canvasCircle');
-    cxt_arc.setLineWidth(6);
-    cxt_arc.setStrokeStyle('#eaeaea');
+    cxt_arc.setLineWidth(4);
+    cxt_arc.setStrokeStyle('#ffffff');
     cxt_arc.setLineCap('round');
     cxt_arc.beginPath();
     cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
@@ -251,8 +251,8 @@ Page({
     ctx.clearRect(0, 0, 200, 200);
     ctx.draw();
     var x = 100, y = 100, radius = 96;
-    ctx.setLineWidth(5);
-    ctx.setStrokeStyle('#d81e06');
+    ctx.setLineWidth(4);
+    ctx.setStrokeStyle('#f02e2e'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
     ctx.setLineCap('round');
     ctx.beginPath();
     ctx.arc(x, y, radius, s, e, false);
