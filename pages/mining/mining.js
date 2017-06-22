@@ -18,6 +18,7 @@ Page({
     num: 0, // 1小时挖出的币数
     gold: '0.0000',
     time: '00:00:00',
+    stopwatchRunningTime: 0,
     status: true, // start:开始，stop:停止
     errorMsg: '',
     hasData: false
@@ -131,12 +132,19 @@ Page({
     });
 
     stopwatchInterval = setInterval(function () {
-      const stopwatchTime = (new Date().getTime() - startTimestamp + runningTime);
-      that.animation();
-      that.setData({
-        gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
-        time: that.returnFormattedToMilliseconds(stopwatchTime)
-      });
+      const now = new Date().getTime();
+      const night = new Date().setHours(23, 59, 59, 500); // 当天晚上23:59:59 999
+      let stopwatchTime;
+      if (now <= night) {
+        stopwatchTime = (now - startTimestamp + runningTime);
+        that.animation();
+        that.setData({
+          gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
+          time: that.returnFormattedToMilliseconds(stopwatchTime)
+        });
+      } else {
+        that.pauseWatch(night);
+      }
     }, 100);
   },
   pauseWatch: function (startTimestamp) {
@@ -227,10 +235,9 @@ Page({
     }
   },
   animation: function () {
-    const that = this;
     if (step <= n) {
       endAngle = step * 2 * Math.PI / n + 1.5 * Math.PI;
-      that.drawArc(startAngle, endAngle);
+      this.drawArc(startAngle, endAngle);
       step++;
     } else {
       step = 1;
