@@ -90,7 +90,7 @@ Page({
     if (!data.is_stop) { // Number(sbt) && Number(srt)
       const runningTime = Number(srt) + data.timestamp - Number(sbt); // data.timestamp = new Date().getTime()
       Storage.writeSync('stopwatchRunningTime', runningTime);
-      that.startWatch(speed, data.timestamp);
+      that.startWatch(speed);
     }
 
     if (srt) {
@@ -108,13 +108,19 @@ Page({
       Storage.writeSync('stopwatchRunningTime', 0);
     }
   },
-  startWatch: function (sped, startTimestamp) {
+  startWatch: function (sped) {
     const that = this;
     const speed = sped || that.data.speed;
 
     clearInterval(stopwatchInterval);
 
-    // const startTimestamp = new Date().getTime();
+    API.handleMineGo().then(json => {
+      console.log('mineGo: ', JSON.stringify(json, null, 2));
+    }, error => {
+      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+    });
+
+    const startTimestamp = new Date().getTime();
     let runningTime = 0;
     const str = Storage.readSync('stopwatchRunningTime');
 
@@ -122,8 +128,7 @@ Page({
 
     if (Number(str)) {
       runningTime = Number(str);
-    }
-    else {
+    } else {
       Storage.writeSync('stopwatchRunningTime', 1);
     }
 
@@ -133,7 +138,7 @@ Page({
 
     stopwatchInterval = setInterval(function () {
       const now = new Date().getTime();
-      const night = new Date().setHours(23, 59, 59, 500); // 当天晚上23:59:59 999
+      const night = new Date().setHours(23, 59, 59, 500); // 当天晚上23:59:59 500
       let stopwatchTime;
       if (now <= night) {
         stopwatchTime = (now - startTimestamp + runningTime);
@@ -143,21 +148,27 @@ Page({
           time: that.returnFormattedToMilliseconds(stopwatchTime)
         });
       } else {
-        that.pauseWatch(night);
+        that.pauseWatch();
       }
     }, 100);
   },
-  pauseWatch: function (startTimestamp) {
+  pauseWatch: function () {
     const that = this;
     clearInterval(stopwatchInterval);
     const bt = Storage.readSync('stopwatchBeginingTimestamp');
     const srt = Storage.readSync('stopwatchRunningTime');
     console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
     if (Number(bt)) {
-      const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
+      const runningTime = Number(srt) + new Date().getTime() - Number(bt); // startTimestamp = new Date().getTime()
 
       Storage.writeSync('stopwatchBeginingTimestamp', 0);
       Storage.writeSync('stopwatchRunningTime', runningTime);
+
+      API.handleMineStop(runningTime).then(json => {
+        console.log('mineStop: ', JSON.stringify(json, null, 2));
+      }, error => {
+        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      });
 
       that.setData({
         status: true
@@ -191,47 +202,9 @@ Page({
     const speed = that.data.speed;
     console.log('status: ', status);
     if (status) {
-      API.handleMineGo().then(json => {
-        console.log('mineGo: ', JSON.stringify(json, null, 2));
-        if (json && json.code === 0) {
-          that.startWatch(speed, json.data.timestamp);
-        } else {
-          wx.showToast({
-            title: '接口异常，请重试~',
-            icon: 'loading',
-            duration: 3000
-          });
-        }
-      }, error => {
-        _.hideLoading();
-        wx.showToast({
-          title: '接口异常，请重试~',
-          icon: 'loading',
-          duration: 3000
-        });
-        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
-      });
+      that.startWatch(speed);
     } else {
-      API.handleMineStop().then(json => {
-        console.log('mineStop: ', JSON.stringify(json, null, 2));
-        if (json && json.code === 0) {
-          that.pauseWatch(json.data.timestamp);
-        } else {
-          wx.showToast({
-            title: '接口异常，请重试~',
-            icon: 'loading',
-            duration: 3000
-          });
-        }
-      }, error => {
-        _.hideLoading();
-        wx.showToast({
-          title: '接口异常，请重试~',
-          icon: 'loading',
-          duration: 3000
-        });
-        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
-      });
+      that.pauseWatch();
     }
   },
   animation: function () {

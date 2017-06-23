@@ -3,13 +3,13 @@
 <import src="../common/template.wxml" />
 
 <view class="container exchange-wrap">
-  <view class="todo">
+  <view hidden="true" class="todo">
     <view class="todo-wrap todo-wrap__exchange">
       <image class="todo-img todo-img__exchange" src="/images/icon_exchange.png"></image>
     </view>
     <view class="todo-txt">交易所功能开发中</view>
   </view>
-  <view hidden="true" class="exchange-new line-bottom">
+  <view class="exchange-new line-bottom">
     <view class="exchange-title">
       <text>BTC最新市价：</text>
     </view>
@@ -20,7 +20,7 @@
       <view class="exchange-btn">+12.4%</view>
     </view>
   </view>
-  <view hidden="true" class="exchange-weekly line-bottom">
+  <view class="exchange-weekly line-bottom">
     <view class="weekly-title">
       <text>最近一周走势</text>
     </view>
@@ -45,7 +45,7 @@
       </view>
     </view>
   </view>
-  <view hidden="true" class="exchange-capital line-bottom">
+  <view class="exchange-capital line-bottom">
     <view class="weekly-title">
       <text>拥有资产</text>
     </view>

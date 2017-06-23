@@ -3,13 +3,13 @@
 <import src="../common/template.wxml" />
 
 <view class="container wallet-wrap">
-  <view class="todo">
+  <view hidden="true" class="todo">
     <view class="todo-wrap todo-wrap__wallet">
       <image class="todo-img todo-img__wallet" src="/images/icon_wallet.png"></image>
     </view>
     <view class="todo-txt">钱包功能开发中</view>
   </view>
-  <view hidden="true" class="wallet line-bottom">
+  <view class="wallet line-bottom">
     <view class="wallet-item">
       <view class="wallet-title">
         <text>xbtc：</text>
@@ -40,7 +40,7 @@
       <view class="wallet-btn wallet-gather">收款</view>
     </view>
   </view>
-  <view hidden="true" class="wallet-history">
+  <view class="wallet-history">
     <view class="wallet-tit">
       <text>最近交易记录</text>
     </view>
