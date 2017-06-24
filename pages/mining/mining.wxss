@@ -1,50 +1,50 @@
 page {
   background-color: #fff;
 }
-/*
-.mining-wrap {
-  min-height: 100vh;
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 0, 0, 0.7)), to(#ffdd2f));
-  background-attachment: fixed;
-}*/
 
-.mining {
-  display: block;
-  padding-top: 70rpx;
-  margin-left: 200rpx;
-  z-index: 100;
+.mining_wrap {
+  margin-top: 150rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #000;
+}
+
+.mining_txt {
+  display: inline-block;
+  width: 300rpx;
+  text-align: left;
 }
 
 .mining-item {
-  color: #fff;
-  font-weight: 700;
-  margin-bottom: 50rpx;
+  text-align: center;
+  margin-top: 60rpx;
 }
 
-.mining-item:last-child {
-  margin-bottom: 0;
+.circle-box {
+  position: relative;
+  text-align: center;
+  margin: 10vw auto 0;
+  width: 400rpx;
+  height: 400rpx;
 }
 
-.mining-title {
+.circle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.mining-btns {
+  position: absolute;
+  left: 15rpx;
+  top: 15rpx;
   font-size: 36rpx;
-  margin-bottom: 16rpx;
-}
-
-.mining-time {
-  font-size: 64rpx;
-}
-
-.mining-coin {
-  font-size: 0;
-  margin: 0 auto;
-  width: 480rpx;
-  height: 323rpx;
-  z-index: 1;
-}
-
-.mining-gold {
-  display: inline-block;
-  width: 480rpx;
-  height: 323rpx;
-  z-index: 1;
+  color: #f02e2e;
+  width: 372rpx;
+  height: 372rpx;
+  line-height: 368rpx;
+  border-radius: 100%;
+  text-align: center;
+  background-color: #ffe7e7;
 }

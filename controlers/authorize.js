@@ -72,7 +72,8 @@ class Authorize {
             console.log('authorize信息：', JSON.stringify(json, null, 2));
             const data = {
               Authorization: json.data.access_token,
-              BitUser: json.data.weixin,
+              WalletId: json.data.wallet_id,
+              // BitUser: json.data.weixin,
               WechatUser: result.data.userInfo
             };
             if (json.code == 0) {
@@ -107,10 +108,11 @@ class Authorize {
     this.initializing = true;
     return new Promise((resolve, reject) => {
       this.login().then(result => {
-        // console.log('登录成功数据: ', JSON.stringify(result, null, 2));
+        console.log('登录成功数据: ', JSON.stringify(result, null, 2));
         this.initializing = false;
         this.Authorization = result.Authorization;
-        this.BitUser = result.BitUser;
+        this.WalletId = result.WalletId;
+        // this.BitUser = result.BitUser;
         this.WechatUser = result.WechatUser;
         this.saveStorage().then(result => {
           resolve(this);
@@ -124,7 +126,8 @@ class Authorize {
           console.log('本地存储数据: ', JSON.stringify(result, null, 2));
           this.initializing = false;
           this.Authorization = result.Authorization;
-          this.BitUser = result.BitUser;
+          this.WalletId = result.WalletId;
+          // this.BitUser = result.BitUser;
           resolve(this);
         }, error => {
           this.initializing = false;
@@ -154,22 +157,33 @@ class Authorize {
             }, null);
           });
         },
-        BitUser: done => {
-          storage.read('BitUser').then(user => {
-            console.info('读取BitUser成功！');
-            done(null, user);
+        WalletId: done => {
+          storage.read('WalletId').then(walletId => {
+            console.info('读取WalletId成功！');
+            done(null, walletId);
           }, error => {
             done({
               err: error,
-              msg: '读取BitUser失败！'
+              msg: '读取WalletId失败！'
             }, null);
           });
+        // },
+        // BitUser: done => {
+        //   storage.read('BitUser').then(user => {
+        //     console.info('读取BitUser成功！');
+        //     done(null, user);
+        //   }, error => {
+        //     done({
+        //       err: error,
+        //       msg: '读取BitUser失败！'
+        //     }, null);
+        //   });
         }
       }, (error, result) => {
         if (error) {
           reject(error);
         } else {
-          console.info('读取Authorization，BitUser成功！');
+          console.info('读取Authorization，WalletId成功！');
           resolve(result);
         }
       });
@@ -194,6 +208,17 @@ class Authorize {
             }, null);
           });
         },
+        WalletId: done => {
+          storage.write('WalletId', this.WalletId).then(walletId => {
+            console.info('存储WalletId成功！');
+            done(null, walletId);
+          }, error => {
+            done({
+              err: error,
+              msg: '存储WalletId失败！'
+            }, null);
+          });
+        },
         WechatUser: done => {
           storage.write('WechatUser', this.WechatUser).then(user => {
             console.info('存储WechatUser成功！');
@@ -204,23 +229,23 @@ class Authorize {
               msg: '存储WechatUser失败！'
             }, null);
           });
-        },
-        BitUser: done => {
-          storage.write('BitUser', this.BitUser).then(user => {
-            console.info('存储BitUser成功！');
-            done(null, user);
-          }, error => {
-            done({
-              err: error,
-              msg: '存储BitUser失败！'
-            }, null);
-          });
+        // },
+        // BitUser: done => {
+        //   storage.write('BitUser', this.BitUser).then(user => {
+        //     console.info('存储BitUser成功！');
+        //     done(null, user);
+        //   }, error => {
+        //     done({
+        //       err: error,
+        //       msg: '存储BitUser失败！'
+        //     }, null);
+        //   });
         }
       }, (error, result) => {
         if (error) {
           reject(error);
         } else {
-          console.info('存储Authorization，WechatUser，BitUser成功！');
+          console.info('存储Authorization，WalletId, WechatUser成功！');
           resolve(result);
         }
       });

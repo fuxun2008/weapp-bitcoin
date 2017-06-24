@@ -9,8 +9,16 @@ class Storage {
     return Storage.read(key);
   }
 
+  readSync(key) {
+    return Storage.readSync(key);
+  }
+
   write(key, value) {
     return Storage.write(key, value);
+  }
+
+  writeSync(key, value) {
+    return Storage.writeSync(key, value);
   }
 
   static read(key) {
@@ -27,6 +35,10 @@ class Storage {
     });
   }
 
+  static readSync(key) {
+    return wx.getStorageSync(key);
+  }
+
   static write(key, value) {
     return new Promise((resolve, reject) => {
       wx.setStorage({
@@ -40,6 +52,10 @@ class Storage {
         }
       });
     });
+  }
+
+  static writeSync(key, value) {
+    return wx.setStorageSync(key, value);
   }
 
   static get instance() {

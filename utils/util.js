@@ -124,9 +124,9 @@ const stringify = function (query, flag) {
 /**
  * 显示加载样式
  */
-const showLoading = function () {
+const showLoading = function (title = '玩命加载中...') {
   wx.showLoading({
-    title: '玩命加载中...',
+    title: title,
     mask: true
   });
 };
@@ -138,12 +138,31 @@ const hideLoading = function() {
   wx.hideLoading();
 };
 
+const showToast = function (title = '', duration = 1500) {
+  wx.showToast({
+    title: title,
+    duration: duration
+  });
+};
+
+const hideToast = function () {
+  wx.hideToast();
+};
+
+const formatTime = function (n) {
+  n = n.toString();
+  return n[1] ? n : '0' + n;
+}
+
 module.exports = {
+  formatTime,
   msToDate,
   nowToDate,
   dateFromNow,
   parse,
   stringify,
   showLoading,
-  hideLoading
+  hideLoading,
+  showToast,
+  hideToast
 };

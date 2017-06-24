@@ -2,9 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/mining/mining",
+    "pages/exchange/exchange",
+    "pages/transfer/transfer",
+    "pages/receive/receive",
     "pages/wallet/wallet",
     "pages/detail/detail",
-    "pages/exchange/exchange",
     "pages/list/list"
   ],
   "window": {

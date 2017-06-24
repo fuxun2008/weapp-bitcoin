@@ -6,9 +6,14 @@ const WX_URL = `https://api.damabtc.com`;
 
 const API_METHODS = {
   'user': `${WX_URL}/wx/connect`,
-  'userSetting': `${WX_URL}/wx/mode`,
   'index': `${WX_URL}/article/list`,
-  'detail': `${WX_URL}/article/detail`
+  'detail': `${WX_URL}/article/detail`,
+  'mineGet': `${WX_URL}/mine/get`,
+  'mineStart': `${WX_URL}/mine/start`,
+  'mineStop': `${WX_URL}/mine/stop`,
+  'mineReset': `${WX_URL}/mine/reset`,
+  'walletShow': `${WX_URL}/wallet/show`,
+  'walletTransfer': `${WX_URL}/wallet/transfer`
 };
 
 const authorize = (code, iv, info) => {
@@ -21,54 +26,6 @@ const authorize = (code, iv, info) => {
         iv: iv,
         info: info
       }
-    }).then(data => {
-      resolve(data);
-    }, err => {
-      reject(err);
-    });
-  });
-};
-
-const putUserInfo = (data) => {
-  return new Promise((resolve, reject) => {
-    const url = API_METHODS['userSetting'];
-
-    const mode = parseInt(data.mode, 10);
-    const circle = data.menstrual_cycle;
-    const duration = data.duration_of_menstruation;
-    const lastMenses = data.last_menses;
-    const duedate = data.duedate;
-    const babyBirthday = data.baby_birthday;
-    const babySex = data.baby_sex;
-    let dataObj = {};
-
-    if (mode === 1) { // 怀孕
-      dataObj = {
-        mode: 1,
-        duration_of_menstruation: parseInt(duration) || 5,
-        menstrual_cycle: parseInt(circle) || 28,
-        last_menses: lastMenses || '',
-        duedate: duedate || ''
-      };
-    } else if (mode === 2) { // 备孕
-      dataObj = {
-        mode: 2,
-        duration_of_menstruation: parseInt(duration) || 5,
-        menstrual_cycle: parseInt(circle) || 28,
-        last_menses: lastMenses || '',
-        duedate: duedate || ''
-      };
-    } else if (mode === 3) { // 辣妈
-      dataObj = {
-        mode: 3,
-        baby_birthday: babyBirthday || '',
-        baby_sex: babySex + 1 || 0
-      };
-    }
-
-    Http.instance.put({
-      url,
-      data: dataObj
     }).then(data => {
       resolve(data);
     }, err => {
@@ -110,9 +67,101 @@ const fetchDetail = id => {
   });
 };
 
+const handleMineGet = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineGet'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMineStart = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineStart'];
+    Http.instance.post({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMineStop = (counter = 0) => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineStop'];
+    Http.instance.post({
+      url: url,
+      data: {
+        counter: counter
+      }
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMineReset = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['mineReset'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleWalletShow = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['walletShow'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleWalletTransfer = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['walletTransfer'];
+    Http.instance.post({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
+  WX_URL,
   fetchIndex,
   fetchDetail,
-  authorize,
-  putUserInfo
+  handleMineGet,
+  handleMineStart,
+  handleMineStop,
+  handleMineReset,
+  handleWalletShow,
+  handleWalletTransfer,
+  authorize
 };

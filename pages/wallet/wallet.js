@@ -4,15 +4,17 @@ import API from '../../services/api';
 
 const App = getApp();
 
+console.log(App.globalData.WalletId);
+
 Page({
   data: {
-    cid: 3,
-    articles: []
+    walletId: ''
   },
   onLoad: function () {
     const that = this;
-    _.showLoading();
-    that.fetchData(1, 3);
+    that.setData({
+      walletId: App.globalData.WalletId
+    });
   },
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
@@ -28,31 +30,5 @@ Page({
         console.log(res.errMsg);
       }
     };
-  },
-  fetchData: function (page, cid) {
-    const that = this;
-    API.fetchIndex(page, cid).then(json => {
-      console.log('walletPage: ', JSON.stringify(json, null, 2));
-      _.hideLoading();
-      if (json && json.code === 0) {
-        const data = json.data;
-        data.article_list.forEach((item, index) => {
-          if (item.created_at <= 0) {
-            item.created_at = new Date().getTime();
-          }
-          item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
-        });
-        that.setData({
-          cid: data.cid,
-          articles: data.article_list
-        });
-      }
-    }, error => {
-      _.hideLoading();
-      that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~'
-      });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
-    });
   }
 })

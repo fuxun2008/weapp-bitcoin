@@ -1,0 +1,25 @@
+<!--transfer.wxml-->
+
+<view class="container transfer-wrap">
+  <form bindsubmit="formSubmit" bindreset="formReset" class="transfer-form line-top">
+    <view class="transfer-section line-bottom">
+      <label for="J_addr"><text class="transfer-txt">钱包地址</text></label>
+      <input type="text" id="J_addr" placeholder="请输入收款人钱包地址" placeholder-class="input-placeholder" value="{{ walletId }}" focus confirm-type="next" class="transfer-input" />
+      <view class="transfer-qrwrap" catchtap="handleScan">
+        <image src="/images/icon_qrbtn.png" class="transfer-qrbtn" mode="aspectFill"></image>
+      </view>
+    </view>
+    <view class="transfer-section line-bottom">
+      <label for="J_money"><text class="transfer-txt">转账金额</text></label>
+      <input type="digit" id="J_money" placeholder="请输入转账金额" placeholder-class="input-placeholder" confirm-type="next" class="transfer-input" />
+    </view>
+    <view class="transfer-section line-bottom">
+      <label for="J_info"><text class="transfer-txt">备注</text></label>
+      <input type="text" id="J_info" placeholder="请输入备注信息" placeholder-class="input-placeholder" confirm-type="done" class="transfer-input" />
+    </view>
+    <view class="btn-area">
+      <button type="primary" formType="submit" class="transfer-submit"> 确认转账 </button>
+      <button type="warn" formType="reset" class="transfer-reset"> 重新填写 </button>
+    </view>
+  </form>  
+</view>
