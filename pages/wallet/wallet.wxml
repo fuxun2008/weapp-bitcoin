@@ -29,12 +29,12 @@
       </view>
       <view class="wallet-info">
         <view class="wallet-addr">钱包地址：</view>
-        <view class="wallet-key">0edce4bb393cc7a49510dade77c83449510d</view>
+        <view class="wallet-key">{{ walletId }}</view>
       </view>
     </view>
     <view class="wallet-btns">
-      <view class="wallet-btn wallet-transfer">转账</view>
-      <view class="wallet-btn wallet-gather">收款</view>
+      <view class="wallet-btn wallet-transfer"><navigator url="../transfer/transfer?id={{ walletId }}">转账</navigator></view>
+      <view class="wallet-btn wallet-gather"><navigator url="../receive/receive?id={{ walletId }}">收款</navigator></view>
     </view>
   </view>
   <view class="wallet-history">

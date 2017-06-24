@@ -11,7 +11,9 @@ const API_METHODS = {
   'mineGet': `${WX_URL}/mine/get`,
   'mineStart': `${WX_URL}/mine/start`,
   'mineStop': `${WX_URL}/mine/stop`,
-  'mineReset': `${WX_URL}/mine/reset`
+  'mineReset': `${WX_URL}/mine/reset`,
+  'walletShow': `${WX_URL}/wallet/show`,
+  'walletTransfer': `${WX_URL}/wallet/transfer`
 };
 
 const authorize = (code, iv, info) => {
@@ -123,12 +125,43 @@ const handleMineReset = () => {
   });
 };
 
+const handleWalletShow = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['walletShow'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleWalletTransfer = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['walletTransfer'];
+    Http.instance.post({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
+  WX_URL,
   fetchIndex,
   fetchDetail,
   handleMineGet,
   handleMineStart,
   handleMineStop,
   handleMineReset,
+  handleWalletShow,
+  handleWalletTransfer,
   authorize
 };

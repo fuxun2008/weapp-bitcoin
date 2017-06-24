@@ -6,41 +6,33 @@ const App = getApp();
 
 Page({
   data: {
-    cid: 3,
-    articles: []
+    walletId: '',
+    avatar: '/images/baby_head.png',
+    qrcode: ''
   },
-  onLoad: function () {
+  onLoad: function (options) {
     const that = this;
-    _.showLoading();
-    that.fetchData(1, 3);
-  },
-  fetchData: function (page, cid) {
-    const that = this;
-    API.fetchIndex(page, cid).then(json => {
-      console.log('walletPage: ', JSON.stringify(json, null, 2));
-      _.hideLoading();
-      if (json && json.code === 0) {
-        const data = json.data;
-        data.article_list.forEach((item, index) => {
-          if (item.created_at <= 0) {
-            item.created_at = new Date().getTime();
-          }
-          item.created_at = _.msToDate(item.created_at, 'yyyy-MM-dd');
-        });
-        that.setData({
-          cid: data.cid,
-          articles: data.article_list
-        });
-      }
-    }, error => {
-      _.hideLoading();
-      that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~'
-      });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+    console.log('ReceiveOptions: ', JSON.stringify(options, null, 2));
+    const id = options.id || App.globalData.WalletId;
+    that.setData({
+      walletId: id,
+      avatar: App.globalData.WechatUser.avatarUrl + '?ts=' + Math.random(),
+      qrcode: `${API.WX_URL}/wallet/show`
     });
   },
   handleCopy: function() {
     console.log('复制到剪贴板');
+    const that = this;
+    wx.setClipboardData({
+      data: that.data.walletId || App.globalData.WalletId,
+      success: function (res) {
+        _.showToast('复制成功~');
+        console.log('res: ', JSON.stringify(res, null, 2));
+      },
+      fail: function (res) {
+        _.showToast('复制失败，请重试~');
+        console.error('res: ', JSON.stringify(res, null, 2));
+      }
+    })
   }
 })

@@ -4,13 +4,17 @@ import API from '../../services/api';
 
 const App = getApp();
 
+console.log(App.globalData.WalletId);
+
 Page({
   data: {
-    cid: 3,
-    articles: []
+    walletId: ''
   },
   onLoad: function () {
     const that = this;
+    that.setData({
+      walletId: App.globalData.WalletId
+    });
   },
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;

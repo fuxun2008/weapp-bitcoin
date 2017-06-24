@@ -46,12 +46,14 @@ App({
       this.Authorize = Authorize.instance;
       Http.setAuthorization(result.Authorization);
       this.globalData.WechatUser = Object.assign({}, result.WechatUser);
-      this.globalData.BitUser = Object.assign({}, result.BitUser);
+      this.globalData.WalletId = result.WalletId;
+      // this.globalData.BitUser = Object.assign({}, result.BitUser);
     });
   },
   globalData: {
     defaultName: '中本聪',
     WechatUser: {},
-    BitUser: {}
+    WalletId: ''
+    // BitUser: {}
   }
 })
