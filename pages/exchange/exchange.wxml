@@ -4,10 +4,10 @@
 
 <view class="container exchange-wrap">
   <view class="exchange-new line-bottom">
-    <view class="exchange-title">
-      <text>BTC最新市价：</text>
-    </view>
     <view class="exchange-pwrap">
+      <view class="exchange-title">
+        <text>BTC最新市价：</text>
+      </view>
       <view class="exchange-price">
         ￥<text>19302</text>
       </view>
@@ -16,7 +16,11 @@
   </view>
   <view class="exchange-weekly line-bottom">
     <view class="weekly-title">
-      <text>最近一周走势</text>
+      <text>BTC最近一周走势</text>
+    </view>
+    <view class="exchange-toggle clearfix">
+      <view class="exchange-tog exchange-left">时</view>
+      <view class="exchange-tog exchange-right active">天</view>
     </view>
     <view class="exchange-list">
       <view class="exchange-item">
@@ -35,18 +39,72 @@
         <text class="item-week">周五</text>
         <text class="item-date">2017-06-09</text>
         <text class="item-money">￥21563</text>
+        <text class="item-rate item-btn cred">-65.47%</text>
+      </view>
+      <view class="exchange-item">
+        <text class="item-week">周四</text>
+        <text class="item-date">2017-06-08</text>
+        <text class="item-money">￥21563</text>
+        <text class="item-rate item-btn cred">+99.99%</text>
+      </view>
+      <view class="exchange-item">
+        <text class="item-week">周三</text>
+        <text class="item-date">2017-06-07</text>
+        <text class="item-money">￥212631</text>
         <text class="item-rate item-btn cred">+9.4%</text>
       </view>
+      <view class="exchange-item">
+        <text class="item-week">周二</text>
+        <text class="item-date">2017-06-06</text>
+        <text class="item-money">￥215</text>
+        <text class="item-rate item-btn cred">+9.4%</text>
+      </view>
+      <view class="exchange-item">
+        <text class="item-week">周一</text>
+        <text class="item-date">2017-06-05</text>
+        <text class="item-money">￥21111</text>
+        <text class="item-rate item-btn cred">+19.4%</text>
+      </view>
+    </view>
+    <view class="exchange-more">
+      <text>点击查看更多</text>
     </view>
   </view>
-  <view class="exchange-capital line-bottom">
-    <view class="weekly-title">
-      <text>拥有资产</text>
+  <view class="exchange-con line-bottom">
+    <view class="exchange-tabs clearfix">
+      <view class="exchange-tab active">买入</view>
+      <view class="exchange-tab">卖出</view>
     </view>
-    <view class="exchange-money">
-      <view class="exchange-bit">比特币：<text>21</text>BTC</view>
-      <view class="exchange-value">市值约为：<text>¥212331</text></view>
-    </view>
+  </view>
+  <view class="exchange-pane exchange-in">
+    <form bindsubmit="formSubmitIn" class="exchange-form">
+      <view class="exchange-section line-bottom">
+        <label for="J_xbtc"><text class="exchange-txt">金 额</text></label>
+        <input type="text" id="J_xbtc" placeholder="输入金额(X-BTC)" placeholder-class="input-placeholder" focus confirm-type="next" class="exchange-input" />
+      </view>
+      <view class="exchange-section line-bottom">
+        <label for="J_btc"><text class="exchange-txt">可兑换比特币</text></label>
+        <input type="text" id="J_btc" disabled confirm-type="next" class="exchange-input" />
+      </view>
+      <view class="btn-area">
+        <button type="warn" plain formType="submit" class="exchange-submit"> 市价买入 </button>
+      </view>
+    </form>
+  </view>
+  <view class="exchange-pane exchange-out">
+    <form bindsubmit="formSubmitOut" class="exchange-form">
+<view class="exchange-section line-bottom">
+        <label for="J_2btc"><text class="exchange-txt">金 额</text></label>
+        <input type="text" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" focus confirm-type="next" class="exchange-input" />
+      </view>
+      <view class="exchange-section line-bottom">
+        <label for="J_ren"><text class="exchange-txt">可兑换人民币</text></label>
+        <input type="text" id="J_ren" disabled confirm-type="next" class="exchange-input" />
+      </view>
+      <view class="btn-area">
+        <button type="warn" plain formType="submit" class="exchange-submit"> 市价卖出 </button>
+      </view>
+    </form>
   </view>
   <view wx:if="{{articles && articles.length}}" class="common-footer">
     <template is="articleItem" data="{{ ...articles[0] }}" />

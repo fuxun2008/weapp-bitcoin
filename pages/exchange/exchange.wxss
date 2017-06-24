@@ -2,31 +2,63 @@ page {
   background-color: #fff;
 }
 
-.exchange-wrap {
-  padding: 0 30rpx;
-}
-
 .exchange-new {
   position: relative;
-  padding: 60rpx 30rpx;
-}
-
-.exchange-title {
-  font-size: 28rpx;
-  color: #000;
-  margin-bottom: 10rpx;
+  padding: 30rpx 20rpx;
+  margin: 0 30rpx;
 }
 
 .exchange-pwrap {
   display: -webkit-flex;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
+.exchange-title {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.exchange-toggle {
+  width: 340rpx;
+  margin: 30rpx auto 40rpx;
+}
+
+.exchange-tog {
+  width: 50%;
+  font-size: 28rpx;
+  color: #ff3100;
+  text-align: center;
+  height: 64rpx;
+  line-height: 64rpx;
+  border: 2rpx solid #ff3100;
+  box-sizing: border-box;
+}
+
+.exchange-tog.active {
+  background-color: #ff3100;
+  color: #fff;
+}
+
+.exchange-left {
+  float: left;
+  border-top-left-radius: 8rpx;
+  border-bottom-left-radius: 8rpx;
+}
+
+.exchange-right {
+  float: right;
+  border-top-right-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
+}
+
 .exchange-price {
+  flex: 1;
   font-size: 60rpx;
   color: #ff3000;
-  margin-right: 32rpx;
+  margin-right: 28rpx;
+  text-align: right;
 }
 
 .exchange-btn {
@@ -38,10 +70,9 @@ page {
   padding: 10rpx 16rpx;
 }
 
-.exchange-weekly,
-.exchange-capital {
+.exchange-weekly {
   position: relative;
-  padding: 30rpx;
+  padding: 30rpx 50rpx 0;
 }
 
 .weekly-title {
@@ -83,8 +114,8 @@ page {
 .item-btn {
   font-size: 20rpx;
   border-radius: 6rpx;
-  padding: 4rpx 16rpx;
-  min-width: 72.8126rpx;
+  padding: 4rpx 10rpx;
+  min-width: 108rpx;
   text-align: center;
 }
 
@@ -100,16 +131,71 @@ page {
   border: 2rpx solid #ff3100;
 }
 
-.exchange-money {
+.exchange-more {
   font-size: 28rpx;
   color: #000;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx 0;
 }
 
-.exchange-bit {
-  margin-bottom: 10rpx;
+.exchange-con {
+  position: relative;
 }
 
-.exchange-money text {
-  display: inline-block;
-  margin-left: 10rpx;
+.exchange-tabs {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #000;
+  background-color: #fff;
+  font-size: 32rpx;
+}
+
+.exchange-tab {
+  flex: 1 1 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.exchange-tab.active {
+  color: #ff3100;
+  border-bottom-style: solid;
+  border-bottom-width: 4rpx;
+  border-bottom-color: #ff3100;
+  -webkit-transition: color, border-bottom-color 0.5s linear;
+  transition: color, border-bottom-color 0.5s linear;
+}
+
+.exchange-section {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+}
+
+.exchange-input {
+  flex: 1;
+}
+
+.exchange-txt {
+  display: block;
+  float: left;
+  font-size: 34rpx;
+  color: #000;
+  text-align: right;
+  width: 220rpx;
+  margin-right: 30rpx;
+}
+
+.btn-area {
+  padding: 40rpx;
 }

@@ -11,7 +11,6 @@ Page({
   },
   onLoad: function () {
     const that = this;
-    _.showLoading();
     that.fetchData(1, 4);
   },
   onShareAppMessage: function (options) {
@@ -54,5 +53,11 @@ Page({
       });
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
+  },
+  formSubmitIn: function(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
+  formSubmitOut: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
   }
-})
+});
