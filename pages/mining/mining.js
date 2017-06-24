@@ -26,13 +26,13 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad');
-    const that = this;
-    _.showLoading();
-    that.fetchData();
   },
   onReady: function () {
     // 页面渲染完成
     console.log('onReady');
+    const that = this;
+    _.showLoading();
+    that.fetchData();
   },
   onShow: function () {
   },
@@ -87,7 +87,7 @@ Page({
     const speed = data.speed;
     const srt = Storage.readSync('stopwatchRunningTime');
     const sbt = Storage.readSync('stopwatchBeginingTimestamp');
-    if (!data.is_stop) { // Number(sbt) && Number(srt)
+    if (Number(sbt) && Number(srt)) { // Number(sbt) && Number(srt)
       const runningTime = Number(srt) + data.timestamp - Number(sbt); // data.timestamp = new Date().getTime()
       Storage.writeSync('stopwatchRunningTime', runningTime);
       that.startWatch(speed);
@@ -108,19 +108,13 @@ Page({
       Storage.writeSync('stopwatchRunningTime', 0);
     }
   },
-  startWatch: function (sped) {
+  startWatch: function (sped, startTimestamp) {
     const that = this;
     const speed = sped || that.data.speed;
 
     clearInterval(stopwatchInterval);
 
-    API.handleMineGo().then(json => {
-      console.log('mineGo: ', JSON.stringify(json, null, 2));
-    }, error => {
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
-    });
-
-    const startTimestamp = new Date().getTime();
+    // const startTimestamp = new Date().getTime();
     let runningTime = 0;
     const str = Storage.readSync('stopwatchRunningTime');
 
@@ -152,23 +146,17 @@ Page({
       }
     }, 100);
   },
-  pauseWatch: function () {
+  pauseWatch: function (startTimestamp) {
     const that = this;
     clearInterval(stopwatchInterval);
     const bt = Storage.readSync('stopwatchBeginingTimestamp');
     const srt = Storage.readSync('stopwatchRunningTime');
     console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
     if (Number(bt)) {
-      const runningTime = Number(srt) + new Date().getTime() - Number(bt); // startTimestamp = new Date().getTime()
+      const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
 
       Storage.writeSync('stopwatchBeginingTimestamp', 0);
       Storage.writeSync('stopwatchRunningTime', runningTime);
-
-      API.handleMineStop(runningTime).then(json => {
-        console.log('mineStop: ', JSON.stringify(json, null, 2));
-      }, error => {
-        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
-      });
 
       that.setData({
         status: true
@@ -202,9 +190,45 @@ Page({
     const speed = that.data.speed;
     console.log('status: ', status);
     if (status) {
-      that.startWatch(speed);
+      API.handleMineStart().then(json => {
+        console.log('mineStart: ', JSON.stringify(json, null, 2));
+        if (json && json.code === 0) {
+          that.startWatch(speed);
+        } else {
+          wx.showToast({
+            title: '接口异常，请重试~',
+            icon: 'loading',
+            duration: 3000
+          });
+        }
+      }, error => {
+        wx.showToast({
+          title: '接口异常，请重试~',
+          icon: 'loading',
+          duration: 3000
+        });
+        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      });
     } else {
-      that.pauseWatch();
+      API.handleMineStop().then(json => {
+        console.log('mineStop: ', JSON.stringify(json, null, 2));
+        if (json && json.code === 0) {
+          that.pauseWatch();
+        } else {
+          wx.showToast({
+            title: '接口异常，请重试~',
+            icon: 'loading',
+            duration: 3000
+          });
+        }
+      }, error => {
+        wx.showToast({
+          title: '接口异常，请重试~',
+          icon: 'loading',
+          duration: 3000
+        });
+        console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      });
     }
   },
   animation: function () {

@@ -9,7 +9,7 @@ const API_METHODS = {
   'index': `${WX_URL}/article/list`,
   'detail': `${WX_URL}/article/detail`,
   'mineGet': `${WX_URL}/mine/get`,
-  'mineGo': `${WX_URL}/mine/start`,
+  'mineStart': `${WX_URL}/mine/start`,
   'mineStop': `${WX_URL}/mine/stop`,
   'mineReset': `${WX_URL}/mine/reset`
 };
@@ -79,9 +79,9 @@ const handleMineGet = () => {
   });
 };
 
-const handleMineGo = () => {
+const handleMineStart = () => {
   return new Promise((resolve, reject) => {
-    const url = API_METHODS['mineGo'];
+    const url = API_METHODS['mineStart'];
     Http.instance.post({
       url: url,
       data: {}
@@ -127,7 +127,7 @@ module.exports = {
   fetchIndex,
   fetchDetail,
   handleMineGet,
-  handleMineGo,
+  handleMineStart,
   handleMineStop,
   handleMineReset,
   authorize
