@@ -3,12 +3,6 @@
 <import src="../common/template.wxml" />
 
 <view class="container exchange-wrap">
-  <view hidden="true" class="todo">
-    <view class="todo-wrap todo-wrap__exchange">
-      <image class="todo-img todo-img__exchange" src="/images/icon_exchange.png"></image>
-    </view>
-    <view class="todo-txt">交易所功能开发中</view>
-  </view>
   <view class="exchange-new line-bottom">
     <view class="exchange-title">
       <text>BTC最新市价：</text>
