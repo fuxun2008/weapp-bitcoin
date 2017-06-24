@@ -15,10 +15,9 @@ const n = 600; // 一分钟
 
 Page({
   data: {
-    num: 0, // 1小时挖出的币数
+    speed: 0, // 1小时挖出的币数
     gold: '0.0000',
     time: '00:00:00',
-    stopwatchRunningTime: 0,
     status: true, // start:开始，stop:停止
     errorMsg: '',
     hasData: true
@@ -82,12 +81,12 @@ Page({
   initWatch: function (data) {
     const that = this;
     const speed = data.speed;
-    const srt = Storage.readSync('stopwatchRunningTime');
-    const sbt = Storage.readSync('stopwatchBeginingTimestamp');
-    if (Number(sbt) && Number(srt)) { // Number(sbt) && Number(srt)
+    const srt = data.total; // Storage.readSync('stopwatchRunningTime');
+    const sbt = data.start_time; // Storage.readSync('stopwatchBeginingTimestamp');
+    if (!data.is_stop) { // Number(sbt) && Number(srt)
       const runningTime = Number(srt) + data.timestamp - Number(sbt); // data.timestamp = new Date().getTime()
       Storage.writeSync('stopwatchRunningTime', runningTime);
-      that.startWatch(speed);
+      that.startWatch(speed, data.timestamp, data.total);
     }
 
     if (srt) {
@@ -98,13 +97,12 @@ Page({
       });
     } else {
       that.setData({
-        speed: speed,
-        gold: data.xbtc
+        speed: speed
       });
       Storage.writeSync('stopwatchRunningTime', 0);
     }
   },
-  startWatch: function (sped, startTimestamp) {
+  startWatch: function (sped, startTimestamp, total) {
     const that = this;
     const speed = sped || that.data.speed;
 
@@ -112,12 +110,12 @@ Page({
 
     // const startTimestamp = new Date().getTime();
     let runningTime = 0;
-    const str = Storage.readSync('stopwatchRunningTime');
+    // const str = Storage.readSync('stopwatchRunningTime');
 
     Storage.writeSync('stopwatchBeginingTimestamp', startTimestamp);
 
-    if (Number(str)) {
-      runningTime = Number(str);
+    if (Number(total)) { // str
+      runningTime = Number(total); // str
     } else {
       Storage.writeSync('stopwatchRunningTime', 1);
     }
@@ -138,7 +136,7 @@ Page({
           time: that.returnFormattedToMilliseconds(stopwatchTime)
         });
       } else {
-        that.pauseWatch();
+        that.pauseWatch(night);
       }
     }, 100);
   },
@@ -189,7 +187,8 @@ Page({
       API.handleMineStart().then(json => {
         console.log('mineStart: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.startWatch(speed);
+          const data = json.data;
+          that.startWatch(speed, data.timestamp, data.total);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',
@@ -209,7 +208,7 @@ Page({
       API.handleMineStop().then(json => {
         console.log('mineStop: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.pauseWatch();
+          that.pauseWatch(json.data.timestamp);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',
