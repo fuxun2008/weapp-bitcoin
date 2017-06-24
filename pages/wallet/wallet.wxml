@@ -3,27 +3,24 @@
 <import src="../common/template.wxml" />
 
 <view class="container wallet-wrap">
-  <view hidden="true" class="todo">
-    <view class="todo-wrap todo-wrap__wallet">
-      <image class="todo-img todo-img__wallet" src="/images/icon_wallet.png"></image>
-    </view>
-    <view class="todo-txt">钱包功能开发中</view>
-  </view>
   <view class="wallet line-bottom">
     <view class="wallet-item">
       <view class="wallet-title">
-        <text>xbtc：</text>
+        <text>小比特币</text>
       </view>
       <view class="wallet-value">
-        <text class="wallet-bi">150.2553</text><text class="wallet-unit hidden">BTC</text>
+        <text class="wallet-bi">150.2553</text><text class="wallet-unit">X-BTC</text>
       </view>
     </view>
-    <view class="wallet-item hidden">
+    <view class="wallet-item">
       <view class="wallet-title">
-        <text>今天市值：</text>
+        <text>比特币：</text>
       </view>
       <view class="wallet-value">
-        <text class="wallet-bi">480124</text><text class="wallet-unit">CNY</text>
+        <text class="wallet-bi">150.2553</text><text class="wallet-unit">BTC</text>
+      </view>
+      <view class="wallet-title">
+        <text class="wallet-yuan">≈<text class="wallet-ren">3000302</text>元人民币[虚拟]</text>
       </view>
     </view>
     <view class="wallet-package">

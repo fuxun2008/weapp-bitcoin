@@ -2,6 +2,10 @@ page {
   background-color: #fff;
 }
 
+.wallet-wrap {
+  padding-bottom: 40rpx;
+}
+
 .wallet {
   position: relative;
   margin: 0 26rpx;
@@ -23,11 +27,16 @@ page {
 }
 
 .wallet-value {
-  font-size: 60rpx;
+  font-size: 64rpx;
 }
 
 .wallet-bi {
   margin-right: 30rpx;
+}
+
+.wallet-yuan {
+  color: #888;
+  font-size: 32rpx;
 }
 
 .wallet-btns {
@@ -107,7 +116,7 @@ page {
 
 .wallet-line {
   display: flex;
-  margin-bottom: 30rpx;
+  margin-bottom: 48rpx;
 }
 
 .wallet-line:last-child {
