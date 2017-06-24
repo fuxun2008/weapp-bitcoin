@@ -9,7 +9,7 @@ const API_METHODS = {
   'index': `${WX_URL}/article/list`,
   'detail': `${WX_URL}/article/detail`,
   'mineGet': `${WX_URL}/mine/get`,
-  'mineGo': `${WX_URL}/mine/go`,
+  'mineGo': `${WX_URL}/mine/start`,
   'mineStop': `${WX_URL}/mine/stop`,
   'mineReset': `${WX_URL}/mine/reset`
 };
