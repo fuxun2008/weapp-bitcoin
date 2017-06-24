@@ -107,6 +107,11 @@ page {
 
 .wallet-line {
   display: flex;
+  margin-bottom: 30rpx;
+}
+
+.wallet-line:last-child {
+  margin-bottom: 0;
 }
 
 .wallet-cimg {
