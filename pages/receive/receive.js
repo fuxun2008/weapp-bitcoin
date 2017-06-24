@@ -1,4 +1,4 @@
-//wallet.js
+//receive.js
 import _ from '../../utils/util.js';
 import API from '../../services/api';
 

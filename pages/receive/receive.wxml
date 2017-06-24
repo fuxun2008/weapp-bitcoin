@@ -1,4 +1,4 @@
-<!--wallet.wxml-->
+<!--receive.wxml-->
 
 <view class="container receive-wrap">
   <view class="receive-avatar">

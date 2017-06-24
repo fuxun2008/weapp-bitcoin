@@ -1,0 +1,55 @@
+page {
+  background-color: #fff;
+}
+
+.transfer-wrap {
+  padding-top: 56rpx;
+}
+
+.transfer-form {
+  position: relative;
+  display: block;
+}
+
+.transfer-section {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+}
+
+.transfer-input {
+  flex: 1;
+}
+
+.transfer-txt {
+  display: block;
+  float: left;
+  font-size: 34rpx;
+  color: #000;
+  text-align: left;
+  width: 180rpx;
+}
+
+.transfer-qrwrap {
+  width: 48rpx;
+  height: 48rpx;
+  font-size: 0;
+  margin-left: 30rpx;
+}
+
+.transfer-qrbtn {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.btn-area {
+  margin-top: 96rpx;
+  padding: 0 40rpx;
+}
+
+.transfer-submit {
+  margin-bottom: 30rpx;
+}

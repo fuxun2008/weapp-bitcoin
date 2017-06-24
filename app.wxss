@@ -422,3 +422,10 @@ page {
   text-align: center;
 }
 /* todo */
+
+/* common style */
+.input-placeholder {
+  font-size: 34rpx;
+  color: #b2b2b2;
+}
+/* common style */

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/transfer/transfer",
     "pages/receive/receive",
     "pages/wallet/wallet",
     "pages/index/index",
