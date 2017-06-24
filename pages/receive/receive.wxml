@@ -1,0 +1,19 @@
+<!--wallet.wxml-->
+
+<view class="container receive-wrap">
+  <view class="receive-avatar">
+    <image src="/images/icon_mining.png" class="receive-img" mode="aspectFill"></image>
+  </view>
+  <view class="receive-addr">
+    <text>钱包地址：</text>
+  </view>
+  <view class="receive-wallet">
+    <text>0edce4bb393cc7a49510dade77c83449510d</text>
+  </view>
+  <view class="receive-qrcode">
+    <image src="/images/icon_qr.png" class="receive-qr" mode="aspectFill"></image>
+  </view>
+  <view class="receive-btns">
+    <button type="primary" size="default" bindtap="handleCopy"> 复制钱包地址 </button>
+  </view>
+</view>

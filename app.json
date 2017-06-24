@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/receive/receive",
     "pages/wallet/wallet",
     "pages/index/index",
     "pages/mining/mining",
