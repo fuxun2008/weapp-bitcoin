@@ -6,9 +6,9 @@
 <block wx:if="{{hasData}}">
   <view class="container">
     <view class="mining_wrap">挖出XBTC：<text class="mining_txt">{{ gold }}</text></view>
-    <view class="mining-item">
+    <!--<view class="mining-item">
       <view class="mining-title">挖矿时长：<text class="mining_txt">{{ time }}</text></view>
-    </view>
+    </view>-->
     <view class="circle-box">
       <canvas class="circle" style="width:200px; height:200px;" canvas-id="canvasArcCir">
       </canvas>

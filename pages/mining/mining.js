@@ -17,7 +17,7 @@ Page({
   data: {
     speed: 0, // 1小时挖出的币数
     gold: '0.0000',
-    time: '00:00:00',
+    // time: '00:00:00',
     status: true, // start:开始，stop:停止
     errorMsg: '',
     hasData: false
@@ -96,8 +96,8 @@ Page({
     if (srt) {
       that.setData({
         speed: speed,
-        gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT), // data.xbtc
-        time: that.returnFormattedToMilliseconds(Number(srt))
+        gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT) // data.xbtc
+        // time: that.returnFormattedToMilliseconds(Number(srt))
       });
       Storage.writeSync('stopwatchRunningTime', srt);
     } else {
@@ -137,8 +137,8 @@ Page({
         stopwatchTime = (now - startTimestamp + runningTime);
         that.animation();
         that.setData({
-          gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
-          time: that.returnFormattedToMilliseconds(stopwatchTime)
+          gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT)
+          // time: that.returnFormattedToMilliseconds(stopwatchTime)
         });
       } else {
         that.pauseWatch(night);
@@ -170,7 +170,7 @@ Page({
     Storage.writeSync('stopwatchRunningTime', 0);
     that.setData({
       gold: '0.0000',
-      time: that.returnFormattedToMilliseconds(0),
+      // time: that.returnFormattedToMilliseconds(0),
       status: true
     });
   },

@@ -11,8 +11,8 @@ page {
 
 .mining_txt {
   display: inline-block;
-  width: 300rpx;
-  text-align: left;
+  /*width: 300rpx;
+  text-align: left;*/
 }
 
 .mining-item {
