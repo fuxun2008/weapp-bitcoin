@@ -145,22 +145,22 @@ Page({
       }
     }, 100);
   },
-  pauseWatch: function (startTimestamp) {
+  pauseWatch: function (startTimestamp, total) {
     const that = this;
     clearInterval(stopwatchInterval);
-    const bt = Storage.readSync('stopwatchBeginingTimestamp');
-    const srt = Storage.readSync('stopwatchRunningTime');
-    console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
-    if (Number(bt)) {
-      const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
+    // const bt = Storage.readSync('stopwatchBeginingTimestamp');
+    // const srt = Storage.readSync('stopwatchRunningTime');
+    // console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
+    // if (Number(bt)) {
+      // const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
 
-      Storage.writeSync('stopwatchBeginingTimestamp', 0);
-      Storage.writeSync('stopwatchRunningTime', runningTime);
+    Storage.writeSync('stopwatchBeginingTimestamp', 0);
+    Storage.writeSync('stopwatchRunningTime', total); // runningTime
 
-      that.setData({
-        status: true
-      });
-    }
+    that.setData({
+      status: true
+    });
+    // }
   },
   resetWatch: function () {
     const that = this;
@@ -213,7 +213,8 @@ Page({
       API.handleMineStop().then(json => {
         console.log('mineStop: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.pauseWatch(json.data.timestamp);
+          const data = json.data;
+          that.pauseWatch(data.timestamp, data.total);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',
