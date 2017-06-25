@@ -52,11 +52,11 @@
     <form bindsubmit="formSubmitIn" class="exchange-form">
       <view class="exchange-section line-bottom">
         <label for="J_xbtc"><text class="exchange-txt">金 额</text></label>
-        <input type="text" name="money" id="J_xbtc" placeholder="输入金额(X-BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" />
+        <input type="text" name="money" id="J_xbtc" placeholder="输入金额(X-BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputIn" />
       </view>
       <view class="exchange-section line-bottom">
         <label for="J_btc"><text class="exchange-txt">可兑换比特币</text></label>
-        <input type="text" id="J_btc" disabled confirm-type="next" class="exchange-input" />
+        <input type="text" id="J_btc" value="{{ jBtc }}" disabled confirm-type="next" class="exchange-input" />
       </view>
       <view class="btn-area">
         <button type="warn" plain formType="submit" class="exchange-submit"> 市价买入 </button>
@@ -67,11 +67,11 @@
     <form bindsubmit="formSubmitOut" class="exchange-form">
 <view class="exchange-section line-bottom">
         <label for="J_2btc"><text class="exchange-txt">金 额</text></label>
-        <input type="text" name="money" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" />
+        <input type="text" name="money" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputOut" />
       </view>
       <view class="exchange-section line-bottom">
         <label for="J_ren"><text class="exchange-txt">可兑换人民币</text></label>
-        <input type="text" id="J_ren" disabled confirm-type="next" class="exchange-input" />
+        <input type="text" id="J_ren" value="{{ jRen }}" disabled confirm-type="next" class="exchange-input" />
       </view>
       <view class="btn-area">
         <button type="warn" plain formType="submit" class="exchange-submit"> 市价卖出 </button>

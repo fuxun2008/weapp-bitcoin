@@ -12,6 +12,8 @@ Page({
       price: 0,
       diff: '0.00'
     },
+    jBtc: '',
+    jRen: '',
     hourly: [],
     weekly: []
   },
@@ -66,6 +68,22 @@ Page({
     const method = e.currentTarget.dataset.method;
     this.setData({
       method: method
+    });
+  },
+  inputIn: function (e) {
+    const value = e.detail.value;
+    console.log(e.detail);
+    const btc = value / this.data.curr.price;
+    this.setData({
+      jBtc: btc
+    });
+  },
+  inputOut: function (e) {
+    const value = e.detail.value;
+    console.log(e.detail);
+    const ren = value * this.data.curr.price;
+    this.setData({
+      jRen: ren
     });
   },
   formSubmitIn: function(e) {
