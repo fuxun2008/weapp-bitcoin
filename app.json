@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/exchange/exchange",
     "pages/index/index",
+    "pages/exchange/exchange",
     "pages/wallet/wallet",
     "pages/mining/mining",
     "pages/transfer/transfer",
@@ -25,7 +25,7 @@
     "position": "bottom",
     "list": [{
       "pagePath": "pages/index/index",
-      "text": "资讯",
+      "text": "百科",
       "iconPath": "images/ic_news_normal.png",
       "selectedIconPath": "images/ic_news_active.png"
     }, {

@@ -73,7 +73,7 @@ Page({
   inputIn: function (e) {
     const value = e.detail.value;
     console.log(e.detail);
-    const btc = value / this.data.curr.price;
+    const btc = (value / this.data.curr.price).toFixed(15);
     this.setData({
       jBtc: btc
     });
@@ -81,7 +81,7 @@ Page({
   inputOut: function (e) {
     const value = e.detail.value;
     console.log(e.detail);
-    const ren = value * this.data.curr.price;
+    const ren = (value * this.data.curr.price).toFixed(10);
     this.setData({
       jRen: ren
     });
