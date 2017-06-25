@@ -20,18 +20,18 @@ Page({
     time: '00:00:00',
     status: true, // start:开始，stop:停止
     errorMsg: '',
-    hasData: true
+    hasData: false
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad');
+    const that = this;
+    _.showLoading();
+    that.fetchData();
   },
   onReady: function () {
     // 页面渲染完成
     console.log('onReady');
-    const that = this;
-    _.showLoading();
-    that.fetchData();
   },
   onShow: function () {
   },
@@ -61,6 +61,10 @@ Page({
       console.log('miningInfo: ', JSON.stringify(json, null, 2));
       _.hideLoading();
       if (json && json.code === 0) {
+        that.setData({
+          errorMsg: '',
+          hasData: true
+        });
         that.initDraw();
         that.initWatch(json.data);
       } else {
@@ -95,6 +99,7 @@ Page({
         gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT), // data.xbtc
         time: that.returnFormattedToMilliseconds(Number(srt))
       });
+      Storage.writeSync('stopwatchRunningTime', srt);
     } else {
       that.setData({
         speed: speed

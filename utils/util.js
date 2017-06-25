@@ -138,7 +138,7 @@ const hideLoading = function() {
   wx.hideLoading();
 };
 
-const showToast = function (title = '', duration = 1500) {
+const showToast = function (title = '', duration = 2000) {
   wx.showToast({
     title: title,
     duration: duration

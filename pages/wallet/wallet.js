@@ -30,5 +30,16 @@ Page({
         console.log(res.errMsg);
       }
     };
+  },
+  gotoReceive: function () {
+    const that = this;
+    wx.navigateTo({
+      url: '../receive/receive?id=' + that.data.walletId
+    });
+  },
+  gotoTransfer: function () {
+    wx.navigateTo({
+      url: '../transfer/transfer'
+    });
   }
 })

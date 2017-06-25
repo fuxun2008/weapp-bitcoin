@@ -8,7 +8,7 @@ Page({
   data: {
     walletId: '',
     avatar: '/images/baby_head.png',
-    qrcode: ''
+    qrcode: '/images/img_error.gif'
   },
   onLoad: function (options) {
     const that = this;
@@ -17,7 +17,7 @@ Page({
     that.setData({
       walletId: id,
       avatar: App.globalData.WechatUser.avatarUrl + '?ts=' + Math.random(),
-      qrcode: `${API.WX_URL}/wallet/show`
+      qrcode: `${API.WX_URL}/wallet/show?wallet_id=` + id // 'http://qr.liantu.com/api.php?w=100&text=' + id
     });
   },
   handleCopy: function() {
