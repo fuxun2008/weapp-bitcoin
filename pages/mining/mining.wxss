@@ -5,7 +5,7 @@ page {
 .mining_wrap {
   margin-top: 150rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 36rpx;
   color: #000;
 }
 
@@ -16,6 +16,7 @@ page {
 }
 
 .mining-item {
+  font-size: 36rpx;
   text-align: center;
   margin-top: 60rpx;
 }
