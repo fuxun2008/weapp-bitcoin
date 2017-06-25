@@ -5,10 +5,15 @@
 <!--加载动画-->
 <block wx:if="{{hasData}}">
   <view class="container">
-    <view class="mining_wrap">挖出XBTC：<text class="mining_txt">{{ gold }}</text></view>
-    <view class="mining-item">
-      <view class="mining-title">挖矿时长：<text class="mining_txt">{{ time }}</text></view>
+    <view class="mining_guide">
+      <navigator url="/pages/detail/detail?id={{ articleId }}" class="mining_navigator">
+        <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>挖矿规则
+      </navigator>
     </view>
+    <view class="mining_wrap">挖出XBTC：<text class="mining_txt">{{ gold }}</text></view>
+    <!--<view class="mining-item">
+      <view class="mining-title">挖矿时长：<text class="mining_txt">{{ time }}</text></view>
+    </view>-->
     <view class="circle-box">
       <canvas class="circle" style="width:200px; height:200px;" canvas-id="canvasArcCir">
       </canvas>

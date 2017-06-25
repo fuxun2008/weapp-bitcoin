@@ -58,7 +58,7 @@ Page({
           title: data.title,
           cover: data.cover,
           info: htmlToWxml.html2json(data.content),
-          resource: data.source || '比特币资讯',
+          resource: data.source || '比特币百科',
           views: data.views,
           timestamp: data.created_at,
           errorMsg: '',

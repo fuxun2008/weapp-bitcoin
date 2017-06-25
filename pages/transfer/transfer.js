@@ -6,10 +6,18 @@ const App = getApp();
 
 Page({
   data: {
-    walletId: ''
+    wallet: '',
+    money: '',
+    remark: ''
   },
-  onLoad: function () {
+  onLoad: function (options) {
     const that = this;
+    const id = options.id;
+    if (id) {
+      that.setData({
+        wallet: id
+      });
+    }
   },
   handleScan: function () {
     const that = this;
@@ -18,19 +26,38 @@ Page({
       success: function (res) {
         console.log('res: ', JSON.stringify(res, null, 2));
         that.setData({
-          walletId: res.result
+          wallet: res.result || 'zWw594f57535a553Z2r'
         });
       },
       fail: function (res) {
         console.error('res: ', JSON.stringify(res, null, 2));
         that.setData({
-          walletId: ''
+          wallet: 'zWw594f57535a553Z2r'
         });
       }
     });
   },
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const that = this;
+    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    API.handleWalletTransfer(e.detail.value).then(json => {
+      if (json && json.code === 0) {
+        console.log('transferInfo: ', JSON.stringify(json, null, 2));
+        _.showToast('转账成功', 2000, 'success', function() {
+          wx.navigateBack({
+            delta: 1
+          });
+        });
+      } else {
+        if (json.code === 2005) {
+          _.errorTips();
+          return;
+        }
+        _.showToast(json.msg, 2000, 'loading');
+      }
+    }, err => {
+      _.showToast(err.msg, 2000, 'loading');
+    });
   },
   formReset: function () {
     console.log('form发生了reset事件')

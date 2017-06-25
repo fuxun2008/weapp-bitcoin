@@ -8,7 +8,7 @@
         </view>
         <view class="article-desc clearfix">
           <view class="article-resource line-1 vertical">
-            来源：<text>{{ source || '比特币资讯' }}</text>
+            来源：<text>{{ source || '比特币百科' }}</text>
           </view>
           <view class="article-date">
             <text>{{ created_at }}</text>

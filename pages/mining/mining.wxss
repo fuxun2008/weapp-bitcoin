@@ -2,20 +2,42 @@ page {
   background-color: #fff;
 }
 
+.mining_guide {
+  font-size: 24rpx;
+  color: #000;
+  text-align: right;
+  padding-right: 90rpx;
+  line-height: 36rpx;
+  margin-top: 20rpx;
+}
+
+.mining_navigator {
+  display: inline-block;
+}
+
+.img_guide {
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
 .mining_wrap {
-  margin-top: 150rpx;
+  margin-top: 100rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 36rpx;
   color: #000;
 }
 
 .mining_txt {
   display: inline-block;
-  width: 300rpx;
-  text-align: left;
+  /*width: 300rpx;
+  text-align: left;*/
 }
 
 .mining-item {
+  font-size: 36rpx;
   text-align: center;
   margin-top: 60rpx;
 }

@@ -18,7 +18,7 @@ Page({
     const that = this;
     const cid = parseInt(options.cid, 10);
     wx.setNavigationBarTitle({
-      title: options.name + '资讯' || '资讯新闻'
+      title: options.name + '百科' || '百科新闻'
     });
     _.showLoading();
     that.fetchData(1, cid);

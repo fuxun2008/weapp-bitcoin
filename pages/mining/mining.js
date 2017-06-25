@@ -15,9 +15,10 @@ const n = 600; // 一分钟
 
 Page({
   data: {
+    articleId: 0,
     speed: 0, // 1小时挖出的币数
     gold: '0.0000',
-    time: '00:00:00',
+    // time: '00:00:00',
     status: true, // start:开始，stop:停止
     errorMsg: '',
     hasData: false
@@ -61,12 +62,14 @@ Page({
       console.log('miningInfo: ', JSON.stringify(json, null, 2));
       _.hideLoading();
       if (json && json.code === 0) {
+        const data = json.data;
         that.setData({
+          articleId: data.article_id,
           errorMsg: '',
           hasData: true
         });
         that.initDraw();
-        that.initWatch(json.data);
+        that.initWatch(data);
       } else {
         that.setData({
           errorMsg: '暂时没有数据哦~',
@@ -96,8 +99,8 @@ Page({
     if (srt) {
       that.setData({
         speed: speed,
-        gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT), // data.xbtc
-        time: that.returnFormattedToMilliseconds(Number(srt))
+        gold: (speed / 3600000 * Number(srt)).toFixed(WEIGHT) // data.xbtc
+        // time: that.returnFormattedToMilliseconds(Number(srt))
       });
       Storage.writeSync('stopwatchRunningTime', srt);
     } else {
@@ -137,30 +140,30 @@ Page({
         stopwatchTime = (now - startTimestamp + runningTime);
         that.animation();
         that.setData({
-          gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT),
-          time: that.returnFormattedToMilliseconds(stopwatchTime)
+          gold: (speed / 3600000 * stopwatchTime).toFixed(WEIGHT)
+          // time: that.returnFormattedToMilliseconds(stopwatchTime)
         });
       } else {
         that.pauseWatch(night);
       }
     }, 100);
   },
-  pauseWatch: function (startTimestamp) {
+  pauseWatch: function (startTimestamp, total) {
     const that = this;
     clearInterval(stopwatchInterval);
-    const bt = Storage.readSync('stopwatchBeginingTimestamp');
-    const srt = Storage.readSync('stopwatchRunningTime');
-    console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
-    if (Number(bt)) {
-      const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
+    // const bt = Storage.readSync('stopwatchBeginingTimestamp');
+    // const srt = Storage.readSync('stopwatchRunningTime');
+    // console.log('stopwatchBeginingTimestamp: ', bt, ' stopwatchRunningTime', srt);
+    // if (Number(bt)) {
+      // const runningTime = Number(srt) + startTimestamp - Number(bt); // startTimestamp = new Date().getTime()
 
-      Storage.writeSync('stopwatchBeginingTimestamp', 0);
-      Storage.writeSync('stopwatchRunningTime', runningTime);
+    Storage.writeSync('stopwatchBeginingTimestamp', 0);
+    Storage.writeSync('stopwatchRunningTime', total); // runningTime
 
-      that.setData({
-        status: true
-      });
-    }
+    that.setData({
+      status: true
+    });
+    // }
   },
   resetWatch: function () {
     const that = this;
@@ -170,7 +173,7 @@ Page({
     Storage.writeSync('stopwatchRunningTime', 0);
     that.setData({
       gold: '0.0000',
-      time: that.returnFormattedToMilliseconds(0),
+      // time: that.returnFormattedToMilliseconds(0),
       status: true
     });
   },
@@ -213,7 +216,8 @@ Page({
       API.handleMineStop().then(json => {
         console.log('mineStop: ', JSON.stringify(json, null, 2));
         if (json && json.code === 0) {
-          that.pauseWatch(json.data.timestamp);
+          const data = json.data;
+          that.pauseWatch(data.timestamp, data.total);
         } else {
           wx.showToast({
             title: '接口异常，请重试~',
