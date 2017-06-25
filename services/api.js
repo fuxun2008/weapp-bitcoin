@@ -14,7 +14,10 @@ const API_METHODS = {
   'mineReset': `${WX_URL}/mine/reset`,
   'walletDetail': `${WX_URL}/wallet/detail`,
   'walletShow': `${WX_URL}/wallet/show`,
-  'walletTransfer': `${WX_URL}/wallet/transfer`
+  'walletTransfer': `${WX_URL}/wallet/transfer`,
+  'marketIndex': `${WX_URL}/market/index`,
+  'marketBuy': `${WX_URL}/market/buy`,
+  'marketSell': `${WX_URL}/market/sell`
 };
 
 const authorize = (code, iv, info) => {
@@ -170,6 +173,51 @@ const handleWalletTransfer = json => {
   });
 };
 
+const handleMarketIndex = () => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['marketIndex'];
+    Http.instance.get({
+      url: url,
+      data: {}
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
+const handleMarketBuy = (money = 0) => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['marketBuy'];
+    Http.instance.post({
+      url: url,
+      data: {
+        money: money
+      }
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+const handleMarketSell = (money = 0) => {
+  return new Promise((resolve, reject) => {
+    const url = API_METHODS['marketSell'];
+    Http.instance.post({
+      url: url,
+      data: {
+        money: money
+      }
+    }).then(data => {
+      resolve(data);
+    }, err => {
+      reject(err);
+    });
+  });
+};
+
 module.exports = {
   WX_URL,
   fetchIndex,
@@ -181,5 +229,8 @@ module.exports = {
   handleWalletDetail,
   handleWalletShow,
   handleWalletTransfer,
+  handleMarketIndex,
+  handleMarketBuy,
+  handleMarketSell,
   authorize
 };

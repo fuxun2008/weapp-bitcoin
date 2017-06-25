@@ -81,6 +81,10 @@ page {
   margin-bottom: 20rpx;
 }
 
+.exchange-list {
+  padding-bottom: 30rpx;
+}
+
 .exchange-item {
   display: -webkit-flex;
   display: flex;
@@ -169,8 +173,8 @@ page {
   border-bottom-style: solid;
   border-bottom-width: 4rpx;
   border-bottom-color: #ff3100;
-  -webkit-transition: color, border-bottom-color 0.5s linear;
-  transition: color, border-bottom-color 0.5s linear;
+  -webkit-transition: color, border-bottom-color 0.3s linear;
+  transition: color, border-bottom-color 0.3s linear;
 }
 
 .exchange-section {
