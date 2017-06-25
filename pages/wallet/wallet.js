@@ -98,20 +98,7 @@ Page({
     const that = this;
     const xbtc = that.data.xbtc;
     if (Number(xbtc) === 0 || Number(xbtc) === NaN || xbtc === '0.000') {
-      wx.showModal({
-        title: '金额不足',
-        content: '你的小比特币金额不足，快去挖矿吧！',
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-            wx.switchTab({
-              url: '/pages/mining/mining'
-            });
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        }
-      });
+      _.errorTips();
       return;
     }
     wx.navigateTo({

@@ -49,6 +49,10 @@ Page({
           });
         });
       } else {
+        if (json.code === 2005) {
+          _.errorTips();
+          return;
+        }
         _.showToast(json.msg, 2000, 'loading');
       }
     }, err => {

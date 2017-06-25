@@ -95,6 +95,10 @@ Page({
       if (json && json.code === 0) {
         console.log('BuyInfo: ', JSON.stringify(json, null, 2));
       } else {
+        if (json.code === 2003) {
+          _.errorTips();
+          return;
+        }
         _.showToast(json.msg, 2000, 'loading');
       }
     }, err => {
@@ -112,6 +116,10 @@ Page({
       if (json && json.code === 0) {
         console.log('SellInfo: ', JSON.stringify(json, null, 2));
       } else {
+        if (json.code === 2003) {
+          _.errorTips();
+          return;
+        }
         _.showToast(json.msg, 2000, 'loading');
       }
     }, err => {

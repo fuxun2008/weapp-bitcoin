@@ -156,6 +156,23 @@ const formatTime = function (n) {
   return n[1] ? n : '0' + n;
 }
 
+const errorTips = function () {
+  wx.showModal({
+    title: '金额不足',
+    content: '你的小比特币金额不足，快去挖矿吧！',
+    success: function (res) {
+      if (res.confirm) {
+        console.log('用户点击确定');
+        wx.switchTab({
+          url: '/pages/mining/mining'
+        });
+      } else if (res.cancel) {
+        console.log('用户点击取消');
+      }
+    }
+  });
+}
+
 module.exports = {
   formatTime,
   msToDate,
@@ -166,5 +183,6 @@ module.exports = {
   showLoading,
   hideLoading,
   showToast,
+  errorTips,
   hideToast
 };
