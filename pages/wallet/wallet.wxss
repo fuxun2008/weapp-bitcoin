@@ -26,6 +26,21 @@ page {
   margin-bottom: 10rpx;
 }
 
+.wallet_navigator {
+  float: right;
+  font-size: 24rpx;
+  color: #000;
+  line-height: 36rpx;
+}
+
+.img_guide {
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
 .wallet-value {
   font-size: 64rpx;
 }

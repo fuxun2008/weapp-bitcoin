@@ -10,6 +10,22 @@ Page({
     avatar: '/images/baby_head.png',
     qrcode: '/images/img_error.gif'
   },
+  onShareAppMessage: function (options) {
+    const that = this;
+    const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
+    return {
+      title: name + '让你来转账啦~',
+      path: '/pages/transfer/transfer?id=' + (that.data.walletId || App.globalData.WalletId),
+      success: function (res) {
+        // 转发成功
+        console.log(res);
+      },
+      fail: function (res) {
+        // 转发失败
+        console.log(res.errMsg);
+      }
+    };
+  },
   onLoad: function (options) {
     const that = this;
     console.log('ReceiveOptions: ', JSON.stringify(options, null, 2));
