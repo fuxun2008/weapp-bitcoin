@@ -138,10 +138,12 @@ const hideLoading = function() {
   wx.hideLoading();
 };
 
-const showToast = function (title = '', duration = 2000) {
+const showToast = function (title = '', duration = 2000, icon = 'success', callback) {
   wx.showToast({
     title: title,
-    duration: duration
+    icon: icon,
+    duration: duration,
+    success: callback
   });
 };
 

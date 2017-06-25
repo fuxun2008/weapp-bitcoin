@@ -15,6 +15,7 @@ const n = 600; // 一分钟
 
 Page({
   data: {
+    articleId: 0,
     speed: 0, // 1小时挖出的币数
     gold: '0.0000',
     // time: '00:00:00',
@@ -61,12 +62,14 @@ Page({
       console.log('miningInfo: ', JSON.stringify(json, null, 2));
       _.hideLoading();
       if (json && json.code === 0) {
+        const data = json.data;
         that.setData({
+          articleId: data.article_id,
           errorMsg: '',
           hasData: true
         });
         that.initDraw();
-        that.initWatch(json.data);
+        that.initWatch(data);
       } else {
         that.setData({
           errorMsg: '暂时没有数据哦~',

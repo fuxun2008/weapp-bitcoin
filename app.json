@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/wallet/wallet",
     "pages/mining/mining",
-    "pages/index/index",
     "pages/exchange/exchange",
     "pages/transfer/transfer",
     "pages/receive/receive",

@@ -14,7 +14,7 @@ Page({
     const that = this;
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;
     return {
-      title: name + '让你来转账啦~',
+      title: name + '向你分享小比特币钱包',
       path: '/pages/transfer/transfer?id=' + (that.data.walletId || App.globalData.WalletId),
       success: function (res) {
         // 转发成功

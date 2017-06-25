@@ -6,7 +6,7 @@
 <block wx:if="{{hasData}}">
   <view class="container">
     <view class="mining_guide">
-      <navigator url="/pages/detail/detail?id=2222" class="mining_navigator">
+      <navigator url="/pages/detail/detail?id={{ articleId }}" class="mining_navigator">
         <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>挖矿规则
       </navigator>
     </view>
