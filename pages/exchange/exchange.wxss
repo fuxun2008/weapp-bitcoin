@@ -123,6 +123,12 @@ page {
   text-align: center;
 }
 
+.cgrey {
+  color: #888;
+  background: #eee;
+  border: 2px solid #888;
+}
+
 .cgreen {
   color: #04d724;
   background: #ddefcb;

@@ -12,12 +12,12 @@ Page({
       price: 0,
       diff: '0.00'
     },
-    jBtc: '',
-    jRen: '',
+    jBtc: 0,
+    jRen: 0,
     hourly: [],
     weekly: []
   },
-  onLoad: function () {
+  onShow: function () {
     const that = this;
     _.showLoading();
     that.fetchData();
@@ -87,7 +87,7 @@ Page({
   inputIn: function (e) {
     const value = e.detail.value;
     console.log(e.detail);
-    const btc = (value / this.data.curr.price).toFixed(15);
+    const btc = value === '' ? 0 : (value / this.data.curr.price).toFixed(6);
     this.setData({
       jBtc: btc
     });
@@ -95,7 +95,7 @@ Page({
   inputOut: function (e) {
     const value = e.detail.value;
     console.log(e.detail);
-    const ren = (value * this.data.curr.price).toFixed(10);
+    const ren = value === '' ? 0 : (value * this.data.curr.price).toFixed(6);
     this.setData({
       jRen: ren
     });
