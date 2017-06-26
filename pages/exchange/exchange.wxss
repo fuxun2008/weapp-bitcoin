@@ -72,7 +72,7 @@ page {
 
 .exchange-weekly {
   position: relative;
-  padding: 30rpx 50rpx 0;
+  padding: 30rpx 50rpx 473rpx;
 }
 
 .weekly-title {
@@ -124,9 +124,9 @@ page {
 }
 
 .cgrey {
-  color: #888;
+  color: #666;
   background: #eee;
-  border: 2px solid #888;
+  border: 2rpx solid #888;
 }
 
 .cgreen {
@@ -142,16 +142,26 @@ page {
 }
 
 .exchange-more {
+  position: relative;
   font-size: 28rpx;
   color: #000;
   text-align: center;
-  height: 60rpx;
-  line-height: 60rpx;
-  padding: 20rpx 0;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 10rpx 0;
 }
 
 .exchange-con {
   position: relative;
+}
+
+.exchange-money {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #fff;
 }
 
 .exchange-tabs {
@@ -207,5 +217,5 @@ page {
 }
 
 .btn-area {
-  padding: 40rpx;
+  padding: 30rpx 40rpx;
 }

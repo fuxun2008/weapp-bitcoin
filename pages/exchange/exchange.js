@@ -10,7 +10,8 @@ Page({
     method: 'buy',
     curr: {
       price: 0,
-      diff: '0.00'
+      diff: '0.00',
+      direct: '0'
     },
     jBtc: 0,
     jRen: 0,
@@ -36,6 +37,10 @@ Page({
         console.log(res.errMsg);
       }
     };
+  },
+  onPullDownRefresh: function() {
+    const that = this;
+    that.fetchData();
   },
   fetchData: function () {
     const that = this;
@@ -107,17 +112,18 @@ Page({
     API.handleMarketBuy(val.money).then(json => {
       _.hideLoading();
       if (json && json.code === 0) {
+        _.showToast(json.data.msg, 3000, 'success');
         console.log('BuyInfo: ', JSON.stringify(json, null, 2));
       } else {
         if (json.code === 2003) {
           _.errorTips();
           return;
         }
-        _.showToast(json.msg, 2000, 'loading');
+        _.showToast(json.msg, 3000, 'loading');
       }
     }, err => {
       _.hideLoading();
-      _.showToast('买入失败，请重试~', 2000, 'loading');
+      _.showToast('买入失败，请重试~', 3000, 'loading');
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
   },
@@ -129,16 +135,17 @@ Page({
       _.hideLoading();
       if (json && json.code === 0) {
         console.log('SellInfo: ', JSON.stringify(json, null, 2));
+        _.showToast(json.data.msg, 3000, 'success');
       } else {
         if (json.code === 2003) {
           _.errorTips();
           return;
         }
-        _.showToast(json.msg, 2000, 'loading');
+        _.showToast(json.msg, 3000, 'loading');
       }
     }, err => {
       _.hideLoading();
-      _.showToast('买入失败，请重试~', 2000, 'loading');
+      _.showToast('买入失败，请重试~', 3000, 'loading');
       console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
     });
   }
