@@ -111,7 +111,7 @@ Page({
     API.handleMarketBuy(val.money).then(json => {
       _.hideLoading();
       if (json && json.code === 0) {
-        _.showToast(json.data.msg, 3000, 'success');
+        _.showToast(json.data.message, 3000, 'success');
         console.log('BuyInfo: ', JSON.stringify(json, null, 2));
       } else {
         if (json.code === 2003) {
@@ -134,7 +134,7 @@ Page({
       _.hideLoading();
       if (json && json.code === 0) {
         console.log('SellInfo: ', JSON.stringify(json, null, 2));
-        _.showToast(json.data.msg, 3000, 'success');
+        _.showToast(json.data.message, 3000, 'success');
       } else {
         if (json.code === 2003) {
           _.errorTips();

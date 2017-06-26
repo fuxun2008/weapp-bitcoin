@@ -78,7 +78,7 @@
             <input type="digit" name="money" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputOut" />
           </view>
           <view class="exchange-section line-bottom">
-            <label for="J_ren"><text class="exchange-txt">可兑换人民币</text></label>
+            <label for="J_ren"><text class="exchange-txt exchange-xu">可兑换人民币[虚拟]</text></label>
             <input type="digit" id="J_ren" value="{{ jRen }}" disabled confirm-type="next" class="exchange-input" />
           </view>
           <view class="btn-area">

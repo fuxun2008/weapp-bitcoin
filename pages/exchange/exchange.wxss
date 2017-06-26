@@ -219,3 +219,7 @@ page {
 .btn-area {
   padding: 30rpx 40rpx;
 }
+
+.exchange-xu {
+  width: 300rpx;
+}
