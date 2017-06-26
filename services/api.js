@@ -99,14 +99,12 @@ const handleMineStart = () => {
   });
 };
 
-const handleMineStop = (counter = 0) => {
+const handleMineStop = () => {
   return new Promise((resolve, reject) => {
     const url = API_METHODS['mineStop'];
     Http.instance.post({
       url: url,
-      data: {
-        counter: counter
-      }
+      data: {}
     }).then(data => {
       resolve(data);
     }, err => {

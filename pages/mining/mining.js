@@ -7,7 +7,6 @@ let stopwatchInterval;
 stopwatchInterval = 0;
 const WEIGHT = 4;
 
-const ctx = wx.createCanvasContext('canvasArcCir');
 let step = 1;
 let startAngle = 1.5 * Math.PI;
 let endAngle = 0;
@@ -68,7 +67,7 @@ Page({
           errorMsg: '',
           hasData: true
         });
-        that.initDraw();
+        // that.initDraw();
         that.initWatch(data);
       } else {
         that.setData({
@@ -244,21 +243,24 @@ Page({
       step = 1;
     }
   },
-  initDraw: function() {
-    var cxt_arc = wx.createCanvasContext('canvasCircle');
-    cxt_arc.setLineWidth(4);
-    cxt_arc.setStrokeStyle('#ffffff');
-    cxt_arc.setLineCap('round');
-    cxt_arc.beginPath();
-    cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
-    cxt_arc.stroke();
-    cxt_arc.draw();
-  },
+  // initDraw: function() {
+  //   const cxt_arc = wx.createCanvasContext('canvasCircle');
+  //   cxt_arc.setLineWidth(4);
+  //   cxt_arc.setStrokeStyle('#eaeaea');
+  //   cxt_arc.setLineCap('round');
+  //   cxt_arc.beginPath();
+  //   cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
+  //   cxt_arc.stroke();
+  //   cxt_arc.draw();
+  // },
   drawArc: function (s, e) {
+    const x = 100;
+    const y = 100;
+    const radius = 96;
+    const ctx = wx.createCanvasContext('canvasArcCir');
     ctx.setFillStyle('white');
     ctx.clearRect(0, 0, 200, 200);
     ctx.draw();
-    var x = 100, y = 100, radius = 96;
     ctx.setLineWidth(4);
     ctx.setStrokeStyle('#f02e2e'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
     ctx.setLineCap('round');

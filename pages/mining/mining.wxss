@@ -59,13 +59,14 @@ page {
 
 .mining-btns {
   position: absolute;
-  left: 15rpx;
-  top: 15rpx;
-  font-size: 36rpx;
+  left: 4px;
+  top: 4px;
+  font-size: 20px;
+  font-weight: 600;
   color: #f02e2e;
-  width: 372rpx;
-  height: 372rpx;
-  line-height: 368rpx;
+  width: 192px;
+  height: 192px;
+  line-height: 192px;
   border-radius: 100%;
   text-align: center;
   background-color: #ffe7e7;
