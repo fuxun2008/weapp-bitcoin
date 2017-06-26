@@ -50,7 +50,7 @@ Page({
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       _.hideLoading();
-      if (json && json.code === 0 && json.data && (json.data.article_top_list.length || json.data.article_list.length)) {
+      if (json && json.code === 0 && json.data && json.data.category_list.length) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
           if (item.created_at <= 0) {
@@ -69,7 +69,6 @@ Page({
           hasMore: data.article_list.length === MAXSIZE ? true : false
         });
       } else {
-        _.showToast(json.msg, 2000, 'loading');
         that.setData({
           currentTab: cid,
           errorMsg: '暂时没有数据哦！点我刷新页面重试~',

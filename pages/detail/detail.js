@@ -65,7 +65,6 @@ Page({
           hasData: true
         });
       } else {
-        _.showToast(json.msg, 2000, 'loading');
         that.setData({
           id: id,
           errorMsg: '暂时没有数据哦！点我刷新页面重试~',
