@@ -37,7 +37,7 @@ Page({
       }
     };
   },
-  fetchData: function (page, cid) {
+  fetchData: function () {
     const that = this;
     API.handleMarketIndex().then(json => {
       console.log('exchangePage: ', JSON.stringify(json, null, 2));
@@ -47,16 +47,30 @@ Page({
         that.setData({
           curr: data.curr,
           hourly: data.hourly,
-          weekly: data.weekly
+          weekly: data.weekly,
+          hasData: true
+        });
+      } else {
+        _.showToast(json.msg, 2000, 'loading');
+        that.setData({
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
+          hasData: false
         });
       }
     }, error => {
       _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~'
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
+        hadData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
+  },
+  reloadData: function () {
+    console.log('reloadData');
+    const that = this;
+    _.showLoading();
+    that.fetchData();
   },
   toggleType: function (e) {
     const date = e.currentTarget.dataset.date;

@@ -96,8 +96,8 @@ page {
 
 .wallet-img {
   display: block;
-  width: 60rpx;
-  height: 60rpx;
+  width: 62rpx;
+  height: 61rpx;
   background-color: #eee;
 }
 

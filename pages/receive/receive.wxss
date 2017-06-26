@@ -23,7 +23,7 @@ page {
 
 .receive-addr,
 .receive-wallet {
-  font-size: 24rpx;
+  font-size: 32rpx;
   color: #000;
   text-align: center;
   margin-bottom: 10rpx;

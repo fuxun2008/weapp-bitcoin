@@ -70,8 +70,7 @@ page {
   font-size: 32rpx;
   color: #888;
   line-height: 48rpx;
-  width: 80%;
-  min-width: 512rpx;
+  width: 280rpx;
 }
 
 .line-1,

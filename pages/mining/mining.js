@@ -70,18 +70,19 @@ Page({
         // that.initDraw();
         that.initWatch(data);
       } else {
+        _.showToast(json.msg, 2000, 'loading');
         that.setData({
-          errorMsg: '暂时没有数据哦~',
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
           hasData: false
         });
       }
     }, error => {
       _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
         hasData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
   },
   initWatch: function (data) {

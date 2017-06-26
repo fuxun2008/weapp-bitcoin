@@ -65,8 +65,9 @@ Page({
           hasData: true
         });
       } else {
+        _.showToast(json.msg, 2000, 'loading');
         that.setData({
-          errorMsg: '暂时没有数据哦~',
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
           page: 1,
           hasMore: false,
           hasData: false
@@ -75,11 +76,11 @@ Page({
     }, err => {
       _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
         hasMore: false,
         hasData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
   },
   reloadData: function () {

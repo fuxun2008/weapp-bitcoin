@@ -2,84 +2,90 @@
 <!-- 导入模板 -->
 <import src="../common/template.wxml" />
 
-<view class="container exchange-wrap">
-  <view class="exchange-new line-bottom">
-    <view class="exchange-title">
-      <text>BTC最新市价：</text>
-    </view>
-    <view class="exchange-pwrap">
-      <view class="exchange-price">
-        ￥<text>{{ curr.price }}</text>
+<block wx:if="{{hasData}}">
+  <view class="container exchange-wrap">
+    <view class="exchange-new line-bottom">
+      <view class="exchange-title">
+        <text>BTC最新市价：</text>
       </view>
-      <view class="exchange-btn">{{ curr.diff }}</view>
+      <view class="exchange-pwrap">
+        <view class="exchange-price">
+          ￥<text>{{ curr.price }}</text>
+        </view>
+        <view class="exchange-btn">{{ curr.diff }}</view>
+      </view>
+    </view>
+    <view class="exchange-weekly line-bottom">
+      <view class="weekly-title">
+        <text>BTC最近一周走势</text>
+      </view>
+      <view class="exchange-toggle clearfix">
+        <view class="exchange-tog exchange-left {{ date === 'hour' ? 'active' : '' }}" bindtap="toggleType" data-date="hour">时</view>
+        <view class="exchange-tog exchange-right {{ date === 'week' ? 'active' : '' }}" bindtap="toggleType" data-date="week">天</view>
+      </view>
+      <view wx:if="{{ hourly && hourly.length }}" class="exchange-list exchange-hour {{ date === 'hour' ? '' : 'hidden' }}">
+        <view wx:for="{{ hourly }}" wx:key="index" class="exchange-item">
+          <text class="item-week">{{ item.hour }}</text>
+          <text class="item-date">{{ item.date }}</text>
+          <text class="item-money">{{ item.price }}</text>
+          <text class="item-rate item-btn cred">{{ item.diff }}</text>
+        </view>
+      </view>
+      <view wx:if="{{ weekly && weekly.length }}" class="exchange-list exchange-week {{ date === 'week' ? '' : 'hidden' }}">
+        <view wx:for="{{ weekly }}" wx:key="index" class="exchange-item">
+          <text class="item-week">{{ item.weekday }}</text>
+          <text class="item-date">{{ item.date }}</text>
+          <text class="item-money">{{ item.price }}</text>
+          <text class="item-rate item-btn cred">{{ item.diff }}</text>
+        </view>
+      </view>
+      <view class="exchange-more hidden">
+        <text>点击查看更多</text>
+      </view>
+    </view>
+    <view class="exchange-con line-bottom">
+      <view class="exchange-tabs clearfix">
+        <view class="exchange-tab {{ method === 'buy' ? 'active' : '' }}" data-method="buy" bindtap="toggleMethod">买入</view>
+        <view class="exchange-tab {{ method === 'sell' ? 'active' : '' }}" data-method="sell" bindtap="toggleMethod">卖出</view>
+      </view>
+    </view>
+    <view class="exchange-pane exchange-in {{ method === 'buy' ? '' : 'hidden' }}">
+      <form bindsubmit="formSubmitIn" class="exchange-form">
+        <view class="exchange-section line-bottom">
+          <label for="J_xbtc"><text class="exchange-txt">金 额</text></label>
+          <input type="digit" name="money" id="J_xbtc" placeholder="输入金额(X-BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputIn" />
+        </view>
+        <view class="exchange-section line-bottom">
+          <label for="J_btc"><text class="exchange-txt">可兑换比特币</text></label>
+          <input type="digit" id="J_btc" value="{{ jBtc }}" disabled confirm-type="next" class="exchange-input" />
+        </view>
+        <view class="btn-area">
+          <button type="warn" plain formType="submit" class="exchange-submit"> 市价买入 </button>
+        </view>
+      </form>
+    </view>
+    <view class="exchange-pane exchange-out {{ method === 'sell' ? '' : 'hidden' }}">
+      <form bindsubmit="formSubmitOut" class="exchange-form">
+        <view class="exchange-section line-bottom">
+          <label for="J_2btc"><text class="exchange-txt">金 额</text></label>
+          <input type="digit" name="money" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputOut" />
+        </view>
+        <view class="exchange-section line-bottom">
+          <label for="J_ren"><text class="exchange-txt">可兑换人民币</text></label>
+          <input type="digit" id="J_ren" value="{{ jRen }}" disabled confirm-type="next" class="exchange-input" />
+        </view>
+        <view class="btn-area">
+          <button type="warn" plain formType="submit" class="exchange-submit"> 市价卖出 </button>
+        </view>
+      </form>
+    </view>
+    <view wx:if="{{articles && articles.length}}" class="common-footer">
+      <template is="articleItem" data="{{ ...articles[0] }}" />
+      <template is="footer" data="{{ cid: cid, name: '交易所' }}" />
     </view>
   </view>
-  <view class="exchange-weekly line-bottom">
-    <view class="weekly-title">
-      <text>BTC最近一周走势</text>
-    </view>
-    <view class="exchange-toggle clearfix">
-      <view class="exchange-tog exchange-left {{ date === 'hour' ? 'active' : '' }}" bindtap="toggleType" data-date="hour">时</view>
-      <view class="exchange-tog exchange-right {{ date === 'week' ? 'active' : '' }}" bindtap="toggleType" data-date="week">天</view>
-    </view>
-    <view wx:if="{{ hourly && hourly.length }}" class="exchange-list exchange-hour {{ date === 'hour' ? '' : 'hidden' }}">
-      <view wx:for="{{ hourly }}" wx:key="index" class="exchange-item">
-        <text class="item-week">{{ item.hour }}</text>
-        <text class="item-date">{{ item.date }}</text>
-        <text class="item-money">{{ item.price }}</text>
-        <text class="item-rate item-btn cred">{{ item.diff }}</text>
-      </view>
-    </view>
-    <view wx:if="{{ weekly && weekly.length }}" class="exchange-list exchange-week {{ date === 'week' ? '' : 'hidden' }}">
-      <view wx:for="{{ weekly }}" wx:key="index" class="exchange-item">
-        <text class="item-week">{{ item.weekday }}</text>
-        <text class="item-date">{{ item.date }}</text>
-        <text class="item-money">{{ item.price }}</text>
-        <text class="item-rate item-btn cred">{{ item.diff }}</text>
-      </view>
-    </view>
-    <view class="exchange-more hidden">
-      <text>点击查看更多</text>
-    </view>
-  </view>
-  <view class="exchange-con line-bottom">
-    <view class="exchange-tabs clearfix">
-      <view class="exchange-tab {{ method === 'buy' ? 'active' : '' }}" data-method="buy" bindtap="toggleMethod">买入</view>
-      <view class="exchange-tab {{ method === 'sell' ? 'active' : '' }}" data-method="sell" bindtap="toggleMethod">卖出</view>
-    </view>
-  </view>
-  <view class="exchange-pane exchange-in {{ method === 'buy' ? '' : 'hidden' }}">
-    <form bindsubmit="formSubmitIn" class="exchange-form">
-      <view class="exchange-section line-bottom">
-        <label for="J_xbtc"><text class="exchange-txt">金 额</text></label>
-        <input type="digit" name="money" id="J_xbtc" placeholder="输入金额(X-BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputIn" />
-      </view>
-      <view class="exchange-section line-bottom">
-        <label for="J_btc"><text class="exchange-txt">可兑换比特币</text></label>
-        <input type="digit" id="J_btc" value="{{ jBtc }}" disabled confirm-type="next" class="exchange-input" />
-      </view>
-      <view class="btn-area">
-        <button type="warn" plain formType="submit" class="exchange-submit"> 市价买入 </button>
-      </view>
-    </form>
-  </view>
-  <view class="exchange-pane exchange-out {{ method === 'sell' ? '' : 'hidden' }}">
-    <form bindsubmit="formSubmitOut" class="exchange-form">
-<view class="exchange-section line-bottom">
-        <label for="J_2btc"><text class="exchange-txt">金 额</text></label>
-        <input type="digit" name="money" id="J_2btc" placeholder="输入金额(BTC)" placeholder-class="input-placeholder" confirm-type="next" class="exchange-input" bindinput="inputOut" />
-      </view>
-      <view class="exchange-section line-bottom">
-        <label for="J_ren"><text class="exchange-txt">可兑换人民币</text></label>
-        <input type="digit" id="J_ren" value="{{ jRen }}" disabled confirm-type="next" class="exchange-input" />
-      </view>
-      <view class="btn-area">
-        <button type="warn" plain formType="submit" class="exchange-submit"> 市价卖出 </button>
-      </view>
-    </form>
-  </view>
-  <view wx:if="{{articles && articles.length}}" class="common-footer">
-    <template is="articleItem" data="{{ ...articles[0] }}" />
-    <template is="footer" data="{{ cid: cid, name: '交易所' }}" />
-  </view>
-</view>
+</block>
+<!-- 加载数据失败 -->
+<block wx:else>
+  <template is="noNetwork" data="{{ errorMsg: errorMsg }}" />
+</block>
