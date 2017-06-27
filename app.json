@@ -1,9 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/exchange/exchange",
-    "pages/wallet/wallet",
     "pages/mining/mining",
+    "pages/wallet/wallet",
+    "pages/exchange/exchange",
     "pages/transfer/transfer",
     "pages/receive/receive",
     "pages/detail/detail",
@@ -24,11 +23,6 @@
     "backgroundColor": "#fafafa",
     "position": "bottom",
     "list": [{
-      "pagePath": "pages/index/index",
-      "text": "百科",
-      "iconPath": "images/ic_news_normal.png",
-      "selectedIconPath": "images/ic_news_active.png"
-    }, {
       "pagePath": "pages/mining/mining",
       "text": "挖矿",
       "iconPath": "images/ic_coin_normal.png",

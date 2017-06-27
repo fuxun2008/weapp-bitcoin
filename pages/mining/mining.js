@@ -1,7 +1,10 @@
 //mining.js
 import _ from '../../utils/util.js';
+import Http from '../../components/http';
 import API from '../../services/api';
 import Storage from '../../components/storage';
+
+const App = getApp();
 
 let stopwatchInterval;
 stopwatchInterval = 0;
@@ -26,8 +29,27 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad');
     const that = this;
+    const auth = App.globalData.Authorization || wx.getStorageSync('Authorization');
     _.showLoading();
-    that.fetchData();
+    if (auth) {
+      Http.setAuthorization(auth);
+      that.fetchData();
+    } else {
+      App.initialize(() => {
+        _.hideLoading();
+        that.setData({
+          errorMsg: '咦？网络不见了，请检查网络连接~',
+          showLoading: false,
+          hasData: false
+        });
+        return false;
+      }).then(() => {
+        that.fetchData();
+      }, error => {
+        _.hideLoading();
+        console.log('ERROR...');
+      });
+    }
   },
   onReady: function () {
     // 页面渲染完成

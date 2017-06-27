@@ -1,5 +1,6 @@
 //exchange.js
 import _ from '../../utils/util.js';
+import Http from '../../components/http';
 import API from '../../services/api';
 
 const App = getApp();
@@ -20,8 +21,27 @@ Page({
   },
   onShow: function () {
     const that = this;
+    const auth = App.globalData.Authorization || wx.getStorageSync('Authorization');
     _.showLoading();
-    that.fetchData();
+    if (auth) {
+      Http.setAuthorization(auth);
+      that.fetchData();
+    } else {
+      App.initialize(() => {
+        _.hideLoading();
+        that.setData({
+          errorMsg: '咦？网络不见了，请检查网络连接~',
+          hasMore: false,
+          hasData: false
+        });
+        return false;
+      }).then(result => {
+        that.fetchData();
+      }, error => {
+        _.hideLoading();
+        console.log('ERROR...');
+      });
+    }
   },
   onShareAppMessage: function (options) {
     const name = App.globalData.WechatUser.nickName || App.globalData.defaultName;

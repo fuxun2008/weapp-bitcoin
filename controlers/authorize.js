@@ -73,7 +73,6 @@ class Authorize {
             const data = {
               Authorization: json.data.access_token,
               WalletId: json.data.wallet_id,
-              // BitUser: json.data.weixin,
               WechatUser: result.data.userInfo
             };
             if (json.code == 0) {
@@ -101,7 +100,7 @@ class Authorize {
     });
   }
 
-  initialize() {
+  initialize(callback) {
     if (this.initializing) {
       return;
     }
@@ -112,7 +111,6 @@ class Authorize {
         this.initializing = false;
         this.Authorization = result.Authorization;
         this.WalletId = result.WalletId;
-        // this.BitUser = result.BitUser;
         this.WechatUser = result.WechatUser;
         this.saveStorage().then(result => {
           resolve(this);
@@ -127,10 +125,10 @@ class Authorize {
           this.initializing = false;
           this.Authorization = result.Authorization;
           this.WalletId = result.WalletId;
-          // this.BitUser = result.BitUser;
           resolve(this);
         }, error => {
           this.initializing = false;
+          callback && callback();
           console.error(error.msg, JSON.stringify(error, null, 2));
         });
         this.initializing = false;
@@ -167,17 +165,6 @@ class Authorize {
               msg: '读取WalletId失败！'
             }, null);
           });
-        // },
-        // BitUser: done => {
-        //   storage.read('BitUser').then(user => {
-        //     console.info('读取BitUser成功！');
-        //     done(null, user);
-        //   }, error => {
-        //     done({
-        //       err: error,
-        //       msg: '读取BitUser失败！'
-        //     }, null);
-        //   });
         }
       }, (error, result) => {
         if (error) {
@@ -229,17 +216,6 @@ class Authorize {
               msg: '存储WechatUser失败！'
             }, null);
           });
-        // },
-        // BitUser: done => {
-        //   storage.write('BitUser', this.BitUser).then(user => {
-        //     console.info('存储BitUser成功！');
-        //     done(null, user);
-        //   }, error => {
-        //     done({
-        //       err: error,
-        //       msg: '存储BitUser失败！'
-        //     }, null);
-        //   });
         }
       }, (error, result) => {
         if (error) {
@@ -256,8 +232,8 @@ class Authorize {
     return Authorize.instance.adapter(name, engine);
   }
 
-  static initialize() {
-    return Authorize.instance.initialize();
+  static initialize(callback) {
+    return Authorize.instance.initialize(callback);
   }
 
   static loadStorage() {
