@@ -131,8 +131,13 @@ Page({
     API.handleMarketBuy(val.money).then(json => {
       _.hideLoading();
       if (json && json.code === 0) {
-        _.showToast(json.data.message, 2000, 'success');
         console.log('BuyInfo: ', JSON.stringify(json, null, 2));
+        _.showToast(json.data.message, 2000, 'success');
+        setTimeout(function() {
+          wx.switchTab({
+            url: '/pages/wallet/wallet'
+          });
+        }, 2000);
       } else {
         if (json.code === 2003) {
           _.errorTips();
@@ -155,6 +160,11 @@ Page({
       if (json && json.code === 0) {
         console.log('SellInfo: ', JSON.stringify(json, null, 2));
         _.showToast(json.data.message, 2000, 'success');
+        setTimeout(function () {
+          wx.switchTab({
+            url: '/pages/wallet/wallet'
+          });
+        }, 2000);
       } else {
         _.showToast(json.msg, 2000, 'loading');
       }
