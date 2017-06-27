@@ -4,8 +4,7 @@ import Http from '../../components/http';
 import API from '../../services/api';
 
 const App = getApp();
-
-console.log(App.globalData.WalletId);
+const MAXSIZE = 10;
 
 Page({
   data: {
@@ -82,12 +81,14 @@ Page({
           transList: page === 1 ? data.trans_list : that.data.transList.concat(data.trans_list),
           page: page,
           qrcode: `${API.WX_URL}/wallet/show?wallet_id=${id}`, // 'http://qr.liantu.com/api.php?w=100&text=' + id
-          hasData: true
+          hasData: true,
+          errorMsg: '',
+          hasMore: data.trans_list.length === MAXSIZE ? true : false
         });
       } else {
         that.setData({
           errorMsg: '暂时没有数据哦！点我刷新页面重试~',
-          page: 1,
+          page: page,
           hasMore: false,
           hasData: false
         });
@@ -108,6 +109,15 @@ Page({
     _.showLoading();
     that.fetchData(1);
   },
+  // onReachBottom: function () {
+  //   const that = this;
+  //   const page = parseInt(that.data.page, 10);
+  //   const nextPage = page + 1;
+  //   const hasMore = that.data.hasMore;
+  //   if (hasMore) {
+  //     that.fetchData(nextPage);
+  //   }
+  // },
   gotoReceive: function () {
     const that = this;
     wx.navigateTo({

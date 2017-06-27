@@ -60,6 +60,17 @@
           </view>
         </view>
       </view>
+      <!-- 加载更多开始 -->
+      <view wx:if="{{ page > 1 }}" class="load-more-wrap">
+        <block wx:if="{{ hasMore }}">
+          <text class="weui-loading"/><text class="loading-text">正在加载更多</text>
+        </block>
+        <block wx:else>
+          没有更多了哟~
+        </block>
+      </view>
+      <!-- 加载更多结束 -->
+
     </view>
   </view>
 </block>
