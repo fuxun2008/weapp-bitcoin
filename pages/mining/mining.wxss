@@ -3,10 +3,10 @@ page {
 }
 
 .mining_guide {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #000;
   text-align: right;
-  padding-right: 90rpx;
+  padding-right: 40rpx;
   line-height: 36rpx;
   margin-top: 20rpx;
 }

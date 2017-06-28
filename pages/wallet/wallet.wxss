@@ -9,7 +9,7 @@ page {
 .wallet {
   position: relative;
   margin: 0 26rpx;
-  padding: 54rpx 30rpx 67rpx;
+  padding: 34rpx 30rpx 67rpx;
 }
 
 .wallet-item {
@@ -27,10 +27,12 @@ page {
 }
 
 .wallet_navigator {
-  float: right;
-  font-size: 24rpx;
+  text-align: right;
+  font-size: 28rpx;
   color: #000;
   line-height: 36rpx;
+  padding-right: 40rpx;
+  padding-top: 20rpx;
 }
 
 .img_guide {

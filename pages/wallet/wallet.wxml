@@ -4,13 +4,13 @@
 
 <block wx:if="{{hasData}}">
   <view class="container wallet-wrap">
+    <navigator url="/pages/detail/detail?id={{ articleId }}" class="wallet_navigator">
+      <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>钱包指南
+    </navigator>
     <view class="wallet line-bottom">
       <view class="wallet-item">
         <view class="wallet-title">
           <text>小比特币</text>
-          <navigator url="/pages/detail/detail?id={{ articleId }}" class="wallet_navigator">
-            <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>钱包指南
-          </navigator>
         </view>
         <view class="wallet-value">
           <text class="wallet-bi">{{ xbtc }}</text><text class="wallet-unit">X-BTC</text>
