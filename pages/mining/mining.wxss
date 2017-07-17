@@ -3,10 +3,10 @@ page {
 }
 
 .mining_guide {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #000;
   text-align: right;
-  padding-right: 40rpx;
+  padding-right: 90rpx;
   line-height: 36rpx;
   margin-top: 20rpx;
 }
@@ -19,7 +19,7 @@ page {
   display: inline-block;
   width: 36rpx;
   height: 36rpx;
-  vertical-align: top;
+  vertical-align: middle;
   margin-right: 10rpx;
 }
 
@@ -52,21 +52,19 @@ page {
 
 .circle {
   position: absolute;
-  left: 0;
+  left: -200rpx;
   right: 0;
-  margin: auto;
 }
 
 .mining-btns {
   position: absolute;
-  left: 4px;
-  top: 4px;
-  font-size: 20px;
-  font-weight: 600;
+  left: 15rpx;
+  top: 15rpx;
+  font-size: 36rpx;
   color: #f02e2e;
-  width: 192px;
-  height: 192px;
-  line-height: 192px;
+  width: 372rpx;
+  height: 372rpx;
+  line-height: 368rpx;
   border-radius: 100%;
   text-align: center;
   background-color: #ffe7e7;
