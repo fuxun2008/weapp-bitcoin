@@ -26,13 +26,13 @@ Page({
       success: function (res) {
         console.log('res: ', JSON.stringify(res, null, 2));
         that.setData({
-          wallet: res.result || 'zWw594f57535a553Z2r'
+          wallet: res.result || ''
         });
       },
       fail: function (res) {
         console.error('res: ', JSON.stringify(res, null, 2));
         that.setData({
-          wallet: 'zWw594f57535a553Z2r'
+          wallet: ''
         });
       }
     });

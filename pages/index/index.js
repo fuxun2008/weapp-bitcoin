@@ -50,7 +50,7 @@ Page({
     API.fetchIndex(page, cid).then(json => {
       console.log('indexPage: ', JSON.stringify(json, null, 2));
       _.hideLoading();
-      if (json && json.code === 0 && json.data && (json.data.article_top_list.length || json.data.article_list.length)) {
+      if (json && json.code === 0 && json.data && json.data.category_list.length) {
         const data = json.data;
         data.article_list.forEach((item, index) => {
           if (item.created_at <= 0) {
@@ -71,7 +71,7 @@ Page({
       } else {
         that.setData({
           currentTab: cid,
-          errorMsg: '暂时没有数据哦~',
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
           page: page,
           hasMore: false,
           hasData: false
@@ -80,10 +80,10 @@ Page({
     }, error => {
       _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
         hasData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
   },
   //事件处理函数

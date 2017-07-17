@@ -25,7 +25,7 @@ App({
     this.version = version;
     this.Http = Http.instance;
     Http.instance.onUnAuthorize(this.onUnAuthorize);
-    this.initialize();
+    // this.initialize();
   },
   onUnAuthorize: function () {
     wx.hideToast();
@@ -35,25 +35,30 @@ App({
       duration: 2000
     });
   },
-  initialize: function () {
+  initialize: function (callback) {
     let that = this;
-    Authorize.adapter('network', API);
-    Authorize.adapter('storage', Storage.instance);
+    return new Promise((resolve, reject) => {
+      Authorize.adapter('network', API);
+      Authorize.adapter('storage', Storage.instance);
 
-    this.Authorize = Authorize.instance;
-
-    Authorize.initialize().then(result => {
       this.Authorize = Authorize.instance;
-      Http.setAuthorization(result.Authorization);
-      this.globalData.WechatUser = Object.assign({}, result.WechatUser);
-      this.globalData.WalletId = result.WalletId;
-      // this.globalData.BitUser = Object.assign({}, result.BitUser);
+
+      Authorize.initialize(() => {
+        callback && callback();
+      }).then(result => {
+        this.Authorize = Authorize.instance;
+        Http.setAuthorization(result.Authorization);
+        this.globalData.Authorization = result.Authorization;
+        this.globalData.WechatUser = Object.assign({}, result.WechatUser);
+        this.globalData.WalletId = result.WalletId;
+        resolve(result);
+      });
     });
   },
   globalData: {
     defaultName: '中本聪',
+    Authorization: '',
     WechatUser: {},
     WalletId: ''
-    // BitUser: {}
   }
 })

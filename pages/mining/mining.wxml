@@ -17,8 +17,8 @@
     <view class="circle-box">
       <canvas class="circle" style="width:200px; height:200px;" canvas-id="canvasArcCir">
       </canvas>
-      <canvas class="circle" style="z-index: -5; width:200px; height:200px;" canvas-id="canvasCircle">
-      </canvas>
+      <!-- canvas class="circle" style="z-index: -5; width:200px; height:200px;" canvas-id="canvasCircle">
+      </canvas -->
       <view class="mining-btns" bindtap="goto" data-status="{{ status }}">{{ status ? '开始挖矿' : '暂停挖矿' }}</view>
     </view>
   </view>

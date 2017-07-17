@@ -1,6 +1,7 @@
 //receive.js
 import _ from '../../utils/util.js';
 import API from '../../services/api';
+import Storage from '../../components/storage';
 
 const App = getApp();
 
@@ -28,11 +29,11 @@ Page({
   },
   onLoad: function (options) {
     const that = this;
-    console.log('ReceiveOptions: ', JSON.stringify(options, null, 2));
     const id = options.id || App.globalData.WalletId;
+    const url = Storage.readSync('WechatUser').avatarUrl || App.globalData.WechatUser.avatarUrl;
     that.setData({
       walletId: id,
-      avatar: App.globalData.WechatUser.avatarUrl + '?ts=' + Math.random(),
+      avatar: url + '?ts=' + Math.random(),
       qrcode: `${API.WX_URL}/wallet/show?wallet_id=` + id // 'http://qr.liantu.com/api.php?w=100&text=' + id
     });
   },

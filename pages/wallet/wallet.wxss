@@ -6,10 +6,16 @@ page {
   padding-bottom: 40rpx;
 }
 
+.wallet-tips {
+  text-align: right;
+  margin-top: 20rpx;
+  padding-right: 40rpx;
+}
+
 .wallet {
   position: relative;
   margin: 0 26rpx;
-  padding: 54rpx 30rpx 67rpx;
+  padding: 34rpx 30rpx 67rpx;
 }
 
 .wallet-item {
@@ -27,8 +33,8 @@ page {
 }
 
 .wallet_navigator {
-  float: right;
-  font-size: 24rpx;
+  display: inline-block;
+  font-size: 28rpx;
   color: #000;
   line-height: 36rpx;
 }
@@ -37,7 +43,7 @@ page {
   display: inline-block;
   width: 36rpx;
   height: 36rpx;
-  vertical-align: middle;
+  vertical-align: top;
   margin-right: 10rpx;
 }
 
@@ -96,8 +102,8 @@ page {
 
 .wallet-img {
   display: block;
-  width: 60rpx;
-  height: 60rpx;
+  width: 62rpx;
+  height: 61rpx;
   background-color: #eee;
 }
 

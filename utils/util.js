@@ -173,6 +173,11 @@ const errorTips = function () {
   });
 }
 
+const initData = function (app) {
+  app.globalData.Authorization = '';
+  wx.setStorageSync('Authorization', '');
+};
+
 module.exports = {
   formatTime,
   msToDate,
@@ -184,5 +189,6 @@ module.exports = {
   hideLoading,
   showToast,
   errorTips,
+  initData,
   hideToast
 };

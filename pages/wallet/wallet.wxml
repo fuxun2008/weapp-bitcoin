@@ -4,13 +4,15 @@
 
 <block wx:if="{{hasData}}">
   <view class="container wallet-wrap">
+    <view class="wallet-tips">
+      <navigator url="/pages/detail/detail?id={{ articleId }}" class="wallet_navigator">
+        <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>钱包指南
+      </navigator>
+    </view>
     <view class="wallet line-bottom">
       <view class="wallet-item">
         <view class="wallet-title">
           <text>小比特币</text>
-          <navigator url="/pages/detail/detail?id={{ articleId }}" class="wallet_navigator">
-            <image src="/images/icon_guide.png" mode="aspectFill" class="img_guide"></image>钱包指南
-          </navigator>
         </view>
         <view class="wallet-value">
           <text class="wallet-bi">{{ xbtc }}</text><text class="wallet-unit">X-BTC</text>
@@ -27,7 +29,7 @@
           <text class="wallet-yuan">≈<text class="wallet-ren">{{ rmb }}</text>元人民币[虚拟]</text>
         </view>
       </view>
-      <view class="wallet-package">
+      <view class="wallet-package" bindtap="gotoReceive">
         <view class="wallet-wimg">
           <image class="wallet-img" src="{{ qrcode }}" mode="aspectFill"></image>
         </view>
@@ -60,6 +62,17 @@
           </view>
         </view>
       </view>
+      <!-- 加载更多开始 -->
+      <view wx:if="{{ page > 1 }}" class="load-more-wrap">
+        <block wx:if="{{ hasMore }}">
+          <text class="weui-loading"/><text class="loading-text">正在加载更多</text>
+        </block>
+        <block wx:else>
+          没有更多了哟~
+        </block>
+      </view>
+      <!-- 加载更多结束 -->
+
     </view>
   </view>
 </block>

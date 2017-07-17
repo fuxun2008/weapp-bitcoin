@@ -67,19 +67,18 @@ Page({
       } else {
         that.setData({
           id: id,
-          errorMsg: '暂时没有数据哦~',
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
           hasData: false
         });
-        console.warn('暂时没有数据哦~');
       }
     }, error => {
       _.hideLoading();
       that.setData({
         id: id,
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
         hasData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
   },
   reloadData: function () {

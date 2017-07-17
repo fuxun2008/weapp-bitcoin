@@ -1,13 +1,15 @@
 //mining.js
 import _ from '../../utils/util.js';
+import Http from '../../components/http';
 import API from '../../services/api';
 import Storage from '../../components/storage';
+
+const App = getApp();
 
 let stopwatchInterval;
 stopwatchInterval = 0;
 const WEIGHT = 4;
 
-const ctx = wx.createCanvasContext('canvasArcCir');
 let step = 1;
 let startAngle = 1.5 * Math.PI;
 let endAngle = 0;
@@ -27,8 +29,27 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad');
     const that = this;
+    const auth = App.globalData.Authorization || wx.getStorageSync('Authorization');
     _.showLoading();
-    that.fetchData();
+    if (auth) {
+      Http.setAuthorization(auth);
+      that.fetchData();
+    } else {
+      App.initialize(() => {
+        _.hideLoading();
+        that.setData({
+          errorMsg: '咦？网络不见了，请检查网络连接~',
+          showLoading: false,
+          hasData: false
+        });
+        return false;
+      }).then(() => {
+        that.fetchData();
+      }, error => {
+        _.hideLoading();
+        console.log('ERROR...');
+      });
+    }
   },
   onReady: function () {
     // 页面渲染完成
@@ -68,21 +89,21 @@ Page({
           errorMsg: '',
           hasData: true
         });
-        that.initDraw();
+        // that.initDraw();
         that.initWatch(data);
       } else {
         that.setData({
-          errorMsg: '暂时没有数据哦~',
+          errorMsg: '暂时没有数据哦！点我刷新页面重试~',
           hasData: false
         });
       }
     }, error => {
       _.hideLoading();
       that.setData({
-        errorMsg: '咦，网络不见了，请检查网络连接后点击页面刷新~',
+        errorMsg: '咦，网络不见了，请检查网络连接后点我刷新页面~',
         hasData: false
       });
-      console.error('咦，网络不见了，请检查网络连接后点击页面刷新~', error);
+      console.error('咦，网络不见了，请检查网络连接后点我刷新页面~', error);
     });
   },
   initWatch: function (data) {
@@ -244,23 +265,26 @@ Page({
       step = 1;
     }
   },
-  initDraw: function() {
-    var cxt_arc = wx.createCanvasContext('canvasCircle');
-    cxt_arc.setLineWidth(4);
-    cxt_arc.setStrokeStyle('#ffffff');
-    cxt_arc.setLineCap('round');
-    cxt_arc.beginPath();
-    cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
-    cxt_arc.stroke();
-    cxt_arc.draw();
-  },
+  // initDraw: function() {
+  //   const cxt_arc = wx.createCanvasContext('canvasCircle');
+  //   cxt_arc.setLineWidth(4);
+  //   cxt_arc.setStrokeStyle('#eaeaea');
+  //   cxt_arc.setLineCap('round');
+  //   cxt_arc.beginPath();
+  //   cxt_arc.arc(100, 100, 96, 0, 2 * Math.PI, false);
+  //   cxt_arc.stroke();
+  //   cxt_arc.draw();
+  // },
   drawArc: function (s, e) {
+    const x = 100;
+    const y = 100;
+    const radius = 96;
+    const ctx = wx.createCanvasContext('canvasArcCir');
     ctx.setFillStyle('white');
-    ctx.clearRect(0, 0, 200, 200);
+    ctx.clearRect(0, 0, 100, 100);
     ctx.draw();
-    var x = 100, y = 100, radius = 96;
     ctx.setLineWidth(4);
-    ctx.setStrokeStyle('#f02e2e'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
+    ctx.setStrokeStyle('#ff3100'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
     ctx.setLineCap('round');
     ctx.beginPath();
     ctx.arc(x, y, radius, s, e, false);
