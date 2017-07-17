@@ -6,6 +6,12 @@ page {
   padding-bottom: 40rpx;
 }
 
+.wallet-tips {
+  text-align: right;
+  margin-top: 20rpx;
+  padding-right: 40rpx;
+}
+
 .wallet {
   position: relative;
   margin: 0 26rpx;
@@ -27,12 +33,10 @@ page {
 }
 
 .wallet_navigator {
-  text-align: right;
+  display: inline-block;
   font-size: 28rpx;
   color: #000;
   line-height: 36rpx;
-  padding-right: 40rpx;
-  padding-top: 20rpx;
 }
 
 .img_guide {

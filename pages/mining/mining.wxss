@@ -4,23 +4,23 @@ page {
 }
 
 .mining_guide {
-  font-size: 24rpx;
-  color: #000;
   text-align: right;
-  padding-right: 90rpx;
-  line-height: 36rpx;
+  padding-right: 40rpx;
   margin-top: 20rpx;
 }
 
 .mining_navigator {
   display: inline-block;
+  font-size: 28rpx;
+  color: #000;
+  line-height: 36rpx;
 }
 
 .img_guide {
   display: inline-block;
   width: 36rpx;
   height: 36rpx;
-  vertical-align: middle;
+  vertical-align: top;
   margin-right: 10rpx;
 }
 
