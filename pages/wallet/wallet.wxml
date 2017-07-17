@@ -27,7 +27,7 @@
           <text class="wallet-yuan">≈<text class="wallet-ren">{{ rmb }}</text>元人民币[虚拟]</text>
         </view>
       </view>
-      <view class="wallet-package">
+      <view class="wallet-package" bindtap="gotoReceive">
         <view class="wallet-wimg">
           <image class="wallet-img" src="{{ qrcode }}" mode="aspectFill"></image>
         </view>

@@ -281,10 +281,10 @@ Page({
     const radius = 96;
     const ctx = wx.createCanvasContext('canvasArcCir');
     ctx.setFillStyle('white');
-    ctx.clearRect(0, 0, 200, 200);
+    ctx.clearRect(0, 0, 100, 100);
     ctx.draw();
     ctx.setLineWidth(4);
-    ctx.setStrokeStyle('#f02e2e'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
+    ctx.setStrokeStyle('#ff3100'); // '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6)
     ctx.setLineCap('round');
     ctx.beginPath();
     ctx.arc(x, y, radius, s, e, false);

@@ -1,5 +1,6 @@
 page {
   background-color: #fff;
+  overflow: hidden;
 }
 
 .mining_guide {
@@ -44,7 +45,7 @@ page {
 
 .circle-box {
   position: relative;
-  text-align: center;
+  /*text-align: center;*/
   margin: 10vw auto 0;
   width: 400rpx;
   height: 400rpx;
@@ -52,20 +53,21 @@ page {
 
 .circle {
   position: absolute;
-  left: -200rpx;
-  right: 0;
+  left: 0;
+  top: 0;
 }
 
 .mining-btns {
   position: absolute;
-  left: 15rpx;
-  top: 15rpx;
+  left: 6px;
+  top: 6px;
   font-size: 36rpx;
   color: #f02e2e;
-  width: 372rpx;
-  height: 372rpx;
-  line-height: 368rpx;
+  width: 188px;
+  height: 188px;
+  line-height: 188px;
   border-radius: 100%;
   text-align: center;
   background-color: #ffe7e7;
+  z-index: 100;
 }
