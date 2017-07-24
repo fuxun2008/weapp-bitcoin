@@ -1,13 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/mining/mining",
-    "pages/wallet/wallet",
-    "pages/exchange/exchange",
-    "pages/transfer/transfer",
-    "pages/receive/receive",
-    "pages/detail/detail",
-    "pages/list/list"
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "black",
@@ -16,34 +10,6 @@
     "navigationBarTitleText": "比特币大富翁",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
-  },
-  "tabBar": {
-    "color": "#888",
-    "selectedColor": "#f02e2e",
-    "borderStyle": "white",
-    "backgroundColor": "#fafafa",
-    "position": "bottom",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "百科",
-      "iconPath": "images/ic_news_normal.png",
-      "selectedIconPath": "images/ic_news_active.png"
-    }, {
-      "pagePath": "pages/mining/mining",
-      "text": "挖矿",
-      "iconPath": "images/ic_coin_normal.png",
-      "selectedIconPath": "images/ic_coin_active.png"
-    }, {
-      "pagePath": "pages/wallet/wallet",
-      "text": "钱包",
-      "iconPath": "images/ic_wallet_normal.png",
-      "selectedIconPath": "images/ic_wallet_active.png"
-    }, {
-      "pagePath": "pages/exchange/exchange",
-      "text": "交易所",
-      "iconPath": "images/ic_exchange_normal.png",
-      "selectedIconPath": "images/ic_exchange_active.png"
-    }]
   },
   "networkTimeout": {
     "request": 10000,
